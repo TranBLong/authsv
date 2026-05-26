@@ -1,0 +1,1088 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Quản lý role permissions | School Manager</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#007bff" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#1a1a1a" media="(prefers-color-scheme: dark)" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@fontsource/source-sans-3@5.0.12/index.css"
+      crossorigin="anonymous"
+      media="print"
+      onload="this.media='all'"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.11.0/styles/overlayscrollbars.min.css"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../css/adminlte.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/css/tom-select.bootstrap5.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .sidebar-menu .nav-link {
+        transition: none !important;
+      }
+
+      .sidebar-menu .nav-item:hover > .nav-link,
+      .sidebar-menu .nav-item:focus-within > .nav-link,
+      .sidebar-menu .nav-link:hover,
+      .sidebar-menu .nav-link:focus {
+        background-color: transparent !important;
+        background-image: none !important;
+        box-shadow: none !important;
+        filter: none !important;
+      }
+
+      .sidebar-menu .nav-item:hover > .nav-link:not(.active),
+      .sidebar-menu .nav-item:focus-within > .nav-link:not(.active),
+      .sidebar-menu .nav-link:not(.active):hover,
+      .sidebar-menu .nav-link:not(.active):focus,
+      .sidebar-menu .nav-link:not(.active):active {
+        color: rgba(255, 255, 255, 0.75) !important;
+      }
+
+      .sidebar-menu .nav-item:hover > .nav-link.active,
+      .sidebar-menu .nav-item:focus-within > .nav-link.active,
+      .sidebar-menu .nav-link.active,
+      .sidebar-menu .nav-link.active:hover,
+      .sidebar-menu .nav-link.active:focus {
+        color: #fff !important;
+        background-color: var(--lte-sidebar-menu-active-bg) !important;
+      }
+    </style>
+  </head>
+  <body class="layout-fixed sidebar-expand-lg sidebar-open bg-body-tertiary">
+    <div class="app-wrapper">
+      <nav class="app-header navbar navbar-expand bg-body">
+        <div class="container-fluid">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" data-lte-toggle="sidebar" href="#" role="button">
+                <i class="bi bi-list"></i>
+              </a>
+            </li>
+            <li class="nav-item d-none d-md-block">
+              <span class="nav-link fw-semibold">Quản lý role permissions</span>
+            </li>
+          </ul>
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="#" data-lte-toggle="fullscreen">
+                <i data-lte-icon="maximize" class="bi bi-arrows-fullscreen"></i>
+                <i data-lte-icon="minimize" class="bi bi-fullscreen-exit" style="display: none"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" id="btnLogout" title="Đăng xuất">
+                <i class="bi bi-box-arrow-right"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark">
+        <div class="sidebar-brand">
+          <a href="../index.html" class="brand-link">
+            <img
+              src="../assets/img/AdminLTELogo.png"
+              alt="AdminLTE Logo"
+              class="brand-image opacity-75 shadow"
+            />
+            <span class="brand-text fw-light">School Manager</span>
+          </a>
+        </div>
+        <div class="sidebar-wrapper">
+          <nav class="mt-2">
+            <ul
+              class="nav sidebar-menu flex-column"
+              data-lte-toggle="treeview"
+              role="navigation"
+              aria-label="Main navigation"
+              data-accordion="false"
+            >
+              <li class="nav-item px-3">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                  <span class="text-white small mb-0 fw-semibold">Auth</span>
+                  <span class="badge text-bg-light">Admin</span>
+                </div>
+                <a class="nav-link px-0 py-1 text-white-50" href="./users.html">
+                  <i class="nav-icon bi bi-people"></i>
+                  <p class="mb-0">Users</p>
+                </a>
+                <a class="nav-link px-0 py-1 text-white-50" href="./roles.html">
+                  <i class="nav-icon bi bi-shield-lock"></i>
+                  <p class="mb-0">Roles</p>
+                </a>
+                <a class="nav-link px-0 py-1 text-white-50" href="./permissions.html">
+                  <i class="nav-icon bi bi-key"></i>
+                  <p class="mb-0">Permissions</p>
+                </a>
+                <a class="nav-link px-0 py-1 text-white-50" href="./user_roles.html">
+                  <i class="nav-icon bi bi-diagram-3"></i>
+                  <p class="mb-0">User Roles</p>
+                </a>
+                <a class="nav-link px-0 py-1 text-white-50 active" href="./role_permission.html">
+                  <i class="nav-icon bi bi-link-45deg"></i>
+                  <p class="mb-0">Role Permissions</p>
+                </a>
+                <a class="nav-link px-0 py-1 text-white-50" href="http://localhost:5173/dashboard">
+                  <i class="nav-icon bi bi-speedometer2"></i>
+                  <p class="mb-0">Tổng quan</p>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </aside>
+
+      <main class="app-main">
+        <div class="app-content">
+          <div class="container-fluid">
+            <div class="card shadow-sm border-0">
+              <div class="card-header d-flex flex-wrap gap-3 align-items-center">
+                <div>
+                  <h3 class="card-title mb-1">Danh sách role permissions</h3>
+                </div>
+                <div class="ms-auto d-flex flex-wrap gap-2">
+                  <button class="btn btn-outline-secondary btn-sm" id="btnLoadPage" type="button">
+                    <i class="bi bi-list-ol me-1"></i> Reload
+                  </button>
+                  <button class="btn btn-outline-success btn-sm" id="btnLoadActive" type="button">
+                    <i class="bi bi-filter-circle me-1"></i> Trạng thái
+                  </button>
+                  <button class="btn btn-primary btn-sm" id="btnAdd" type="button">
+                    <i class="bi bi-plus-circle me-1"></i> Thêm role permission
+                  </button>
+                </div>
+              </div>
+
+              <div class="card-body border-bottom">
+                <div class="row g-3 align-items-end">
+                  <div class="col-lg-4">
+                    <label class="form-label small text-secondary mb-1" for="searchInput">
+                      Tìm nhanh
+                    </label>
+                    <div class="input-group">
+                      <span class="input-group-text"><i class="bi bi-search"></i></span>
+                      <input
+                        type="text"
+                        id="searchInput"
+                        class="form-control"
+                        placeholder="Nhập từ khóa để tìm..."
+                      />
+                    </div>
+                  </div>
+                  <div class="col-lg-2">
+                    <label class="form-label small text-secondary mb-1" for="filterRoleSelect">
+                      <i class="bi bi-shield-fill me-1"></i>Lọc theo Role
+                    </label>
+                    <select id="filterRoleSelect" class="form-select">
+                      <option value="">Tất cả roles</option>
+                    </select>
+                  </div>
+                  <div class="col-lg-3">
+                    <label class="form-label small text-secondary mb-1" for="filterPermissionSelect">
+                      <i class="bi bi-key-fill me-1"></i>Lọc theo Permission
+                    </label>
+                    <select id="filterPermissionSelect" class="form-select">
+                      <option value="">Tất cả permissions</option>
+                    </select>
+                  </div>
+                  <div class="col-lg-3">
+                    <label class="form-label small text-secondary mb-1" for="sortSelect">
+                      Sắp xếp
+                    </label>
+                    <select id="sortSelect" class="form-select">
+                      <option value="createdAt,desc">Mới nhất</option>
+                      <option value="createdAt,asc">Cũ nhất</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card-body table-responsive p-0">
+                <table class="table table-hover align-middle text-nowrap mb-0">
+                  <thead class="table-light">
+                    <tr>
+                      <th style="width: 25%">Role</th>
+                      <th style="width: 25%">Permission</th>
+                      <th style="width: 15%">Trạng thái</th>
+                      <th style="width: 20%">Created at</th>
+                      <th style="width: 15%" class="text-end">Hành động</th>
+                    </tr>
+                  </thead>
+                  <tbody id="rolePermissionTableBody"></tbody>
+                </table>
+              </div>
+
+              <div class="card-footer d-flex flex-wrap justify-content-between align-items-center gap-2">
+                <div class="small text-secondary" id="paginationInfo"></div>
+                <nav>
+                  <ul class="pagination pagination-sm mb-0" id="pagination"></ul>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <footer class="app-footer">
+        <div class="float-end d-none d-sm-inline">School Manager</div>
+        <strong>Quản lý role permissions với AdminLTE 4</strong>
+      </footer>
+    </div>
+
+    <div class="modal fade" id="rolePermissionModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="rolePermissionModalTitle">Thêm role permission</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <input type="hidden" id="rolePermissionId" />
+            <div class="mb-3">
+              <label class="form-label">Role</label>
+              <select id="roleIdSelect" class="form-select">
+                <option value="">Chọn role</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Permission</label>
+              <select id="permissionIdSelect" class="form-select">
+                <option value="">Chọn permission</option>
+              </select>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+            <button type="button" class="btn btn-primary" id="btnSaveRolePermission">Lưu</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="rolePermissionDetailModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Chi tiết role permission</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label">ID</label>
+                <input type="text" class="form-control" id="detailId" readonly />
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Trạng thái</label>
+                <input type="text" class="form-control" id="detailStatus" readonly />
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Role ID</label>
+                <input type="text" class="form-control" id="detailRoleId" readonly />
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Permission ID</label>
+                <input type="text" class="form-control" id="detailPermissionId" readonly />
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Role</label>
+                <input type="text" class="form-control" id="detailRoleLabel" readonly />
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Permission</label>
+                <input type="text" class="form-control" id="detailPermissionLabel" readonly />
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Created at</label>
+                <input type="text" class="form-control" id="detailCreatedAt" readonly />
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Updated at</label>
+                <input type="text" class="form-control" id="detailUpdatedAt" readonly />
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.11.0/browser/overlayscrollbars.browser.es6.min.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.min.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="../js/adminlte.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/js/tom-select.complete.min.js"></script>
+
+    <script>
+      function logout() {
+        localStorage.removeItem('token');
+        sessionStorage.removeItem('token');
+        window.location.href = '/auth/login.html';
+      }
+
+      // Auth Check & Fetch Interceptor
+      (function () {
+        const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+        if (!token) {
+          window.location.href = '/auth/login.html';
+          return;
+        }
+        const originalFetch = window.fetch;
+        window.fetch = function (url, options) {
+          options = options || {};
+          options.headers = options.headers || {};
+          options.headers['Authorization'] = 'Bearer ' + token;
+          return originalFetch(url, options).then(response => {
+            if (response.status === 401 || response.status === 403) {
+              localStorage.removeItem('token');
+              sessionStorage.removeItem('token');
+              window.location.href = '/auth/login.html';
+            }
+            return response;
+          });
+        };
+      })();
+
+      document.addEventListener('DOMContentLoaded', function () {
+        const btnLogout = document.getElementById('btnLogout');
+        if (btnLogout) btnLogout.addEventListener('click', function (e) { e.preventDefault(); logout(); });
+
+        const API_BASE = '/api/role-permissions';
+        const ROLES_API = '/api/roles';
+        const PERMISSIONS_API = '/api/permissions';
+        const PAGE_SIZE = 8;
+        const DEFAULT_SORT_FIELD = 'createdAt';
+        const DEFAULT_SORT_DIR = 'desc';
+
+        let currentPage = 0;
+        let totalPages = 0;
+        let totalElements = 0;
+        let activeFilterMode = 0;
+        let serverTotalPages = 0;
+        let serverTotalElements = 0;
+        let loadMode = 'page';
+        let isServerPaging = true;
+        let currentSortField = DEFAULT_SORT_FIELD;
+        let currentSortDir = DEFAULT_SORT_DIR;
+        let allRolePermissions = [];
+        let allRoles = [];
+        let allPermissions = [];
+        let rolesById = {};
+        let permissionsById = {};
+        let tsRole = null;
+        let tsPermission = null;
+        let tsFilterRole = null;
+        let tsFilterPermission = null;
+
+        const rolePermissionTableBody = document.getElementById('rolePermissionTableBody');
+        const pagination = document.getElementById('pagination');
+        const paginationInfo = document.getElementById('paginationInfo');
+        const searchInput = document.getElementById('searchInput');
+        const filterRoleSelect = document.getElementById('filterRoleSelect');
+        const filterPermissionSelect = document.getElementById('filterPermissionSelect');
+
+        const rolePermissionModalEl = document.getElementById('rolePermissionModal');
+        const rolePermissionModalTitle = document.getElementById('rolePermissionModalTitle');
+        const rolePermissionIdInput = document.getElementById('rolePermissionId');
+        const roleIdSelect = document.getElementById('roleIdSelect');
+        const permissionIdSelect = document.getElementById('permissionIdSelect');
+        const btnSaveRolePermission = document.getElementById('btnSaveRolePermission');
+        const btnAdd = document.getElementById('btnAdd');
+        const sortSelect = document.getElementById('sortSelect');
+        const btnApplyFilters = document.getElementById('btnApplyFilters');
+        const btnLoadActive = document.getElementById('btnLoadActive');
+        const btnLoadPage = document.getElementById('btnLoadPage');
+
+        const rolePermissionDetailModalEl = document.getElementById('rolePermissionDetailModal');
+        const detailId = document.getElementById('detailId');
+        const detailStatus = document.getElementById('detailStatus');
+        const detailRoleId = document.getElementById('detailRoleId');
+        const detailPermissionId = document.getElementById('detailPermissionId');
+        const detailRoleLabel = document.getElementById('detailRoleLabel');
+        const detailPermissionLabel = document.getElementById('detailPermissionLabel');
+        const detailCreatedAt = document.getElementById('detailCreatedAt');
+        const detailUpdatedAt = document.getElementById('detailUpdatedAt');
+
+        var rolePermissionModal = null;
+        if (window.bootstrap && rolePermissionModalEl) {
+          rolePermissionModal = new window.bootstrap.Modal(rolePermissionModalEl);
+        }
+        var rolePermissionDetailModal = null;
+        if (window.bootstrap && rolePermissionDetailModalEl) {
+          rolePermissionDetailModal = new window.bootstrap.Modal(rolePermissionDetailModalEl);
+        }
+
+        if (window.TomSelect) {
+          if (roleIdSelect) tsRole = new TomSelect(roleIdSelect, { create: false });
+          if (permissionIdSelect) tsPermission = new TomSelect(permissionIdSelect, { create: false });
+          if (filterRoleSelect) tsFilterRole = new TomSelect(filterRoleSelect, { create: false });
+          if (filterPermissionSelect) tsFilterPermission = new TomSelect(filterPermissionSelect, { create: false });
+        }
+
+        function highlightText(text, term) {
+          const value = text == null ? '' : String(text);
+          if (!term) return value;
+          const escaped = term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+          const re = new RegExp(escaped, 'ig');
+          return value.replace(re, function (m) {
+            return '<mark>' + m + '</mark>';
+          });
+        }
+
+        function normalizeText(value) {
+          return (value || '')
+            .toString()
+            .toLowerCase()
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '')
+            .replace(/Đ/g, 'd');
+        }
+
+        function getIsActive(rolePermission) {
+          if (!rolePermission) return null;
+          if (typeof rolePermission.isActive === 'boolean') return rolePermission.isActive;
+          if (typeof rolePermission.active === 'boolean') return rolePermission.active;
+          if (typeof rolePermission.is_active === 'boolean') return rolePermission.is_active;
+          if (typeof rolePermission.isActive === 'number') return rolePermission.isActive === 1;
+          if (typeof rolePermission.active === 'number') return rolePermission.active === 1;
+          if (typeof rolePermission.is_active === 'number') return rolePermission.is_active === 1;
+          return null;
+        }
+
+        function formatDateTime(value) {
+          if (!value) return '';
+          const d = new Date(value);
+          if (isNaN(d.getTime())) return String(value);
+          return d.toLocaleString('vi-VN');
+        }
+
+        function getRoleLabel(roleId) {
+          if (!roleId) return '';
+          const role = rolesById[String(roleId).toLowerCase()];
+          if (!role) return String(roleId);
+          return ((role.name || role.code || '') + (role.code ? ' (' + role.code + ')' : '')).trim() || String(roleId);
+        }
+
+        function getPermissionLabel(permissionId) {
+          if (!permissionId) return '';
+          const permission = permissionsById[String(permissionId).toLowerCase()];
+          if (!permission) return String(permissionId);
+          return (
+            (permission.name || permission.code || '') +
+            (permission.code ? ' (' + permission.code + ')' : '')
+          ).trim() || String(permissionId);
+        }
+
+        function setSelectOptions(selectEl, items, placeholder, getValue, getLabel) {
+          if (!selectEl) return;
+          const options = ['<option value="">' + placeholder + '</option>']
+            .concat(
+              items.map(function (item) {
+                const value = String(getValue(item) || '');
+                const label = String(getLabel(item) || value);
+                return '<option value="' + value.replace(/"/g, '&quot;') + '">' + label + '</option>';
+              })
+            )
+            .join('');
+          selectEl.innerHTML = options;
+        }
+
+        function populateLookupMaps() {
+          rolesById = {};
+          permissionsById = {};
+
+          allRoles.forEach(function (r) {
+            if (r && r.id) rolesById[String(r.id).toLowerCase()] = r;
+          });
+          allPermissions.forEach(function (p) {
+            if (p && p.id) permissionsById[String(p.id).toLowerCase()] = p;
+          });
+
+          const activeRoles = allRoles.filter(function(r) {
+            return getIsActive(r) !== false;
+          });
+
+          setSelectOptions(roleIdSelect, activeRoles, 'Chọn role', function (r) {
+            return r.id;
+          }, function (r) {
+            return (r.name || r.code || r.id) + (r.code ? ' (' + r.code + ')' : '');
+          });
+
+          const activePermissions = allPermissions.filter(function(p) {
+            return getIsActive(p) !== false;
+          });
+
+          setSelectOptions(permissionIdSelect, activePermissions, 'Chọn permission', function (p) {
+            return p.id;
+          }, function (p) {
+            return (p.name || p.code || p.id) + (p.code ? ' (' + p.code + ')' : '');
+          });
+
+          // Populate filter dropdowns
+          setSelectOptions(filterRoleSelect, allRoles, 'Tất cả roles', function (r) {
+            return r.id;
+          }, function (r) {
+            return (r.name || r.code || r.id) + (r.code ? ' (' + r.code + ')' : '');
+          });
+
+          setSelectOptions(filterPermissionSelect, allPermissions, 'Tất cả permissions', function (p) {
+            return p.id;
+          }, function (p) {
+            return (p.name || p.code || p.id) + (p.code ? ' (' + p.code + ')' : '');
+          });
+
+          // Sync Tom Select
+          if (tsRole) tsRole.sync();
+          if (tsPermission) tsPermission.sync();
+          if (tsFilterRole) tsFilterRole.sync();
+          if (tsFilterPermission) tsFilterPermission.sync();
+        }
+
+        async function loadLookups() {
+          try {
+            const [rolesRes, permissionsRes] = await Promise.all([fetch(ROLES_API), fetch(PERMISSIONS_API)]);
+            const rolesData = await rolesRes.json();
+            const permissionsData = await permissionsRes.json();
+            allRoles = Array.isArray(rolesData) ? rolesData : [];
+            allPermissions = Array.isArray(permissionsData) ? permissionsData : [];
+            populateLookupMaps();
+          } catch (e) {
+            console.error('Lỗi tải danh sách role/permission', e);
+          }
+        }
+
+        function renderTable(rolePermissions) {
+          const term = searchInput.value.trim();
+          rolePermissionTableBody.innerHTML = rolePermissions
+            .map(function (r) {
+              const isActive = getIsActive(r);
+              const statusBadge =
+                typeof isActive === 'boolean'
+                  ? isActive
+                    ? '<span class="badge bg-success">Hoạt động</span>'
+                    : '<span class="badge bg-secondary">Đã khóa</span>'
+                  : '<span class="badge bg-secondary">Không xác định</span>';
+              const lockAction =
+                typeof isActive === 'boolean'
+                  ? isActive
+                    ? '<button class="btn btn-sm btn-outline-warning me-1" data-id="' +
+                      r.id +
+                      '" data-action="lock" title="Khóa">' +
+                      '<i class="bi bi-lock"></i>' +
+                      '</button>'
+                    : '<button class="btn btn-sm btn-outline-success me-1" data-id="' +
+                      r.id +
+                      '" data-action="unlock" title="Mở khóa">' +
+                      '<i class="bi bi-unlock"></i>' +
+                      '</button>'
+                  : '';
+              const roleLabel = getRoleLabel(r.roleId);
+              const permissionLabel = getPermissionLabel(r.permissionId);
+              return (
+                '<tr class="role-permission-row" data-id="' +
+                r.id +
+                '">' +
+                '<td>' +
+                highlightText(roleLabel, term) +
+                '</td>' +
+                '<td>' +
+                highlightText(permissionLabel, term) +
+                '</td>' +
+                '<td>' +
+                statusBadge +
+                '</td>' +
+                '<td>' +
+                highlightText(formatDateTime(r.createdAt), term) +
+                '</td>' +
+                '<td class="text-end">' +
+                lockAction +
+                '<button class="btn btn-sm btn-outline-secondary me-1" data-id="' +
+                r.id +
+                '" data-action="edit">' +
+                '<i class="bi bi-pencil"></i>' +
+                '</button>' +
+                '<button class="btn btn-sm btn-outline-danger" data-id="' +
+                r.id +
+                '" data-action="delete">' +
+                '<i class="bi bi-trash"></i>' +
+                '</button>' +
+                '</td>' +
+                '</tr>'
+              );
+            })
+            .join('');
+
+          const from = totalElements === 0 ? 0 : currentPage * PAGE_SIZE + 1;
+          const to = Math.min((currentPage + 1) * PAGE_SIZE, totalElements);
+          paginationInfo.textContent =
+            'Hiển thị ' + from + '-' + to + ' trên tổng ' + totalElements + ' role permissions';
+
+          renderPagination();
+        }
+
+        function applyFilterAndRender() {
+          const term = normalizeText(searchInput.value.trim());
+          const filterRoleId = filterRoleSelect ? filterRoleSelect.value : '';
+          const filterPermId = filterPermissionSelect ? filterPermissionSelect.value : '';
+          const hasFilter = term || filterRoleId || filterPermId;
+
+          let filtered = allRolePermissions.filter(function (r) {
+            const matchTerm = !term || (
+              normalizeText(r.id).includes(term) ||
+              normalizeText(getRoleLabel(r.roleId)).includes(term) ||
+              normalizeText(getPermissionLabel(r.permissionId)).includes(term)
+            );
+            const matchRole = !filterRoleId || String(r.roleId).toLowerCase() === String(filterRoleId).toLowerCase();
+            const matchPerm = !filterPermId || String(r.permissionId).toLowerCase() === String(filterPermId).toLowerCase();
+            return matchTerm && matchRole && matchPerm;
+          });
+
+          if (isServerPaging && !hasFilter) {
+            totalElements = serverTotalElements;
+            totalPages = serverTotalPages;
+            renderTable(allRolePermissions);
+            return;
+          }
+
+          totalElements = filtered.length;
+          totalPages = totalElements === 0 ? 0 : Math.ceil(totalElements / PAGE_SIZE);
+          if (currentPage >= totalPages) {
+            currentPage = Math.max(0, totalPages - 1);
+          }
+
+          const start = currentPage * PAGE_SIZE;
+          const pageItems = filtered.slice(start, start + PAGE_SIZE);
+          renderTable(pageItems);
+        }
+
+        function renderPagination() {
+          if (totalPages === 0) {
+            pagination.innerHTML = '';
+            return;
+          }
+
+          var html = '';
+          html +=
+            '<li class="page-item ' +
+            (currentPage === 0 ? 'disabled' : '') +
+            '"><a class="page-link" href="#" data-page="' +
+            (currentPage - 1) +
+            '">&laquo;</a></li>';
+
+          for (var i = 0; i < totalPages; i++) {
+            html +=
+              '<li class="page-item ' +
+              (i === currentPage ? 'active' : '') +
+              '"><a class="page-link" href="#" data-page="' +
+              i +
+              '">' +
+              (i + 1) +
+              '</a></li>';
+          }
+
+          html +=
+            '<li class="page-item ' +
+            (currentPage === totalPages - 1 ? 'disabled' : '') +
+            '"><a class="page-link" href="#" data-page="' +
+            (currentPage + 1) +
+            '">&raquo;</a></li>';
+
+          pagination.innerHTML = html;
+        }
+
+        pagination.addEventListener('click', function (e) {
+          if (e.target.tagName !== 'A') return;
+          e.preventDefault();
+          const page = Number(e.target.getAttribute('data-page'));
+          if (isNaN(page) || page === currentPage || page < 0 || page >= totalPages) return;
+          currentPage = page;
+          if (isServerPaging) {
+            loadRolePermissions();
+          } else {
+            applyFilterAndRender();
+          }
+        });
+
+        function onFilterChange() {
+          const term = searchInput.value.trim();
+          const roleId = filterRoleSelect ? filterRoleSelect.value : '';
+          const permId = filterPermissionSelect ? filterPermissionSelect.value : '';
+          const hasFilter = term || roleId || permId;
+
+          if (hasFilter && loadMode === 'page') {
+            setMode('all');
+            loadRolePermissions();
+          } else if (!hasFilter && loadMode === 'all') {
+            setMode('page');
+            loadRolePermissions();
+          } else {
+            currentPage = 0;
+            applyFilterAndRender();
+          }
+        }
+
+        searchInput.addEventListener('input', onFilterChange);
+        if (filterRoleSelect) filterRoleSelect.addEventListener('change', onFilterChange);
+        if (filterPermissionSelect) filterPermissionSelect.addEventListener('change', onFilterChange);
+
+        function setMode(mode) {
+          loadMode = mode;
+          isServerPaging = mode === 'page';
+          currentPage = 0;
+        }
+
+        function buildSearchParams() {
+          const roleId = searchInput ? searchInput.value.trim() : '';
+          const params = new URLSearchParams();
+          if (roleId) params.set('roleId', roleId);
+          return params;
+        }
+
+        async function loadRolePermissions() {
+          if (loadMode === 'search') return loadRolePermissionsSearch();
+          if (loadMode === 'active') return loadRolePermissionsActive();
+          if (loadMode === 'all') return loadRolePermissionsAll();
+          return loadRolePermissionsPage();
+        }
+
+        async function loadRolePermissionsPage() {
+          try {
+            currentSortField = sortSelect ? sortSelect.value.split(',')[0] || DEFAULT_SORT_FIELD : DEFAULT_SORT_FIELD;
+            currentSortDir = sortSelect ? sortSelect.value.split(',')[1] || DEFAULT_SORT_DIR : DEFAULT_SORT_DIR;
+            const params = new URLSearchParams({
+              page: String(currentPage),
+              size: String(PAGE_SIZE),
+              sort: currentSortField + ',' + currentSortDir,
+            });
+            const res = await fetch(API_BASE + '?' + params.toString());
+            const data = await res.json();
+            allRolePermissions = Array.isArray(data.content) ? data.content : [];
+            serverTotalElements = typeof data.totalElements === 'number' ? data.totalElements : 0;
+            serverTotalPages = typeof data.totalPages === 'number' ? data.totalPages : 0;
+            applyFilterAndRender();
+          } catch (e) {
+            console.error('Lỗi tải danh sách role permissions theo trang', e);
+          }
+        }
+
+        async function loadRolePermissionsAll() {
+          try {
+            const selectedSort = sortSelect ? sortSelect.value : DEFAULT_SORT_FIELD + ',' + DEFAULT_SORT_DIR;
+            const res = await fetch(API_BASE + '?page=0&size=1000&sort=' + selectedSort);
+            const data = await res.json();
+            allRolePermissions = Array.isArray(data.content) ? data.content : [];
+            serverTotalElements = typeof data.totalElements === 'number' ? data.totalElements : 0;
+            serverTotalPages = typeof data.totalPages === 'number' ? data.totalPages : 0;
+            applyFilterAndRender();
+          } catch (e) {
+            console.error('Lỗi tải danh sách role permissions', e);
+          }
+        }
+
+        async function loadRolePermissionsSearch() {
+          try {
+            const params = buildSearchParams();
+            if ([...params.keys()].length === 0) return loadRolePermissionsAll();
+            const roleId = params.get('roleId');
+            const searchParams = new URLSearchParams({
+              roleId: roleId,
+              page: String(currentPage),
+              size: String(PAGE_SIZE),
+            });
+            const res = await fetch(API_BASE + '/search?' + searchParams.toString());
+            const data = await res.json();
+            allRolePermissions = Array.isArray(data.content) ? data.content : [];
+            serverTotalElements = typeof data.totalElements === 'number' ? data.totalElements : 0;
+            serverTotalPages = typeof data.totalPages === 'number' ? data.totalPages : 0;
+            applyFilterAndRender();
+          } catch (e) {
+            console.error('Lỗi tìm kiếm role permissions', e);
+          }
+        }
+
+        async function loadRolePermissionsActive(isActive) {
+          try {
+            const activeValue =
+              typeof isActive === 'boolean'
+                ? isActive
+                  ? 'true'
+                  : 'false'
+                : 'true';
+            const params = new URLSearchParams({ isActive: activeValue });
+            const res = await fetch(API_BASE + '/active?' + params.toString());
+            const data = await res.json();
+            allRolePermissions = Array.isArray(data) ? data : [];
+            serverTotalElements = allRolePermissions.length;
+            serverTotalPages = Math.ceil(allRolePermissions.length / PAGE_SIZE);
+            applyFilterAndRender();
+          } catch (e) {
+            console.error('Lỗi lọc role permissions theo trạng thái', e);
+          }
+        }
+
+        let currentEditingRolePermission = null;
+
+        function openAddModal() {
+          if (!rolePermissionModal) return;
+          currentEditingRolePermission = null;
+          rolePermissionIdInput.value = '';
+          roleIdSelect.value = '';
+          permissionIdSelect.value = '';
+          if (tsRole) tsRole.sync();
+          if (tsPermission) tsPermission.sync();
+          rolePermissionModalTitle.textContent = 'Thêm role permission';
+          btnSaveRolePermission.dataset.mode = 'create';
+          rolePermissionModal.show();
+        }
+
+        function openEditModal(rolePermission) {
+          if (!rolePermissionModal) return;
+          currentEditingRolePermission = rolePermission || {};
+          rolePermissionIdInput.value = rolePermission.id || '';
+          roleIdSelect.value = rolePermission.roleId || '';
+          permissionIdSelect.value = rolePermission.permissionId || '';
+          if (tsRole) tsRole.sync();
+          if (tsPermission) tsPermission.sync();
+          rolePermissionModalTitle.textContent = 'Cập nhật role permission';
+          btnSaveRolePermission.dataset.mode = 'update';
+          rolePermissionModal.show();
+        }
+
+        btnAdd.addEventListener('click', openAddModal);
+
+        if (btnApplyFilters) {
+          btnApplyFilters.addEventListener('click', function () {
+            const hasSearch = searchInput.value.trim().length > 0;
+            if (hasSearch) {
+              setMode('search');
+            } else {
+              setMode('page');
+            }
+            loadRolePermissions();
+          });
+        }
+
+        if (btnLoadActive) {
+          btnLoadActive.addEventListener('click', function () {
+            activeFilterMode = (activeFilterMode + 1) % 3;
+            if (activeFilterMode === 1) {
+              btnLoadActive.innerHTML =
+                '<i class="bi bi-check-circle me-1"></i> Đang hoạt động';
+              setMode('active');
+              loadRolePermissionsActive(true);
+            } else if (activeFilterMode === 2) {
+              btnLoadActive.innerHTML = '<i class="bi bi-slash-circle me-1"></i> Đã khóa';
+              setMode('active');
+              loadRolePermissionsActive(false);
+            } else {
+              btnLoadActive.innerHTML = '<i class="bi bi-filter-circle me-1"></i> Tất cả';
+              setMode('all');
+              loadRolePermissionsAll();
+            }
+          });
+          btnLoadActive.innerHTML = '<i class="bi bi-filter-circle me-1"></i> Tất cả';
+        }
+
+        if (btnLoadPage) {
+          btnLoadPage.addEventListener('click', function () {
+            setMode('page');
+            loadRolePermissions();
+          });
+        }
+
+        if (sortSelect) {
+          sortSelect.addEventListener('change', function () {
+            if (loadMode === 'page') {
+              currentPage = 0;
+              loadRolePermissions();
+            }
+          });
+        }
+
+        rolePermissionTableBody.addEventListener('click', function (e) {
+          const btn = e.target.closest('button[data-action]');
+          if (btn) {
+            const id = btn.getAttribute('data-id');
+            const action = btn.getAttribute('data-action');
+            if (action === 'edit') {
+              fetch(API_BASE + '/' + id)
+                .then(function (res) {
+                  return res.json();
+                })
+                .then(function (rolePermission) {
+                  openEditModal(rolePermission || {});
+                })
+                .catch(function () {
+                  alert('Không tải được thông tin role permission.');
+                });
+            } else if (action === 'lock') {
+              lockRolePermission(id);
+            } else if (action === 'unlock') {
+              unlockRolePermission(id);
+            } else if (action === 'delete') {
+              if (confirm('Bạn có chắc chắn muốn xóa role permission này?')) {
+                deleteRolePermission(id);
+              }
+            }
+            return;
+          }
+
+          const row = e.target.closest('tr.role-permission-row');
+          if (!row) return;
+          const id = row.getAttribute('data-id');
+          if (!id) return;
+          fetch(API_BASE + '/' + id)
+            .then(function (res) {
+              return res.json();
+            })
+            .then(function (rolePermission) {
+              const isActive = getIsActive(rolePermission);
+              detailId.value = rolePermission.id || '';
+              detailStatus.value =
+                typeof isActive === 'boolean'
+                  ? isActive
+                    ? 'Hoạt động'
+                    : 'Đã khóa'
+                  : 'Không xác định';
+              detailRoleId.value = rolePermission.roleId || '';
+              detailPermissionId.value = rolePermission.permissionId || '';
+              detailRoleLabel.value = getRoleLabel(rolePermission.roleId);
+              detailPermissionLabel.value = getPermissionLabel(rolePermission.permissionId);
+              detailCreatedAt.value = formatDateTime(rolePermission.createdAt);
+              detailUpdatedAt.value = formatDateTime(rolePermission.updatedAt);
+              if (rolePermissionDetailModal) rolePermissionDetailModal.show();
+            })
+            .catch(function () {
+              alert('Không tải được thông tin role permission.');
+            });
+        });
+
+        async function saveRolePermission() {
+          const mode = btnSaveRolePermission.dataset.mode;
+          const roleId = roleIdSelect.value.trim();
+          const permissionId = permissionIdSelect.value.trim();
+
+          if (!roleId || !permissionId) {
+            alert('Vui lòng chọn role và permission.');
+            return;
+          }
+
+          const isUpdate = mode === 'update';
+          const id = rolePermissionIdInput.value;
+
+          const payload = {
+            roleId: roleId,
+            permissionId: permissionId,
+            isActive: isUpdate
+              ? currentEditingRolePermission && typeof currentEditingRolePermission.isActive === 'boolean'
+                ? currentEditingRolePermission.isActive
+                : true
+              : true,
+          };
+
+          const url = isUpdate ? API_BASE + '/' + id : API_BASE;
+          const method = isUpdate ? 'PUT' : 'POST';
+
+          try {
+            const res = await fetch(url, {
+              method: method,
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(payload),
+            });
+            if (!res.ok) throw new Error(await res.text());
+            if (rolePermissionModal) rolePermissionModal.hide();
+            await loadRolePermissions();
+          } catch (e) {
+            console.error('Lỗi lưu role permission', e);
+            alert('Có lỗi xảy ra khi lưu role permission.');
+          }
+        }
+
+        btnSaveRolePermission.addEventListener('click', saveRolePermission);
+
+        async function deleteRolePermission(id) {
+          try {
+            const res = await fetch(API_BASE + '/' + id, { method: 'DELETE' });
+            if (!res.ok && res.status !== 204) throw new Error(await res.text());
+            await loadRolePermissions();
+          } catch (e) {
+            console.error('Lỗi xóa role permission', e);
+            alert('Có lỗi xảy ra khi xóa role permission.');
+          }
+        }
+
+        async function lockRolePermission(id) {
+          try {
+            const res = await fetch(API_BASE + '/' + id + '/lock', { method: 'PUT' });
+            if (!res.ok) throw new Error(await res.text());
+            await loadRolePermissions();
+          } catch (e) {
+            console.error('Lỗi khóa role permission', e);
+            alert('Có lỗi xảy ra khi khóa role permission.');
+          }
+        }
+
+        async function unlockRolePermission(id) {
+          try {
+            const res = await fetch(API_BASE + '/' + id + '/unlock', { method: 'PUT' });
+            if (!res.ok) throw new Error(await res.text());
+            await loadRolePermissions();
+          } catch (e) {
+            console.error('Lỗi mở khóa role permission', e);
+            alert('Có lỗi xảy ra khi mở khóa role permission.');
+          }
+        }
+
+        const SELECTOR_SIDEBAR_WRAPPER = '.sidebar-wrapper';
+        const Default = {
+          scrollbarTheme: 'os-theme-light',
+          scrollbarAutoHide: 'leave',
+          scrollbarClickScroll: true,
+        };
+        const sidebarWrapper = document.querySelector(SELECTOR_SIDEBAR_WRAPPER);
+        if (sidebarWrapper && window.OverlayScrollbarsGlobal && window.OverlayScrollbarsGlobal.OverlayScrollbars) {
+          window.OverlayScrollbarsGlobal.OverlayScrollbars(sidebarWrapper, {
+            scrollbars: {
+              theme: Default.scrollbarTheme,
+              autoHide: Default.scrollbarAutoHide,
+              clickScroll: Default.scrollbarClickScroll,
+            },
+          });
+        }
+
+        if (sortSelect) sortSelect.value = `${DEFAULT_SORT_FIELD},${DEFAULT_SORT_DIR}`;
+
+        loadLookups().then(function () {
+          setMode('page');
+          loadRolePermissions();
+        });
+      });
+    </script>
+  </body>
+</html>

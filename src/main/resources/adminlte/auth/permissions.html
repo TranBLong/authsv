@@ -1,0 +1,1048 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Quản lý permissions | School Manager</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#007bff" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#1a1a1a" media="(prefers-color-scheme: dark)" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@fontsource/source-sans-3@5.0.12/index.css"
+      crossorigin="anonymous"
+      media="print"
+      onload="this.media='all'"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.11.0/styles/overlayscrollbars.min.css"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../css/adminlte.css" />
+    <style>
+      .sidebar-menu .nav-link {
+        transition: none !important;
+      }
+
+      .sidebar-menu .nav-item:hover > .nav-link,
+      .sidebar-menu .nav-item:focus-within > .nav-link,
+      .sidebar-menu .nav-link:hover,
+      .sidebar-menu .nav-link:focus {
+        background-color: transparent !important;
+        background-image: none !important;
+        box-shadow: none !important;
+        filter: none !important;
+      }
+
+      .sidebar-menu .nav-item:hover > .nav-link:not(.active),
+      .sidebar-menu .nav-item:focus-within > .nav-link:not(.active),
+      .sidebar-menu .nav-link:not(.active):hover,
+      .sidebar-menu .nav-link:not(.active):focus,
+      .sidebar-menu .nav-link:not(.active):active {
+        color: rgba(255, 255, 255, 0.75) !important;
+      }
+
+      .sidebar-menu .nav-item:hover > .nav-link.active,
+      .sidebar-menu .nav-item:focus-within > .nav-link.active,
+      .sidebar-menu .nav-link.active,
+      .sidebar-menu .nav-link.active:hover,
+      .sidebar-menu .nav-link.active:focus {
+        color: #fff !important;
+        background-color: var(--lte-sidebar-menu-active-bg) !important;
+      }
+    </style>
+  </head>
+  <body class="layout-fixed sidebar-expand-lg sidebar-open bg-body-tertiary">
+    <div class="app-wrapper">
+      <nav class="app-header navbar navbar-expand bg-body">
+        <div class="container-fluid">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" data-lte-toggle="sidebar" href="#" role="button">
+                <i class="bi bi-list"></i>
+              </a>
+            </li>
+            <li class="nav-item d-none d-md-block">
+              <span class="nav-link fw-semibold">Quản lý permissions</span>
+            </li>
+          </ul>
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="#" data-lte-toggle="fullscreen">
+                <i data-lte-icon="maximize" class="bi bi-arrows-fullscreen"></i>
+                <i data-lte-icon="minimize" class="bi bi-fullscreen-exit" style="display: none"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" id="btnLogout" title="Đăng xuất">
+                <i class="bi bi-box-arrow-right"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark">
+        <div class="sidebar-brand">
+          <a href="../index.html" class="brand-link">
+            <img
+              src="../assets/img/AdminLTELogo.png"
+              alt="AdminLTE Logo"
+              class="brand-image opacity-75 shadow"
+            />
+            <span class="brand-text fw-light">School Manager</span>
+          </a>
+        </div>
+        <div class="sidebar-wrapper">
+          <nav class="mt-2">
+            <ul
+              class="nav sidebar-menu flex-column"
+              data-lte-toggle="treeview"
+              role="navigation"
+              aria-label="Main navigation"
+              data-accordion="false"
+            >
+              <li class="nav-item px-3">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                  <span class="text-white small mb-0 fw-semibold">Auth</span>
+                  <span class="badge text-bg-light">Admin</span>
+                </div>
+                <a class="nav-link px-0 py-1 text-white-50" href="./users.html">
+                  <i class="nav-icon bi bi-people"></i>
+                  <p class="mb-0">Users</p>
+                </a>
+                <a class="nav-link px-0 py-1 text-white-50" href="./roles.html">
+                  <i class="nav-icon bi bi-shield-lock"></i>
+                  <p class="mb-0">Roles</p>
+                </a>
+                <a class="nav-link px-0 py-1 text-white-50 active" href="./permissions.html">
+                  <i class="nav-icon bi bi-key"></i>
+                  <p class="mb-0">Permissions</p>
+                </a>
+                <a class="nav-link px-0 py-1 text-white-50" href="./user_roles.html">
+                  <i class="nav-icon bi bi-diagram-3"></i>
+                  <p class="mb-0">User Roles</p>
+                </a>
+                <a class="nav-link px-0 py-1 text-white-50" href="./role_permission.html">
+                  <i class="nav-icon bi bi-link-45deg"></i>
+                  <p class="mb-0">Role Permissions</p>
+                </a>
+                <a class="nav-link px-0 py-1 text-white-50" href="http://localhost:5173/dashboard">
+                  <i class="nav-icon bi bi-speedometer2"></i>
+                  <p class="mb-0">Tổng quan</p>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </aside>
+
+      <main class="app-main">
+        <div class="app-content">
+          <div class="container-fluid">
+            <div class="card shadow-sm border-0">
+              <div class="card-header d-flex flex-wrap gap-3 align-items-center">
+                <div>
+                  <h3 class="card-title mb-1">Danh sách permissions</h3>
+                </div>
+                <div class="ms-auto d-flex flex-wrap gap-2">
+                  <button class="btn btn-outline-secondary btn-sm" id="btnLoadPage" type="button">
+                    <i class="bi bi-list-ol me-1"></i> Reload
+                  </button>
+                  <button class="btn btn-outline-success btn-sm" id="btnLoadActive" type="button">
+                    <i class="bi bi-filter-circle me-1"></i> Trạng thái
+                  </button>
+                  <button class="btn btn-primary btn-sm" id="btnAdd" type="button">
+                    <i class="bi bi-plus-circle me-1"></i> Thêm permission
+                  </button>
+                </div>
+              </div>
+
+              <div class="card-body border-bottom">
+                <div class="row g-3 align-items-end">
+                  <div class="col-lg-5">
+                    <label class="form-label small text-secondary mb-1" for="searchInput">
+                      Tìm nhanh
+                    </label>
+                    <div class="input-group">
+                      <span class="input-group-text"><i class="bi bi-search"></i></span>
+                      <input
+                        type="text"
+                        id="searchInput"
+                        class="form-control"
+                        placeholder="Tìm theo code, tên, module hoặc mô tả..."
+                      />
+                    </div>
+                  </div>
+                  <div class="col-lg-3">
+                    <label class="form-label small text-secondary mb-1" for="moduleFilterToggle">
+                      Lọc module
+                    </label>
+                    <div class="dropdown">
+                      <button
+                        class="btn btn-outline-secondary dropdown-toggle w-100 text-start"
+                        type="button"
+                        id="moduleFilterToggle"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                      >
+                        <i class="bi bi-funnel me-1"></i>
+                        <span id="moduleFilterLabel">Module: Tất cả</span>
+                      </button>
+                      <ul class="dropdown-menu w-100" id="moduleFilterMenu"></ul>
+                    </div>
+                  </div>
+                  <div class="col-lg-2">
+                    <label class="form-label small text-secondary mb-1" for="sortSelect">
+                      Sắp xếp
+                    </label>
+                    <select id="sortSelect" class="form-select">
+                      <option value="code,asc">Code A-Z</option>
+                      <option value="code,desc">Code Z-A</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card-body table-responsive p-0">
+                <table class="table table-hover align-middle text-nowrap mb-0">
+                  <thead class="table-light">
+                    <tr>
+                      <th style="width: 18%">Code</th>
+                      <th style="width: 18%">Module</th>
+                      <th style="width: 22%">Tên</th>
+                      <th style="width: 22%">Mô tả</th>
+                      <th style="width: 10%">Trạng thái</th>
+                      <th style="width: 10%" class="text-end">Hành động</th>
+                    </tr>
+                  </thead>
+                  <tbody id="permissionTableBody"></tbody>
+                </table>
+              </div>
+
+              <div class="card-footer d-flex flex-wrap justify-content-between align-items-center gap-2">
+                <div class="small text-secondary" id="paginationInfo"></div>
+                <nav>
+                  <ul class="pagination pagination-sm mb-0" id="pagination"></ul>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <footer class="app-footer">
+        <div class="float-end d-none d-sm-inline">School Manager</div>
+        <strong>Quản lý permissions với AdminLTE 4</strong>
+      </footer>
+    </div>
+
+    <div class="modal fade" id="permissionModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="permissionModalTitle">Thêm permission</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <input type="hidden" id="permissionId" />
+            <div class="mb-3">
+              <label class="form-label">Code</label>
+              <input type="text" id="permissionCode" class="form-control" />
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Tên</label>
+              <input type="text" id="permissionName" class="form-control" />
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Module</label>
+              <input type="text" id="permissionModule" class="form-control" />
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Mô tả</label>
+              <textarea id="permissionDescription" class="form-control" rows="3"></textarea>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+            <button type="button" class="btn btn-primary" id="btnSavePermission">Lưu</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="permissionDetailModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Chi tiết permission</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label">ID</label>
+                <input type="text" class="form-control" id="detailId" readonly />
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Trạng thái</label>
+                <input type="text" class="form-control" id="detailStatus" readonly />
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Code</label>
+                <input type="text" class="form-control" id="detailCode" readonly />
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Module</label>
+                <input type="text" class="form-control" id="detailModule" readonly />
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Tên</label>
+                <input type="text" class="form-control" id="detailName" readonly />
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Mô tả</label>
+                <input type="text" class="form-control" id="detailDescription" readonly />
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.11.0/browser/overlayscrollbars.browser.es6.min.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.min.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="../js/adminlte.js"></script>
+
+    <script>
+      function logout() {
+        localStorage.removeItem('token');
+        sessionStorage.removeItem('token');
+        window.location.href = '/auth/login.html';
+      }
+
+      // Auth Check & Fetch Interceptor
+      (function () {
+        const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+        if (!token) {
+          window.location.href = '/auth/login.html';
+          return;
+        }
+        const originalFetch = window.fetch;
+        window.fetch = function (url, options) {
+          options = options || {};
+          options.headers = options.headers || {};
+          options.headers['Authorization'] = 'Bearer ' + token;
+          return originalFetch(url, options).then(response => {
+            if (response.status === 401 || response.status === 403) {
+              localStorage.removeItem('token');
+              sessionStorage.removeItem('token');
+              window.location.href = '/auth/login.html';
+            }
+            return response;
+          });
+        };
+      })();
+
+      document.addEventListener('DOMContentLoaded', function () {
+        const btnLogout = document.getElementById('btnLogout');
+        if (btnLogout) btnLogout.addEventListener('click', function (e) { e.preventDefault(); logout(); });
+
+        const API_BASE = '/api/permissions';
+        const PAGE_SIZE = 8;
+        const DEFAULT_SORT_FIELD = 'code';
+        const DEFAULT_SORT_DIR = 'asc';
+
+        let currentPage = 0;
+        let totalPages = 0;
+        let totalElements = 0;
+        let activeFilterMode = 0;
+        let serverTotalPages = 0;
+        let serverTotalElements = 0;
+        let loadMode = 'page';
+        let isServerPaging = true;
+        let currentSortField = DEFAULT_SORT_FIELD;
+        let currentSortDir = DEFAULT_SORT_DIR;
+        let allPermissions = [];
+        let allModules = [];
+        let selectedModuleFilter = '';
+        let modulesLoaded = false;
+        const permissionTableBody = document.getElementById('permissionTableBody');
+        const pagination = document.getElementById('pagination');
+        const paginationInfo = document.getElementById('paginationInfo');
+        const searchInput = document.getElementById('searchInput');
+        const moduleFilterToggle = document.getElementById('moduleFilterToggle');
+        const moduleFilterLabel = document.getElementById('moduleFilterLabel');
+        const moduleFilterMenu = document.getElementById('moduleFilterMenu');
+        const permissionModalEl = document.getElementById('permissionModal');
+        const permissionModalTitle = document.getElementById('permissionModalTitle');
+        const permissionIdInput = document.getElementById('permissionId');
+        const permissionCodeInput = document.getElementById('permissionCode');
+        const permissionNameInput = document.getElementById('permissionName');
+        const permissionModuleInput = document.getElementById('permissionModule');
+        const permissionDescriptionInput = document.getElementById('permissionDescription');
+        const btnSavePermission = document.getElementById('btnSavePermission');
+        const btnAdd = document.getElementById('btnAdd');
+        const sortSelect = document.getElementById('sortSelect');
+        const btnApplyFilters = document.getElementById('btnApplyFilters');
+        const btnLoadActive = document.getElementById('btnLoadActive');
+        const btnLoadPage = document.getElementById('btnLoadPage');
+
+        const permissionDetailModalEl = document.getElementById('permissionDetailModal');
+        const detailId = document.getElementById('detailId');
+        const detailStatus = document.getElementById('detailStatus');
+        const detailCode = document.getElementById('detailCode');
+        const detailModule = document.getElementById('detailModule');
+        const detailName = document.getElementById('detailName');
+        const detailDescription = document.getElementById('detailDescription');
+
+        var permissionModal = null;
+        if (window.bootstrap && permissionModalEl) {
+          permissionModal = new window.bootstrap.Modal(permissionModalEl);
+        }
+        var permissionDetailModal = null;
+        if (window.bootstrap && permissionDetailModalEl) {
+          permissionDetailModal = new window.bootstrap.Modal(permissionDetailModalEl);
+        }
+
+        function highlightText(text, term) {
+          const value = text == null ? '' : String(text);
+          if (!term) return value;
+          const escaped = term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+          const re = new RegExp(escaped, 'ig');
+          return value.replace(re, function (m) {
+            return '<mark>' + m + '</mark>';
+          });
+        }
+
+        function normalizeText(value) {
+          return (value || '')
+            .toString()
+            .toLowerCase()
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '')
+            .replace(/Đ/g, 'd');
+        }
+
+        function getIsActive(permission) {
+          if (!permission) return null;
+          if (typeof permission.isActive === 'boolean') return permission.isActive;
+          if (typeof permission.active === 'boolean') return permission.active;
+          if (typeof permission.is_active === 'boolean') return permission.is_active;
+          if (typeof permission.isActive === 'number') return permission.isActive === 1;
+          if (typeof permission.active === 'number') return permission.active === 1;
+          if (typeof permission.is_active === 'number') return permission.is_active === 1;
+          return null;
+        }
+        function normalizeModuleValue(value) {
+          return normalizeText((value || '').toString().trim());
+        }
+
+        function updateModuleFilterLabel() {
+          if (!moduleFilterLabel) return;
+          moduleFilterLabel.textContent = selectedModuleFilter ? 'Module: ' + selectedModuleFilter : 'Module: Tất cả';
+        }
+
+        function renderModuleFilterMenu() {
+          if (!moduleFilterMenu) return;
+          var html = '';
+          html +=
+            '<li><button class="dropdown-item' +
+            (selectedModuleFilter === '' ? ' active' : '') +
+            '" type="button" data-module="">Tất cả modules</button></li>';
+
+          if (!allModules.length) {
+            html += '<li><hr class="dropdown-divider" /></li>';
+            html +=
+              '<li><span class="dropdown-item-text text-secondary small">Chưa có module để hiển thị</span></li>';
+            moduleFilterMenu.innerHTML = html;
+            updateModuleFilterLabel();
+            return;
+          }
+
+          html += '<li><hr class="dropdown-divider" /></li>';
+          html += allModules
+            .map(function (moduleName) {
+              return (
+                '<li><button class="dropdown-item' +
+                (moduleName === selectedModuleFilter ? ' active' : '') +
+                '" type="button" data-module="' +
+                moduleName.replace(/"/g, '&quot;') +
+                '">' +
+                moduleName +
+                '</button></li>'
+              );
+            })
+            .join('');
+
+          moduleFilterMenu.innerHTML = html;
+          updateModuleFilterLabel();
+        }
+
+        async function loadModuleOptions() {
+          try {
+            const res = await fetch(API_BASE);
+            const data = await res.json();
+            const modules = [];
+            const seen = new Set();
+            (Array.isArray(data) ? data : []).forEach(function (permission) {
+              const moduleName = permission && permission.module != null ? String(permission.module).trim() : '';
+              if (!moduleName) return;
+              const key = normalizeModuleValue(moduleName);
+              if (seen.has(key)) return;
+              seen.add(key);
+              modules.push(moduleName);
+            });
+            allModules = modules.sort(function (a, b) {
+              return a.localeCompare(b, 'vi', { sensitivity: 'base' });
+            });
+            modulesLoaded = true;
+            renderModuleFilterMenu();
+          } catch (e) {
+            console.error('Lỗi tải danh sách module', e);
+            modulesLoaded = false;
+            if (moduleFilterMenu) {
+              moduleFilterMenu.innerHTML =
+                '<li><span class="dropdown-item-text text-danger small">Không tải được module</span></li>';
+            }
+          }
+        }
+
+        function renderTable(permissions) {
+          const term = searchInput.value.trim();
+          permissionTableBody.innerHTML = permissions
+            .map(function (r) {
+              const isActive = getIsActive(r);
+              const statusBadge =
+                typeof isActive === 'boolean'
+                  ? isActive
+                    ? '<span class="badge bg-success">Hoạt động</span>'
+                    : '<span class="badge bg-secondary">Đã khóa</span>'
+                  : '<span class="badge bg-secondary">Không xác định</span>';
+              const lockAction =
+                typeof isActive === 'boolean'
+                  ? isActive
+                    ? '<button class="btn btn-sm btn-outline-warning me-1" data-id="' +
+                      r.id +
+                      '" data-action="lock" title="Khóa">' +
+                      '<i class="bi bi-lock"></i>' +
+                      '</button>'
+                    : '<button class="btn btn-sm btn-outline-success me-1" data-id="' +
+                      r.id +
+                      '" data-action="unlock" title="Mở khóa">' +
+                      '<i class="bi bi-unlock"></i>' +
+                      '</button>'
+                  : '';
+              return (
+                '<tr class="permission-row" data-id="' +
+                r.id +
+                '">' +
+                '<td>' +
+                highlightText(r.code || '', term) +
+                '</td>' +
+                '<td>' +
+                highlightText(r.module || '', term) +
+                '</td>' +
+                '<td>' +
+                highlightText(r.name || '', term) +
+                '</td>' +
+                '<td>' +
+                highlightText(r.description || '', term) +
+                '</td>' +
+                '<td>' +
+                statusBadge +
+                '</td>' +
+                '<td class="text-end">' +
+                lockAction +
+                '<button class="btn btn-sm btn-outline-secondary me-1" data-id="' +
+                r.id +
+                '" data-action="edit">' +
+                '<i class="bi bi-pencil"></i>' +
+                '</button>' +
+                '<button class="btn btn-sm btn-outline-danger" data-id="' +
+                r.id +
+                '" data-action="delete">' +
+                '<i class="bi bi-trash"></i>' +
+                '</button>' +
+                '</td>' +
+                '</tr>'
+              );
+            })
+            .join('');
+
+          const from = totalElements === 0 ? 0 : currentPage * PAGE_SIZE + 1;
+          const to = Math.min((currentPage + 1) * PAGE_SIZE, totalElements);
+          paginationInfo.textContent =
+            'Hiển thị ' + from + '-' + to + ' trên tổng ' + totalElements + ' permissions';
+
+          renderPagination();
+        }
+
+        function applyFilterAndRender() {
+          const term = normalizeText(searchInput.value.trim());
+          const moduleTerm = normalizeModuleValue(selectedModuleFilter);
+          const filtered = allPermissions.filter(function (r) {
+            const matchesModule = !moduleTerm || normalizeModuleValue(r.module) === moduleTerm;
+            if (!matchesModule) return false;
+            if (!term) return true;
+            return (
+              normalizeText(r.code).includes(term) ||
+              normalizeText(r.name).includes(term) ||
+              normalizeText(r.module).includes(term) ||
+              normalizeText(r.description).includes(term)
+            );
+          });
+
+          if (isServerPaging && !term && !moduleTerm) {
+            totalElements = serverTotalElements;
+            totalPages = serverTotalPages;
+            renderTable(allPermissions);
+            return;
+          }
+
+          totalElements = filtered.length;
+          totalPages = totalElements === 0 ? 0 : Math.ceil(totalElements / PAGE_SIZE);
+          if (currentPage >= totalPages) {
+            currentPage = Math.max(0, totalPages - 1);
+          }
+
+          const start = currentPage * PAGE_SIZE;
+          const pageItems = filtered.slice(start, start + PAGE_SIZE);
+          renderTable(pageItems);
+        }
+
+        function renderPagination() {
+          if (totalPages === 0) {
+            pagination.innerHTML = '';
+            return;
+          }
+
+          var html = '';
+          html +=
+            '<li class="page-item ' +
+            (currentPage === 0 ? 'disabled' : '') +
+            '"><a class="page-link" href="#" data-page="' +
+            (currentPage - 1) +
+            '">&laquo;</a></li>';
+
+          for (var i = 0; i < totalPages; i++) {
+            html +=
+              '<li class="page-item ' +
+              (i === currentPage ? 'active' : '') +
+              '"><a class="page-link" href="#" data-page="' +
+              i +
+              '">' +
+              (i + 1) +
+              '</a></li>';
+          }
+
+          html +=
+            '<li class="page-item ' +
+            (currentPage === totalPages - 1 ? 'disabled' : '') +
+            '"><a class="page-link" href="#" data-page="' +
+            (currentPage + 1) +
+            '">&raquo;</a></li>';
+
+          pagination.innerHTML = html;
+        }
+
+        pagination.addEventListener('click', function (e) {
+          if (e.target.tagName !== 'A') return;
+          e.preventDefault();
+          const page = Number(e.target.getAttribute('data-page'));
+          if (isNaN(page) || page === currentPage || page < 0 || page >= totalPages) return;
+          currentPage = page;
+          if (isServerPaging) {
+            loadPermissions();
+          } else {
+            applyFilterAndRender();
+          }
+        });
+
+        searchInput.addEventListener('input', function () {
+          currentPage = 0;
+          applyFilterAndRender();
+        });
+
+        if (moduleFilterMenu) {
+          moduleFilterMenu.addEventListener('click', function (e) {
+            const btn = e.target.closest('button[data-module]');
+            if (!btn) return;
+            const moduleName = btn.getAttribute('data-module') || '';
+            selectedModuleFilter = moduleName;
+            updateModuleFilterLabel();
+            renderModuleFilterMenu();
+            currentPage = 0;
+            if (selectedModuleFilter) {
+              setMode('all');
+              loadPermissionsAll();
+            } else {
+              setMode('page');
+              loadPermissions();
+            }
+          });
+        }
+
+        function setMode(mode) {
+          loadMode = mode;
+          isServerPaging = mode === 'page';
+          currentPage = 0;
+        }
+
+        function buildSearchParams() {
+          const params = new URLSearchParams();
+          const term = searchInput.value.trim();
+          if (term) params.set('name', term);
+          return params;
+        }
+
+        async function loadPermissions() {
+          if (loadMode === 'search') return loadPermissionsSearch();
+          if (loadMode === 'active') return loadPermissionsActive();
+          if (loadMode === 'all') return loadPermissionsAll();
+          return loadPermissionsPage();
+        }
+
+        async function loadPermissionsPage() {
+          try {
+            currentSortField = sortSelect ? sortSelect.value.split(',')[0] || DEFAULT_SORT_FIELD : DEFAULT_SORT_FIELD;
+            currentSortDir = sortSelect ? sortSelect.value.split(',')[1] || DEFAULT_SORT_DIR : DEFAULT_SORT_DIR;
+            const params = new URLSearchParams({
+              page: String(currentPage),
+              size: String(PAGE_SIZE),
+              sort: currentSortField + ',' + currentSortDir,
+            });
+            const res = await fetch(API_BASE + '/paging?' + params.toString());
+            const data = await res.json();
+            allPermissions = Array.isArray(data.content) ? data.content : [];
+            serverTotalElements = typeof data.totalElements === 'number' ? data.totalElements : 0;
+            serverTotalPages = typeof data.totalPages === 'number' ? data.totalPages : 0;
+            applyFilterAndRender();
+          } catch (e) {
+            console.error('Lỗi tải danh sách permissions theo trang', e);
+          }
+        }
+
+        async function loadPermissionsAll() {
+          try {
+            const res = await fetch(API_BASE);
+            const data = await res.json();
+            allPermissions = Array.isArray(data) ? data : [];
+            if (!modulesLoaded) {
+              const modules = [];
+              const seen = new Set();
+              allPermissions.forEach(function (permission) {
+                const moduleName = permission && permission.module != null ? String(permission.module).trim() : '';
+                if (!moduleName) return;
+                const key = normalizeModuleValue(moduleName);
+                if (seen.has(key)) return;
+                seen.add(key);
+                modules.push(moduleName);
+              });
+              allModules = modules.sort(function (a, b) {
+                return a.localeCompare(b, 'vi', { sensitivity: 'base' });
+              });
+              renderModuleFilterMenu();
+            }
+            applyFilterAndRender();
+          } catch (e) {
+            console.error('Lỗi tải danh sách permissions', e);
+          }
+        }
+
+        async function loadPermissionsSearch() {
+          try {
+            const params = buildSearchParams();
+            if ([...params.keys()].length === 0) return loadPermissionsAll();
+            const res = await fetch(API_BASE + '/search?' + params.toString());
+            const data = await res.json();
+            allPermissions = Array.isArray(data) ? data : [];
+            applyFilterAndRender();
+          } catch (e) {
+            console.error('Lỗi tìm kiếm permissions', e);
+          }
+        }
+
+        async function loadPermissionsActive(isActive) {
+          try {
+            const activeValue =
+              typeof isActive === 'boolean'
+                ? isActive
+                  ? 'true'
+                  : 'false'
+                : 'true';
+            const params = new URLSearchParams({ isActive: activeValue });
+            const res = await fetch(API_BASE + '/active?' + params.toString());
+            const data = await res.json();
+            allPermissions = Array.isArray(data) ? data : [];
+            applyFilterAndRender();
+          } catch (e) {
+            console.error('Lỗi lọc permissions theo trạng thái', e);
+          }
+        }
+
+        let currentEditingPermission = null;
+
+        function openAddModal() {
+          if (!permissionModal) return;
+          currentEditingPermission = null;
+          permissionIdInput.value = '';
+          permissionCodeInput.value = '';
+          permissionNameInput.value = '';
+          permissionModuleInput.value = '';
+          permissionDescriptionInput.value = '';
+          permissionModalTitle.textContent = 'Thêm permission';
+          btnSavePermission.dataset.mode = 'create';
+          permissionModal.show();
+        }
+
+        function openEditModal(permission) {
+          if (!permissionModal) return;
+          currentEditingPermission = permission || {};
+          permissionIdInput.value = permission.id;
+          permissionCodeInput.value = permission.code || '';
+          permissionNameInput.value = permission.name || '';
+          permissionModuleInput.value = permission.module || '';
+          permissionDescriptionInput.value = permission.description || '';
+          permissionModalTitle.textContent = 'Cập nhật permission';
+          btnSavePermission.dataset.mode = 'update';
+          permissionModal.show();
+        }
+
+        btnAdd.addEventListener('click', openAddModal);
+
+        if (btnApplyFilters) {
+          btnApplyFilters.addEventListener('click', function () {
+            const hasSearch = searchInput.value.trim().length > 0;
+            if (hasSearch) {
+              setMode('search');
+            } else {
+              setMode('page');
+            }
+            loadPermissions();
+          });
+        }
+
+        if (btnLoadActive) {
+          btnLoadActive.addEventListener('click', function () {
+            activeFilterMode = (activeFilterMode + 1) % 3;
+            if (activeFilterMode === 1) {
+              btnLoadActive.innerHTML =
+                '<i class="bi bi-check-circle me-1"></i> Đang hoạt động';
+              setMode('active');
+              loadPermissionsActive(true);
+            } else if (activeFilterMode === 2) {
+              btnLoadActive.innerHTML = '<i class="bi bi-slash-circle me-1"></i> Đã khóa';
+              setMode('active');
+              loadPermissionsActive(false);
+            } else {
+              btnLoadActive.innerHTML = '<i class="bi bi-filter-circle me-1"></i> Tất cả';
+              setMode('all');
+              loadPermissionsAll();
+            }
+          });
+          btnLoadActive.innerHTML = '<i class="bi bi-filter-circle me-1"></i> Tất cả';
+        }
+
+        if (btnLoadPage) {
+          btnLoadPage.addEventListener('click', function () {
+            if (selectedModuleFilter) {
+              setMode('all');
+              loadPermissionsAll();
+              return;
+            }
+            setMode('page');
+            loadPermissions();
+          });
+        }
+
+        if (sortSelect) {
+          sortSelect.addEventListener('change', function () {
+            if (loadMode === 'page') {
+              currentPage = 0;
+              loadPermissions();
+            }
+          });
+        }
+
+        permissionTableBody.addEventListener('click', function (e) {
+          const btn = e.target.closest('button[data-action]');
+          if (btn) {
+            const id = btn.getAttribute('data-id');
+            const action = btn.getAttribute('data-action');
+            if (action === 'edit') {
+              fetch(API_BASE + '/' + id)
+                .then(function (res) {
+                  return res.json();
+                })
+                .then(function (permission) {
+                  openEditModal(permission || {});
+                })
+                .catch(function () {
+                  alert('Không tải được thông tin permission.');
+                });
+            } else if (action === 'lock') {
+              lockPermission(id);
+            } else if (action === 'unlock') {
+              unlockPermission(id);
+            } else if (action === 'delete') {
+              if (confirm('Bạn có chắc chắn muốn xóa permission này?')) {
+                deletePermission(id);
+              }
+            }
+            return;
+          }
+
+          const row = e.target.closest('tr.permission-row');
+          if (!row) return;
+          const id = row.getAttribute('data-id');
+          if (!id) return;
+          fetch(API_BASE + '/' + id)
+            .then(function (res) {
+              return res.json();
+            })
+            .then(function (permission) {
+              const isActive = getIsActive(permission);
+              detailId.value = permission.id || '';
+              detailStatus.value =
+                typeof isActive === 'boolean'
+                  ? isActive
+                    ? 'Hoạt động'
+                    : 'Đã khóa'
+                  : 'Không xác định';
+              detailCode.value = permission.code || '';
+              detailModule.value = permission.module || '';
+              detailName.value = permission.name || '';
+              detailDescription.value = permission.description || '';
+              if (permissionDetailModal) permissionDetailModal.show();
+            })
+            .catch(function () {
+              alert('Không tải được thông tin permission.');
+            });
+        });
+
+        async function savePermission() {
+          const mode = btnSavePermission.dataset.mode;
+          const code = permissionCodeInput.value.trim();
+          const name = permissionNameInput.value.trim();
+          const module = permissionModuleInput.value.trim();
+          const description = permissionDescriptionInput.value.trim();
+
+          if (!code || !name) {
+            alert('Vui lòng nhập đầy đủ code và tên.');
+            return;
+          }
+
+          const isUpdate = mode === 'update';
+          const id = permissionIdInput.value;
+
+          const payload = {
+            code: code,
+            name: name,
+            module: module,
+            description: description,
+            isActive: isUpdate
+              ? currentEditingPermission && typeof currentEditingPermission.isActive === 'boolean'
+                ? currentEditingPermission.isActive
+                : true
+              : true,
+          };
+
+          const url = isUpdate ? API_BASE + '/' + id : API_BASE;
+          const method = isUpdate ? 'PUT' : 'POST';
+
+          try {
+            const res = await fetch(url, {
+              method: method,
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(payload),
+            });
+            if (!res.ok) throw new Error(await res.text());
+            if (permissionModal) permissionModal.hide();
+            await loadPermissions();
+          } catch (e) {
+            console.error('Lỗi lưu permission', e);
+            alert('Có lỗi xảy ra khi lưu permission.');
+          }
+        }
+
+        btnSavePermission.addEventListener('click', savePermission);
+
+        async function deletePermission(id) {
+          try {
+            const res = await fetch(API_BASE + '/' + id, { method: 'DELETE' });
+            if (!res.ok) throw new Error(await res.text());
+            await loadPermissions();
+          } catch (e) {
+            console.error('Lỗi xóa permission', e);
+            alert('Có lỗi xảy ra khi xóa permission.');
+          }
+        }
+
+        async function lockPermission(id) {
+          try {
+            const res = await fetch(API_BASE + '/' + id + '/lock', { method: 'PUT' });
+            if (!res.ok) throw new Error(await res.text());
+            await loadPermissions();
+          } catch (e) {
+            console.error('Lỗi khóa permission', e);
+            alert('Có lỗi xảy ra khi khóa permission.');
+          }
+        }
+
+        async function unlockPermission(id) {
+          try {
+            const res = await fetch(API_BASE + '/' + id + '/unlock', { method: 'PUT' });
+            if (!res.ok) throw new Error(await res.text());
+            await loadPermissions();
+          } catch (e) {
+            console.error('Lỗi mở khóa permission', e);
+            alert('Có lỗi xảy ra khi mở khóa permission.');
+          }
+        }
+
+        const SELECTOR_SIDEBAR_WRAPPER = '.sidebar-wrapper';
+        const Default = {
+          scrollbarTheme: 'os-theme-light',
+          scrollbarAutoHide: 'leave',
+          scrollbarClickScroll: true,
+        };
+        const sidebarWrapper = document.querySelector(SELECTOR_SIDEBAR_WRAPPER);
+        if (sidebarWrapper && window.OverlayScrollbarsGlobal && window.OverlayScrollbarsGlobal.OverlayScrollbars) {
+          window.OverlayScrollbarsGlobal.OverlayScrollbars(sidebarWrapper, {
+            scrollbars: {
+              theme: Default.scrollbarTheme,
+              autoHide: Default.scrollbarAutoHide,
+              clickScroll: Default.scrollbarClickScroll,
+            },
+          });
+        }
+
+        if (sortSelect) sortSelect.value = `${DEFAULT_SORT_FIELD},${DEFAULT_SORT_DIR}`;
+        loadModuleOptions();
+        renderModuleFilterMenu();
+        setMode('page');
+        loadPermissions();
+      });
+    </script>
+  </body>
+</html>

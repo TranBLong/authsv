@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="vi">
+  <!--begin::Head-->
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Đăng nhập | School Manager</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#007bff" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#1a1a1a" media="(prefers-color-scheme: dark)" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@fontsource/source-sans-3@5.0.12/index.css"
+      crossorigin="anonymous"
+      media="print"
+      onload="this.media='all'"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.11.0/styles/overlayscrollbars.min.css"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../css/adminlte.css" />
+    <style>
+      .login-logo img {
+        height: 42px;
+        width: auto;
+      }
+    </style>
+  </head>
+  <!--end::Head-->
+
+  <!--begin::Body-->
+  <body class="login-page bg-body-secondary">
+    <div class="login-box">
+      <div class="login-logo">
+        <a href="../index.html" class="d-inline-flex align-items-center gap-2 text-decoration-none">
+          <img src="../assets/img/AdminLTELogo.png" alt="Logo" />
+          <span><b>School</b> Manager</span>
+        </a>
+      </div>
+
+      <div class="card">
+        <div class="card-body login-card-body">
+          <p class="login-box-msg">Đăng nhập để bắt đầu phiên làm việc</p>
+
+          <div id="errorAlert" class="alert alert-danger d-none py-2 px-3 mb-3 small" role="alert"></div>
+
+          <form id="loginForm" onsubmit="return false;">
+            <div class="input-group mb-3">
+              <input
+                type="text"
+                id="username"
+                class="form-control"
+                placeholder="Tên đăng nhập"
+                autocomplete="username"
+                required
+              />
+              <div class="input-group-text"><span class="bi bi-person-fill"></span></div>
+            </div>
+
+            <div class="input-group mb-3">
+              <input
+                type="password"
+                id="password"
+                class="form-control"
+                placeholder="Mật khẩu"
+                autocomplete="current-password"
+                required
+              />
+              <button
+                id="togglePassword"
+                class="input-group-text btn btn-outline-secondary border-0"
+                type="button"
+                aria-label="Hiện/ẩn mật khẩu"
+                title="Hiện/ẩn mật khẩu"
+              >
+                <span class="bi bi-eye"></span>
+              </button>
+            </div>
+
+            <div class="row align-items-center">
+              <div class="col-8">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="rememberMe" checked />
+                  <label class="form-check-label" for="rememberMe"> Ghi nhớ tôi </label>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="d-grid gap-2">
+                  <button id="btnLogin" type="submit" class="btn btn-primary">
+                    <span class="me-2 bi bi-box-arrow-in-right"></span>Đăng nhập
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+
+          <div class="text-center mt-3">
+            <a class="small text-decoration-none" href="../index.html">← Về trang chính</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.11.0/browser/overlayscrollbars.browser.es6.min.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.min.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="../js/adminlte.js"></script>
+
+    <script>
+      const TOKEN_KEY = 'token';
+      const LOGIN_API = '/api/auth/login';
+      const AFTER_LOGIN_URL = '/auth/users.html';
+
+      function getToken() {
+        return localStorage.getItem(TOKEN_KEY) || sessionStorage.getItem(TOKEN_KEY);
+      }
+
+      function setToken(token, remember) {
+        if (remember) {
+          localStorage.setItem(TOKEN_KEY, token);
+          sessionStorage.removeItem(TOKEN_KEY);
+        } else {
+          sessionStorage.setItem(TOKEN_KEY, token);
+          localStorage.removeItem(TOKEN_KEY);
+        }
+      }
+
+      // Redirect if token exists
+      if (getToken()) {
+        window.location.href = AFTER_LOGIN_URL;
+      }
+
+      document.addEventListener('DOMContentLoaded', function () {
+        const loginForm = document.getElementById('loginForm');
+        const errorAlert = document.getElementById('errorAlert');
+        const btnLogin = document.getElementById('btnLogin');
+        const rememberMe = document.getElementById('rememberMe');
+        const togglePassword = document.getElementById('togglePassword');
+        const passwordInput = document.getElementById('password');
+
+        togglePassword.addEventListener('click', function () {
+          const isPassword = passwordInput.getAttribute('type') === 'password';
+          passwordInput.setAttribute('type', isPassword ? 'text' : 'password');
+          togglePassword.innerHTML = isPassword ? '<span class="bi bi-eye-slash"></span>' : '<span class="bi bi-eye"></span>';
+        });
+
+        function setLoading(isLoading) {
+          btnLogin.disabled = isLoading;
+          btnLogin.innerHTML = isLoading
+            ? '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Đang đăng nhập'
+            : '<span class="me-2 bi bi-box-arrow-in-right"></span>Đăng nhập';
+        }
+
+        function showError(message) {
+          errorAlert.textContent = message || 'Có lỗi xảy ra.';
+          errorAlert.classList.remove('d-none');
+        }
+
+        function clearError() {
+          errorAlert.textContent = '';
+          errorAlert.classList.add('d-none');
+        }
+
+        loginForm.addEventListener('submit', async function (e) {
+          e.preventDefault();
+          clearError();
+
+          const username = document.getElementById('username').value.trim();
+          const password = passwordInput.value;
+
+          if (!username || !password) {
+            showError('Vui lòng nhập tên đăng nhập và mật khẩu.');
+            return;
+          }
+
+          setLoading(true);
+          try {
+            const response = await fetch(LOGIN_API, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ username, password }),
+            });
+
+            if (!response.ok) {
+              let message = 'Tên đăng nhập hoặc mật khẩu không chính xác.';
+              try {
+                const text = await response.text();
+                if (text) message = text;
+              } catch (_) {}
+              showError(message);
+              return;
+            }
+
+            const data = await response.json();
+            const token = data && (data.token || data.accessToken);
+            if (!token) {
+              showError('Không tìm thấy token trong phản hồi.');
+              return;
+            }
+
+            setToken(token, rememberMe.checked);
+            window.location.href = AFTER_LOGIN_URL;
+          } catch (error) {
+            console.error(error);
+            showError('Không thể kết nối tới máy chủ. Vui lòng kiểm tra lại.');
+          } finally {
+            setLoading(false);
+          }
+        });
+      });
+    </script>
+  </body>
+  <!--end::Body-->
+</html>

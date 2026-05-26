@@ -1,0 +1,1069 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Quản lý users | School Manager</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#007bff" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#1a1a1a" media="(prefers-color-scheme: dark)" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@fontsource/source-sans-3@5.0.12/index.css"
+      crossorigin="anonymous"
+      media="print"
+      onload="this.media='all'"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.11.0/styles/overlayscrollbars.min.css"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../css/adminlte.css" />
+    <style>
+      .sidebar-menu .nav-link {
+        transition: none !important;
+      }
+
+      .sidebar-menu .nav-item:hover > .nav-link,
+      .sidebar-menu .nav-item:focus-within > .nav-link,
+      .sidebar-menu .nav-link:hover,
+      .sidebar-menu .nav-link:focus,
+      .sidebar-menu .nav-link:active {
+        background-color: transparent !important;
+        background-image: none !important;
+        box-shadow: none !important;
+        filter: none !important;
+      }
+
+      .sidebar-menu .nav-item:hover > .nav-link:not(.active),
+      .sidebar-menu .nav-item:focus-within > .nav-link:not(.active),
+      .sidebar-menu .nav-link:not(.active):hover,
+      .sidebar-menu .nav-link:not(.active):focus,
+      .sidebar-menu .nav-link:not(.active):active {
+        color: rgba(255, 255, 255, 0.75) !important;
+      }
+
+      .sidebar-menu .nav-item:hover > .nav-link.active,
+      .sidebar-menu .nav-item:focus-within > .nav-link.active,
+      .sidebar-menu .nav-link.active,
+      .sidebar-menu .nav-link.active:hover,
+      .sidebar-menu .nav-link.active:focus {
+        color: #fff !important;
+        background-color: var(--lte-sidebar-menu-active-bg) !important;
+      }
+    </style>
+  </head>
+  <body class="layout-fixed sidebar-expand-lg sidebar-open bg-body-tertiary">
+    <div class="app-wrapper">
+      <nav class="app-header navbar navbar-expand bg-body">
+        <div class="container-fluid">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" data-lte-toggle="sidebar" href="#" role="button">
+                <i class="bi bi-list"></i>
+              </a>
+            </li>
+            <li class="nav-item d-none d-md-block">
+              <span class="nav-link fw-semibold">Quản lý users</span>
+            </li>
+          </ul>
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="#" data-lte-toggle="fullscreen">
+                <i data-lte-icon="maximize" class="bi bi-arrows-fullscreen"></i>
+                <i data-lte-icon="minimize" class="bi bi-fullscreen-exit" style="display: none"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" id="btnLogout" title="Đăng xuất">
+                <i class="bi bi-box-arrow-right"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark">
+        <div class="sidebar-brand">
+          <a href="../index.html" class="brand-link">
+            <img
+              src="../assets/img/AdminLTELogo.png"
+              alt="AdminLTE Logo"
+              class="brand-image opacity-75 shadow"
+            />
+            <span class="brand-text fw-light">School Manager</span>
+          </a>
+        </div>
+        <div class="sidebar-wrapper">
+          <nav class="mt-2">
+            <ul
+              class="nav sidebar-menu flex-column"
+              data-lte-toggle="treeview"
+              role="navigation"
+              aria-label="Main navigation"
+              data-accordion="false"
+            >
+              <li class="nav-item px-3">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                  <span class="text-white small mb-0 fw-semibold">Auth</span>
+                  <span class="badge text-bg-light">Admin</span>
+                </div>
+                <a class="nav-link px-0 py-1 text-white-50 active" href="./users.html">
+                  <i class="nav-icon bi bi-people"></i>
+                  <p class="mb-0">Users</p>
+                </a>
+                <a class="nav-link px-0 py-1 text-white-50" href="./roles.html">
+                  <i class="nav-icon bi bi-shield-lock"></i>
+                  <p class="mb-0">Roles</p>
+                </a>
+                <a class="nav-link px-0 py-1 text-white-50" href="./permissions.html">
+                  <i class="nav-icon bi bi-key"></i>
+                  <p class="mb-0">Permissions</p>
+                </a>
+                <a class="nav-link px-0 py-1 text-white-50" href="./user_roles.html">
+                  <i class="nav-icon bi bi-diagram-3"></i>
+                  <p class="mb-0">User Roles</p>
+                </a>
+                <a class="nav-link px-0 py-1 text-white-50" href="./role_permission.html">
+                  <i class="nav-icon bi bi-link-45deg"></i>
+                  <p class="mb-0">Role Permissions</p>
+                </a>
+                <a class="nav-link px-0 py-1 text-white-50" href="http://localhost:5173/dashboard">
+                  <i class="nav-icon bi bi-speedometer2"></i>
+                  <p class="mb-0">Tổng quan</p>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </aside>
+
+      <main class="app-main">
+        <div class="app-content">
+          <div class="container-fluid">
+            <div class="card shadow-sm border-0">
+              <div class="card-header d-flex flex-wrap gap-3 align-items-center">
+                <div>
+                  <h3 class="card-title mb-1">Danh sách users</h3>
+                </div>
+                <div class="ms-auto d-flex flex-wrap gap-2">
+                  <button class="btn btn-outline-secondary btn-sm" id="btnLoadPage" type="button">
+                    <i class="bi bi-list-ol me-1"></i> Reload
+                  </button>
+                  <button class="btn btn-outline-success btn-sm" id="btnLoadActive" type="button">
+                    <i class="bi bi-filter-circle me-1"></i> Trạng thái
+                  </button>
+                  <button class="btn btn-primary btn-sm" id="btnAdd" type="button">
+                    <i class="bi bi-plus-circle me-1"></i> Thêm users
+                  </button>
+                </div>
+              </div>
+
+              <div class="card-body border-bottom">
+                <div class="row g-3 align-items-end">
+                  <div class="col-lg-5">
+                    <label class="form-label small text-secondary mb-1" for="searchInput">
+                      Tìm nhanh
+                    </label>
+                    <div class="input-group">
+                      <span class="input-group-text"><i class="bi bi-search"></i></span>
+                      <input
+                        type="text"
+                        id="searchInput"
+                        class="form-control"
+                        placeholder="Tìm theo username, tên hoặc email..."
+                      />
+                    </div>
+                  </div>
+                  <div class="col-lg-2">
+                    <label class="form-label small text-secondary mb-1" for="sortSelect">
+                      Sắp xếp
+                    </label>
+                    <select id="sortSelect" class="form-select">
+                      <option value="full_name,asc">Tên A-Z</option>
+                      <option value="full_name,desc">Tên Z-A</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card-body table-responsive p-0">
+                <table class="table table-hover align-middle text-nowrap mb-0">
+                  <thead class="table-light">
+                    <tr>
+                      <th style="width: 10%">Avatar</th>
+                      <th style="width: 20%">Username</th>
+                      <th style="width: 25%">Tên</th>
+                      <th style="width: 25%">Email</th>
+                      <th style="width: 10%">Trạng thái</th>
+                      <th style="width: 10%" class="text-end">Hành động</th>
+                    </tr>
+                  </thead>
+                  <tbody id="studentTableBody"></tbody>
+                </table>
+              </div>
+
+              <div class="card-footer d-flex flex-wrap justify-content-between align-items-center gap-2">
+                <div class="small text-secondary" id="paginationInfo"></div>
+                <nav>
+                  <ul class="pagination pagination-sm mb-0" id="pagination"></ul>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <footer class="app-footer">
+        <div class="float-end d-none d-sm-inline">School Manager</div>
+        <strong>Quản lý users với AdminLTE 4</strong>
+      </footer>
+    </div>
+
+    <div class="modal fade" id="studentModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="studentModalTitle">Thêm users</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <input type="hidden" id="studentId" />
+            <div class="mb-3">
+              <label class="form-label">Tên</label>
+              <input type="text" id="studentName" class="form-control" />
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Username</label>
+              <input type="text" id="studentUsername" class="form-control" />
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Mật khẩu</label>
+              <input type="password" id="studentPassword" class="form-control" />
+              <div class="form-text">Khi cập nhật, để trống sẽ giữ mật khẩu hiện tại.</div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Email</label>
+              <input type="email" id="studentEmail" class="form-control" />
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Số điện thoại</label>
+              <input type="text" id="studentPhone" class="form-control" />
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Avatar URL</label>
+              <input type="url" id="studentAvatarUrl" class="form-control" placeholder="https://example.com/avatar.jpg" />
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Hoặc chọn ảnh</label>
+              <input type="file" id="studentAvatarFile" class="form-control" accept="image/*" />
+              <div class="form-text">Nếu chọn ảnh, hệ thống sẽ lưu ảnh dưới dạng preview và gửi đến máy chủ.</div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Xem trước avatar</label>
+              <div>
+                <img id="avatarPreview" class="rounded-circle shadow-sm" src="" alt="Preview" style="width:80px;height:80px;object-fit:cover;display:none;" />
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+            <button type="button" class="btn btn-primary" id="btnSaveStudent">Lưu</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="userDetailModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Chi tiết users</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="row g-3">
+              <div class="col-12 text-center mb-3">
+                <img id="detailAvatar" class="rounded-circle shadow" src="" alt="Avatar" style="width:100px;height:100px;object-fit:cover;display:none;" />
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">ID</label>
+                <input type="text" class="form-control" id="detailId" readonly />
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Trạng thái</label>
+                <input type="text" class="form-control" id="detailStatus" readonly />
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Tên</label>
+                <input type="text" class="form-control" id="detailFullName" readonly />
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Username</label>
+                <input type="text" class="form-control" id="detailUsername" readonly />
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Email</label>
+                <input type="text" class="form-control" id="detailEmail" readonly />
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Số điện thoại</label>
+                <input type="text" class="form-control" id="detailPhone" readonly />
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.11.0/browser/overlayscrollbars.browser.es6.min.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.min.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="../js/adminlte.js"></script>
+
+    <script>
+      function logout() {
+        localStorage.removeItem('token');
+        sessionStorage.removeItem('token');
+        window.location.href = '/auth/login.html';
+      }
+
+      // Auth Check & Fetch Interceptor
+      (function () {
+        const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+        if (!token) {
+          window.location.href = '/auth/login.html';
+          return;
+        }
+        const originalFetch = window.fetch;
+        window.fetch = function (url, options) {
+          options = options || {};
+          options.headers = options.headers || {};
+          options.headers['Authorization'] = 'Bearer ' + token;
+          return originalFetch(url, options).then(response => {
+            if (response.status === 401 || response.status === 403) {
+              localStorage.removeItem('token');
+              sessionStorage.removeItem('token');
+              window.location.href = '/auth/login.html';
+            }
+            return response;
+          });
+        };
+      })();
+
+      document.addEventListener('DOMContentLoaded', function () {
+        const btnLogout = document.getElementById('btnLogout');
+        if (btnLogout) btnLogout.addEventListener('click', function (e) { e.preventDefault(); logout(); });
+
+        const API_BASE = '/api/users';
+        const PAGE_SIZE = 8;
+        const DEFAULT_SORT = 'full_name,asc';
+
+        let currentPage = 0;
+        let totalPages = 0;
+        let totalElements = 0;
+        let activeFilterMode = 0;
+        let serverTotalPages = 0;
+        let serverTotalElements = 0;
+        let loadMode = 'page';
+        let isServerPaging = true;
+        let currentSort = DEFAULT_SORT;
+        let allStudents = [];
+
+        const tableBody = document.getElementById('studentTableBody');
+        const pagination = document.getElementById('pagination');
+        const paginationInfo = document.getElementById('paginationInfo');
+        const searchInput = document.getElementById('searchInput');
+        const studentModalEl = document.getElementById('studentModal');
+        const studentModalTitle = document.getElementById('studentModalTitle');
+        const studentIdInput = document.getElementById('studentId');
+        const studentNameInput = document.getElementById('studentName');
+        const studentUsernameInput = document.getElementById('studentUsername');
+        const studentPasswordInput = document.getElementById('studentPassword');
+        const studentAvatarUrlInput = document.getElementById('studentAvatarUrl');
+        const studentAvatarFileInput = document.getElementById('studentAvatarFile');
+        const avatarPreviewImg = document.getElementById('avatarPreview');
+        const studentEmailInput = document.getElementById('studentEmail');
+        const studentPhoneInput = document.getElementById('studentPhone');
+        const btnSaveStudent = document.getElementById('btnSaveStudent');
+        const btnAdd = document.getElementById('btnAdd');
+        const filterNameInput = document.getElementById('filterName');
+        const filterUsernameInput = document.getElementById('filterUsername');
+        const filterEmailInput = document.getElementById('filterEmail');
+        const filterActiveSelect = document.getElementById('filterActive');
+        const sortSelect = document.getElementById('sortSelect');
+        const btnApplyFilters = document.getElementById('btnApplyFilters');
+        const btnLoadAll = document.getElementById('btnLoadAll');
+        const btnLoadActive = document.getElementById('btnLoadActive');
+        const btnLoadPage = document.getElementById('btnLoadPage');
+
+        const userDetailModalEl = document.getElementById('userDetailModal');
+        const detailId = document.getElementById('detailId');
+        const detailStatus = document.getElementById('detailStatus');
+        const detailFullName = document.getElementById('detailFullName');
+        const detailUsername = document.getElementById('detailUsername');
+        const detailEmail = document.getElementById('detailEmail');
+        const detailPhone = document.getElementById('detailPhone');
+        const detailAvatarImg = document.getElementById('detailAvatar');
+        var studentModal = null;
+        if (window.bootstrap && studentModalEl) {
+          studentModal = new window.bootstrap.Modal(studentModalEl);
+        }
+        var userDetailModal = null;
+        if (window.bootstrap && userDetailModalEl) {
+          userDetailModal = new window.bootstrap.Modal(userDetailModalEl);
+        }
+
+        function highlightText(text, term) {
+          if (!term) return text;
+          const escaped = term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+          const re = new RegExp(escaped, 'ig');
+          return text.replace(re, function (m) {
+            return '<mark>' + m + '</mark>';
+          });
+        }
+
+        function normalizeText(value) {
+          return (value || '')
+            .toString()
+            .toLowerCase()
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '')
+            .replace(/d/g, 'd')
+            .replace(/Đ/g, 'd');
+        }
+
+        function updateAvatarPreview(url) {
+          if (!avatarPreviewImg) return;
+          if (url) {
+            avatarPreviewImg.src = url;
+            avatarPreviewImg.style.display = 'inline-block';
+          } else {
+            avatarPreviewImg.src = '';
+            avatarPreviewImg.style.display = 'none';
+          }
+        }
+
+        function readFileAsDataURL(file) {
+          return new Promise(function (resolve, reject) {
+            const reader = new FileReader();
+            reader.onload = function (event) {
+              resolve(event.target.result);
+            };
+            reader.onerror = function (error) {
+              reject(error);
+            };
+            reader.readAsDataURL(file);
+          });
+        }
+
+        let selectedAvatarFile = null;
+
+        if (studentAvatarFileInput) {
+          studentAvatarFileInput.addEventListener('change', function () {
+            const file = this.files && this.files[0];
+            selectedAvatarFile = file || null;
+            if (file) {
+              readFileAsDataURL(file).then(updateAvatarPreview).catch(function () {
+                updateAvatarPreview('');
+              });
+            } else {
+              updateAvatarPreview(studentAvatarUrlInput ? studentAvatarUrlInput.value.trim() : '');
+            }
+          });
+        }
+
+        if (studentAvatarUrlInput) {
+          studentAvatarUrlInput.addEventListener('input', function () {
+            if (!selectedAvatarFile) {
+              updateAvatarPreview(this.value.trim());
+            }
+          });
+        }
+
+        function renderTable(students) {
+          const term = searchInput.value.trim();
+          tableBody.innerHTML = students
+            .map(function (s) {
+              const isActive =
+                typeof s.isActive === 'boolean'
+                  ? s.isActive
+                  : typeof s.active === 'boolean'
+                    ? s.active
+                    : true;
+              const avatarCell = s.avatarUrl
+                ? '<img src="' + s.avatarUrl + '" alt="Avatar" class="rounded-circle" style="width:32px;height:32px;object-fit:cover;" />'
+                : '<span class="badge bg-secondary">Chưa có</span>';
+              const statusBadge = isActive
+                ? '<span class="badge bg-success">Hoạt động</span>'
+                : '<span class="badge bg-secondary">Đã khóa</span>';
+              const lockAction = isActive
+                ? '<button class="btn btn-sm btn-outline-warning me-1" data-id="' +
+                  s.id +
+                  '" data-action="lock" title="Khóa">' +
+                  '<i class="bi bi-lock"></i>' +
+                  '</button>'
+                : '<button class="btn btn-sm btn-outline-success me-1" data-id="' +
+                  s.id +
+                  '" data-action="unlock" title="Mở khóa">' +
+                  '<i class="bi bi-unlock"></i>' +
+                  '</button>';
+              return (
+                '<tr class="user-row" data-id="' +
+                s.id +
+                '">' +
+                '<td>' +
+                avatarCell +
+                '</td>' +
+                '<td>' +
+                highlightText(s.username || '', term) +
+                '</td>' +
+                '<td>' +
+                highlightText(s.fullName || '', term) +
+                '</td>' +
+                '<td>' +
+                highlightText(s.email || '', term) +
+                '</td>' +
+                '<td>' +
+                statusBadge +
+                '</td>' +
+                '<td class="text-end">' +
+                lockAction +
+                '<button class="btn btn-sm btn-outline-secondary me-1" data-id="' +
+                s.id +
+                '" data-action="edit">' +
+                '<i class="bi bi-pencil"></i>' +
+                '</button>' +
+                '<button class="btn btn-sm btn-outline-danger" data-id="' +
+                s.id +
+                '" data-action="delete">' +
+                '<i class="bi bi-trash"></i>' +
+                '</button>' +
+                '</td>' +
+                '</tr>'
+              );
+            })
+            .join('');
+
+          const from = totalElements === 0 ? 0 : currentPage * PAGE_SIZE + 1;
+          const to = Math.min((currentPage + 1) * PAGE_SIZE, totalElements);
+          paginationInfo.textContent =
+            'Hiển thị ' + from + '-' + to + ' trên tổng ' + totalElements + ' users';
+
+          renderPagination();
+        }
+
+        function applyFilterAndRender() {
+          const term = normalizeText(searchInput.value.trim());
+          const filtered = allStudents.filter(function (s) {
+            if (!term) return true;
+            const name = normalizeText(s.name);
+            const fullName = normalizeText(s.fullName);
+            const email = normalizeText(s.email);
+            const username = normalizeText(s.username);
+            return (
+              name.includes(term) ||
+              fullName.includes(term) ||
+              email.includes(term) ||
+              username.includes(term)
+            );
+          });
+
+          if (isServerPaging && !term) {
+            totalElements = serverTotalElements;
+            totalPages = serverTotalPages;
+            renderTable(allStudents);
+            return;
+          }
+
+          totalElements = filtered.length;
+          totalPages = totalElements === 0 ? 0 : Math.ceil(totalElements / PAGE_SIZE);
+          if (currentPage >= totalPages) {
+            currentPage = Math.max(0, totalPages - 1);
+          }
+
+          const start = currentPage * PAGE_SIZE;
+          const pageItems = filtered.slice(start, start + PAGE_SIZE);
+          renderTable(pageItems);
+        }
+
+        function renderPagination() {
+          if (totalPages === 0) {
+            pagination.innerHTML = '';
+            return;
+          }
+
+          var html = '';
+          html +=
+            '<li class="page-item ' +
+            (currentPage === 0 ? 'disabled' : '') +
+            '"><a class="page-link" href="#" data-page="' +
+            (currentPage - 1) +
+            '">&laquo;</a></li>';
+
+          for (var i = 0; i < totalPages; i++) {
+            html +=
+              '<li class="page-item ' +
+              (i === currentPage ? 'active' : '') +
+              '"><a class="page-link" href="#" data-page="' +
+              i +
+              '">' +
+              (i + 1) +
+              '</a></li>';
+          }
+
+          html +=
+            '<li class="page-item ' +
+            (currentPage === totalPages - 1 ? 'disabled' : '') +
+            '"><a class="page-link" href="#" data-page="' +
+            (currentPage + 1) +
+            '">&raquo;</a></li>';
+
+          pagination.innerHTML = html;
+        }
+
+        pagination.addEventListener('click', function (e) {
+          if (e.target.tagName !== 'A') return;
+          e.preventDefault();
+          const page = Number(e.target.getAttribute('data-page'));
+          if (isNaN(page) || page === currentPage || page < 0 || page >= totalPages) return;
+          currentPage = page;
+          if (isServerPaging) {
+            loadStudents();
+          } else {
+            applyFilterAndRender();
+          }
+        });
+
+        searchInput.addEventListener('input', function () {
+          currentPage = 0;
+          applyFilterAndRender();
+        });
+
+        function setMode(mode) {
+          loadMode = mode;
+          isServerPaging = mode === 'page';
+          searchInput.disabled = false;
+          currentPage = 0;
+        }
+
+        function buildSearchParams() {
+          const name = filterNameInput ? filterNameInput.value.trim() : '';
+          const username = filterUsernameInput ? filterUsernameInput.value.trim() : '';
+          const email = filterEmailInput ? filterEmailInput.value.trim() : '';
+          const params = new URLSearchParams();
+          if (name) params.set('name', name);
+          if (username) params.set('username', username);
+          if (email) params.set('email', email);
+          return params;
+        }
+
+        async function loadStudents() {
+          if (loadMode === 'search') return loadStudentsSearch();
+          if (loadMode === 'active') return loadStudentsActive();
+          if (loadMode === 'all') return loadStudentsAll();
+          return loadStudentsPage();
+        }
+
+        async function loadStudentsPage() {
+          try {
+            currentSort = sortSelect ? sortSelect.value || DEFAULT_SORT : DEFAULT_SORT;
+            const params = new URLSearchParams({
+              page: String(currentPage),
+              size: String(PAGE_SIZE),
+              sort: currentSort,
+            });
+            const res = await fetch(API_BASE + '/page?' + params.toString());
+            const data = await res.json();
+            allStudents = Array.isArray(data.content) ? data.content : [];
+            serverTotalElements = typeof data.totalElements === 'number' ? data.totalElements : 0;
+            serverTotalPages = typeof data.totalPages === 'number' ? data.totalPages : 0;
+            applyFilterAndRender();
+          } catch (e) {
+            console.error('Lỗi tải danh sách users theo trang', e);
+          }
+        }
+
+        async function loadStudentsAll() {
+          try {
+            const res = await fetch(API_BASE);
+            const data = await res.json();
+            allStudents = Array.isArray(data) ? data : [];
+            applyFilterAndRender();
+          } catch (e) {
+            console.error('Lỗi tải danh sách users', e);
+          }
+        }
+
+        async function loadStudentsSearch() {
+          try {
+            const params = buildSearchParams();
+            if ([...params.keys()].length === 0) return loadStudentsAll();
+            const res = await fetch(API_BASE + '/search?' + params.toString());
+            const data = await res.json();
+            allStudents = Array.isArray(data) ? data : [];
+            applyFilterAndRender();
+          } catch (e) {
+            console.error('Lỗi tìm kiếm users', e);
+          }
+        }
+
+        async function loadStudentsActive(isActive) {
+          try {
+            const activeValue =
+              typeof isActive === 'boolean'
+                ? isActive
+                  ? 'true'
+                  : 'false'
+                : filterActiveSelect
+                  ? filterActiveSelect.value
+                  : 'true';
+            if (activeValue === '') return loadStudentsAll();
+            const params = new URLSearchParams({ isActive: activeValue });
+            const res = await fetch(API_BASE + '/active?' + params.toString());
+            const data = await res.json();
+            allStudents = Array.isArray(data) ? data : [];
+            applyFilterAndRender();
+          } catch (e) {
+            console.error('Lỗi lọc users theo trạng thái', e);
+          }
+        }
+
+        let currentEditingStudent = null;
+
+        function resetAvatarFields(url) {
+          if (studentAvatarUrlInput) {
+            studentAvatarUrlInput.value = url || '';
+          }
+          if (studentAvatarFileInput) {
+            studentAvatarFileInput.value = '';
+          }
+          selectedAvatarFile = null;
+          updateAvatarPreview(url || '');
+        }
+
+        function openAddModal() {
+          if (!studentModal) return;
+          currentEditingStudent = null;
+          studentIdInput.value = '';
+          studentNameInput.value = '';
+          studentUsernameInput.value = '';
+          studentPasswordInput.value = '';
+          resetAvatarFields('');
+          studentEmailInput.value = '';
+          studentPhoneInput.value = '';
+          studentModalTitle.textContent = 'Thêm users';
+          btnSaveStudent.dataset.mode = 'create';
+          studentModal.show();
+        }
+
+        function openEditModal(student) {
+          if (!studentModal) return;
+          currentEditingStudent = student || {};
+          studentIdInput.value = student.id;
+          studentNameInput.value = student.fullName || '';
+          studentUsernameInput.value = student.username || '';
+          studentPasswordInput.value = '';
+          resetAvatarFields(student.avatarUrl || '');
+          studentEmailInput.value = student.email || '';
+          studentPhoneInput.value = student.phone || '';
+          studentModalTitle.textContent = 'Cập nhật users';
+          btnSaveStudent.dataset.mode = 'update';
+          studentModal.show();
+        }
+
+        btnAdd.addEventListener('click', openAddModal);
+
+        if (
+          btnApplyFilters &&
+          filterNameInput &&
+          filterUsernameInput &&
+          filterEmailInput &&
+          filterActiveSelect
+        ) {
+          btnApplyFilters.addEventListener('click', function () {
+            const hasSearch =
+              filterNameInput.value.trim() ||
+              filterUsernameInput.value.trim() ||
+              filterEmailInput.value.trim();
+            const activeValue = filterActiveSelect.value;
+
+            if (hasSearch) {
+              setMode('search');
+            } else if (activeValue !== '') {
+              setMode('active');
+            } else {
+              setMode('page');
+            }
+            loadStudents();
+          });
+        }
+
+        if (btnLoadAll) {
+          btnLoadAll.addEventListener('click', function () {
+            setMode('all');
+            loadStudents();
+          });
+        }
+
+        if (btnLoadActive) {
+          btnLoadActive.addEventListener('click', function () {
+            activeFilterMode = (activeFilterMode + 1) % 3;
+            if (activeFilterMode === 1) {
+              btnLoadActive.innerHTML =
+                '<i class="bi bi-check-circle me-1"></i> Đang hoạt động';
+              setMode('active');
+              loadStudentsActive(true);
+            } else if (activeFilterMode === 2) {
+              btnLoadActive.innerHTML = '<i class="bi bi-slash-circle me-1"></i> Đã khóa';
+              setMode('active');
+              loadStudentsActive(false);
+            } else {
+              btnLoadActive.innerHTML = '<i class="bi bi-filter-circle me-1"></i> Tất cả';
+              setMode('all');
+              loadStudentsAll();
+            }
+          });
+          btnLoadActive.innerHTML = '<i class="bi bi-filter-circle me-1"></i> Tất cả';
+        }
+
+        if (btnLoadPage) {
+          btnLoadPage.addEventListener('click', function () {
+            setMode('page');
+            loadStudents();
+          });
+        }
+
+        if (sortSelect) {
+          sortSelect.addEventListener('change', function () {
+            if (loadMode === 'page') {
+              currentPage = 0;
+              loadStudents();
+            }
+          });
+        }
+
+        tableBody.addEventListener('click', function (e) {
+          const btn = e.target.closest('button[data-action]');
+          if (btn) {
+            const id = btn.getAttribute('data-id');
+            const action = btn.getAttribute('data-action');
+            if (action === 'edit') {
+              fetch(API_BASE + '/' + id)
+                .then(function (res) {
+                  return res.json();
+                })
+                .then(function (student) {
+                  openEditModal(student || {});
+                })
+                .catch(function () {
+                  alert('Không tải được thông tin users.');
+                });
+            } else if (action === 'lock') {
+              lockUser(id);
+            } else if (action === 'unlock') {
+              unlockUser(id);
+            } else if (action === 'delete') {
+              if (confirm('Bạn có chắc chắn muốn xóa users này?')) {
+                deleteStudent(id);
+              }
+            }
+            return;
+          }
+
+          const row = e.target.closest('tr.user-row');
+          if (!row) return;
+          const id = row.getAttribute('data-id');
+          if (!id) return;
+          fetch(API_BASE + '/' + id)
+            .then(function (res) {
+              return res.json();
+            })
+            .then(function (user) {
+              const isActive =
+                typeof user.isActive === 'boolean'
+                  ? user.isActive
+                  : typeof user.active === 'boolean'
+                    ? user.active
+                    : true;
+              detailId.value = user.id || '';
+              detailStatus.value = isActive ? 'Hoạt động' : 'Đã khóa';
+              detailFullName.value = user.fullName || '';
+              detailUsername.value = user.username || '';
+              detailEmail.value = user.email || '';
+              detailPhone.value = user.phone || '';
+              if (detailAvatarImg) {
+                if (user.avatarUrl) {
+                  detailAvatarImg.src = user.avatarUrl;
+                  detailAvatarImg.style.display = 'inline-block';
+                } else {
+                  detailAvatarImg.src = '';
+                  detailAvatarImg.style.display = 'none';
+                }
+              }
+              if (userDetailModal) userDetailModal.show();
+            })
+            .catch(function () {
+              alert('Không tải được thông tin users.');
+            });
+        });
+
+        async function uploadUserAvatar(userId, file) {
+          const formData = new FormData();
+          formData.append('file', file);
+
+          const res = await fetch(API_BASE + '/' + userId + '/avatar', {
+            method: 'POST',
+            body: formData,
+          });
+
+          if (!res.ok) {
+            throw new Error(await res.text());
+          }
+
+          return res.json();
+        }
+
+        async function saveStudent() {
+          const mode = btnSaveStudent.dataset.mode;
+          const name = studentNameInput.value.trim();
+          const username = studentUsernameInput.value.trim();
+          const password = studentPasswordInput.value;
+          const email = studentEmailInput.value.trim();
+          const phone = studentPhoneInput.value.trim();
+
+          if (!name || !email || !username) {
+            alert('Vui lòng nhập đầy đủ tên, username và email.');
+            return;
+          }
+
+          const isUpdate = mode === 'update';
+          const id = studentIdInput.value;
+
+          if (!isUpdate && !password) {
+            alert('Vui lòng nhập mật khẩu.');
+            return;
+          }
+
+          const payload = {
+            fullName: name,
+            email: email,
+            username: username,
+            phone: phone,
+            isActive: isUpdate
+              ? currentEditingStudent && typeof currentEditingStudent.isActive === 'boolean'
+                ? currentEditingStudent.isActive
+                : true
+              : true,
+          };
+
+          const avatarUrlValue = studentAvatarUrlInput ? studentAvatarUrlInput.value.trim() : '';
+          const shouldUploadFile = selectedAvatarFile !== null;
+          if (!shouldUploadFile && avatarUrlValue !== '') {
+            payload.avatarUrl = avatarUrlValue;
+          }
+
+          if (password) payload.passwordHash = password;
+          if (!isUpdate) payload.passwordHash = password;
+
+          const url = isUpdate ? API_BASE + '/' + id : API_BASE;
+          const method = isUpdate ? 'PUT' : 'POST';
+
+          try {
+            const res = await fetch(url, {
+              method: method,
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(payload),
+            });
+            if (!res.ok) throw new Error(await res.text());
+            const result = await res.json();
+
+            if (shouldUploadFile) {
+              await uploadUserAvatar(result.id, selectedAvatarFile);
+            }
+
+            if (studentModal) studentModal.hide();
+            await loadStudents();
+          } catch (e) {
+            console.error('Lỗi lưu users', e);
+            alert('Có lỗi xảy ra khi lưu users.');
+          }
+        }
+
+        btnSaveStudent.addEventListener('click', saveStudent);
+
+        async function deleteStudent(id) {
+          try {
+            const res = await fetch(API_BASE + '/' + id, { method: 'DELETE' });
+            if (!res.ok) throw new Error(await res.text());
+            await loadStudents();
+          } catch (e) {
+            console.error('Lỗi xóa users', e);
+            alert('Có lỗi xảy ra khi xóa users.');
+          }
+        }
+
+        async function lockUser(id) {
+          try {
+            const res = await fetch(API_BASE + '/' + id + '/lock', { method: 'PUT' });
+            if (!res.ok) throw new Error(await res.text());
+            await loadStudents();
+          } catch (e) {
+            console.error('Lỗi khóa users', e);
+            alert('Có lỗi xảy ra khi khóa users.');
+          }
+        }
+
+        async function unlockUser(id) {
+          try {
+            const res = await fetch(API_BASE + '/' + id + '/unlock', { method: 'PUT' });
+            if (!res.ok) throw new Error(await res.text());
+            await loadStudents();
+          } catch (e) {
+            console.error('Lỗi mở khóa users', e);
+            alert('Có lỗi xảy ra khi mở khóa users.');
+          }
+        }
+
+        const SELECTOR_SIDEBAR_WRAPPER = '.sidebar-wrapper';
+        const Default = {
+          scrollbarTheme: 'os-theme-light',
+          scrollbarAutoHide: 'leave',
+          scrollbarClickScroll: true,
+        };
+        const sidebarWrapper = document.querySelector(SELECTOR_SIDEBAR_WRAPPER);
+        if (sidebarWrapper && window.OverlayScrollbarsGlobal && window.OverlayScrollbarsGlobal.OverlayScrollbars) {
+          window.OverlayScrollbarsGlobal.OverlayScrollbars(sidebarWrapper, {
+            scrollbars: {
+              theme: Default.scrollbarTheme,
+              autoHide: Default.scrollbarAutoHide,
+              clickScroll: Default.scrollbarClickScroll,
+            },
+          });
+        }
+
+        if (sortSelect) sortSelect.value = DEFAULT_SORT;
+        setMode('page');
+        loadStudents();
+      });
+    </script>
+  </body>
+</html>
