@@ -133,6 +133,10 @@
                   <i class="nav-icon bi bi-link-45deg"></i>
                   <p class="mb-0">Role Permissions</p>
                 </a>
+                <a class="nav-link px-0 py-1 text-white-50" href="./sv.html">
+                  <i class="nav-icon bi bi-link-45deg"></i>
+                  <p class="mb-0">Sinh viên</p>
+                </a>
                 <a class="nav-link px-0 py-1 text-white-50" href="http://localhost:5173/dashboard">
                   <i class="nav-icon bi bi-speedometer2"></i>
                   <p class="mb-0">Tổng quan</p>
@@ -471,7 +475,7 @@
             detailPermissionsCount.textContent = items.length ? `${items.length} permission` : '';
           }
           if (!items.length) {
-            detailPermissions.innerHTML = '<span class="text-body-secondary small">ChÆ°a cÃ³ permission Ä‘Æ°á»£c gÃ¡n.</span>';
+            detailPermissions.innerHTML = '<span class="text-body-secondary small">Chưa có permission được gán.</span>';
             return;
           }
           detailPermissions.innerHTML = items

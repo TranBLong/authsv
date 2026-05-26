@@ -27,8 +27,10 @@ public interface UserRoleRepository extends JpaRepository<UserRole, UUID> {
 
     List<UserRole> findByRoleId(UUID roleId);
 
-    @Query("SELECT ur FROM UserRole ur WHERE ur.userId = :userId AND ur.deletedAt IS NULL")
+    @Query("SELECT ur FROM UserRole ur WHERE ur.userId = :userId AND ur.isActive = true AND ur.deletedAt IS NULL")
     List<UserRole> findActiveRolesByUserId(UUID userId);
+
+    Page<UserRole> findByUserIdAndDeletedAtIsNull(UUID userId, Pageable pageable);
 
     List<UserRole> findByIsActiveAndDeletedAtIsNull(Boolean isActive);
 

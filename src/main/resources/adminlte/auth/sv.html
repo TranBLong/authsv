@@ -415,6 +415,7 @@
         let isServerPaging = true;
         let currentSort = DEFAULT_SORT;
         let allStudents = [];
+        let sinhVienUserIds = new Set();
 
         const tableBody = document.getElementById('studentTableBody');
         const pagination = document.getElementById('pagination');
@@ -615,6 +616,13 @@
         let rolesById = {};
         let rolesLoaded = false;
 
+        function isSinhVienRole(role) {
+          if (!role) return false;
+          const code = normalizeText(role.code || '');
+          const name = normalizeText(role.name || '');
+          return code === 'sinhvien' || name === 'sinhvien';
+        }
+
         function getRoleLabel(roleId) {
           if (!roleId) return '';
           const role = rolesById[String(roleId).toLowerCase()];
@@ -639,6 +647,51 @@
           } catch (e) {
             console.error('Lỗi tải roles lookup', e);
             rolesLoaded = false;
+          }
+        }
+
+        function isSinhVienUser(student) {
+          if (!student) return false;
+          const username = normalizeText(student.username || '');
+          if (username.startsWith('sinhvien')) return true;
+          const studentId = student.id == null ? '' : String(student.id).toLowerCase();
+          return studentId ? sinhVienUserIds.has(studentId) : false;
+        }
+
+        async function loadSinhVienUserIds() {
+          try {
+            if (!rolesLoaded) await loadRolesLookup();
+
+            const roleIds = Object.values(rolesById)
+              .filter(isSinhVienRole)
+              .map(function (role) {
+                return role && role.id != null ? String(role.id).toLowerCase() : '';
+              })
+              .filter(Boolean);
+            const roleIdSet = new Set(roleIds);
+
+            const params = new URLSearchParams({
+              page: '0',
+              size: '1000',
+              sort: 'createdAt,desc',
+            });
+            const res = await fetch(USER_ROLES_API + '?' + params.toString());
+            if (!res.ok) throw new Error(await res.text());
+            const data = await res.json();
+            const rows = Array.isArray(data.content) ? data.content : Array.isArray(data) ? data : [];
+
+            sinhVienUserIds = new Set(
+              rows
+                .filter(function (ur) {
+                  return ur && ur.userId != null && ur.roleId != null && roleIdSet.has(String(ur.roleId).toLowerCase());
+                })
+                .map(function (ur) {
+                  return String(ur.userId).toLowerCase();
+                }),
+            );
+          } catch (e) {
+            console.error('Lỗi tải danh sách sinh viên theo role', e);
+            sinhVienUserIds = new Set();
           }
         }
 
@@ -745,6 +798,8 @@
         function applyFilterAndRender() {
           const term = normalizeText(searchInput.value.trim());
           const filtered = allStudents.filter(function (s) {
+            return isSinhVienUser(s);
+          }).filter(function (s) {
             if (!term) return true;
             const name = normalizeText(s.name);
             const fullName = normalizeText(s.fullName);
@@ -857,16 +912,12 @@
         async function loadStudentsPage() {
           try {
             currentSort = sortSelect ? sortSelect.value || DEFAULT_SORT : DEFAULT_SORT;
-            const params = new URLSearchParams({
-              page: String(currentPage),
-              size: String(PAGE_SIZE),
-              sort: currentSort,
-            });
-            const res = await fetch(API_BASE + '/page?' + params.toString());
+            const res = await fetch(API_BASE);
             const data = await res.json();
-            allStudents = Array.isArray(data.content) ? data.content : [];
-            serverTotalElements = typeof data.totalElements === 'number' ? data.totalElements : 0;
-            serverTotalPages = typeof data.totalPages === 'number' ? data.totalPages : 0;
+            allStudents = Array.isArray(data) ? data : Array.isArray(data.content) ? data.content : [];
+            serverTotalElements = allStudents.length;
+            serverTotalPages = allStudents.length === 0 ? 0 : Math.ceil(allStudents.length / PAGE_SIZE);
+            await loadSinhVienUserIds();
             applyFilterAndRender();
           } catch (e) {
             console.error('Lỗi tải danh sách users theo trang', e);
@@ -877,7 +928,8 @@
           try {
             const res = await fetch(API_BASE);
             const data = await res.json();
-            allStudents = Array.isArray(data) ? data : [];
+            allStudents = Array.isArray(data) ? data : Array.isArray(data.content) ? data.content : [];
+            await loadSinhVienUserIds();
             applyFilterAndRender();
           } catch (e) {
             console.error('Lỗi tải danh sách users', e);
@@ -890,7 +942,8 @@
             if ([...params.keys()].length === 0) return loadStudentsAll();
             const res = await fetch(API_BASE + '/search?' + params.toString());
             const data = await res.json();
-            allStudents = Array.isArray(data) ? data : [];
+            allStudents = Array.isArray(data) ? data : Array.isArray(data.content) ? data.content : [];
+            await loadSinhVienUserIds();
             applyFilterAndRender();
           } catch (e) {
             console.error('Lỗi tìm kiếm users', e);
@@ -911,7 +964,8 @@
             const params = new URLSearchParams({ isActive: activeValue });
             const res = await fetch(API_BASE + '/active?' + params.toString());
             const data = await res.json();
-            allStudents = Array.isArray(data) ? data : [];
+            allStudents = Array.isArray(data) ? data : Array.isArray(data.content) ? data.content : [];
+            await loadSinhVienUserIds();
             applyFilterAndRender();
           } catch (e) {
             console.error('Lỗi lọc users theo trạng thái', e);
@@ -1235,9 +1289,8 @@
         }
 
         if (sortSelect) sortSelect.value = DEFAULT_SORT;
-        setMode('page');
-        loadRolesLookup();
-        loadStudents();
+        setMode('all');
+        loadStudentsAll();
       });
     </script>
   </body>
