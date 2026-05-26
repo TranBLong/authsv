@@ -298,6 +298,17 @@
                 <label class="form-label">System</label>
                 <input type="text" class="form-control" id="detailSystem" readonly />
               </div>
+              <div class="col-12">
+                <div class="d-flex align-items-center justify-content-between">
+                  <label class="form-label mb-1">Permissions</label>
+                  <span class="small text-body-secondary" id="detailPermissionsCount"></span>
+                </div>
+                <div
+                  id="detailPermissions"
+                  class="border rounded p-2 bg-body-tertiary"
+                  style="min-height: 44px"
+                ></div>
+              </div>
             </div>
           </div>
           <div class="modal-footer">
@@ -404,6 +415,8 @@
         const detailName = document.getElementById('detailName');
         const detailDescription = document.getElementById('detailDescription');
         const detailSystem = document.getElementById('detailSystem');
+        const detailPermissions = document.getElementById('detailPermissions');
+        const detailPermissionsCount = document.getElementById('detailPermissionsCount');
 
         var roleModal = null;
         if (window.bootstrap && roleModalEl) {
@@ -432,12 +445,160 @@
             .replace(/Đ/g, 'd');
         }
 
+        function getRolePermissionIsActive(rolePermission) {
+          if (!rolePermission) return null;
+          if (typeof rolePermission.isActive === 'boolean') return rolePermission.isActive;
+          if (typeof rolePermission.active === 'boolean') return rolePermission.active;
+          if (typeof rolePermission.is_active === 'boolean') return rolePermission.is_active;
+          if (typeof rolePermission.isActive === 'number') return rolePermission.isActive === 1;
+          if (typeof rolePermission.active === 'number') return rolePermission.active === 1;
+          if (typeof rolePermission.is_active === 'number') return rolePermission.is_active === 1;
+          return null;
+        }
+
         function isTrueishRoleSystem(value) {
           return value === true || value === 'true' || value === 1 || value === '1';
         }
 
         function getRoleSystemValue(role) {
           return isTrueishRoleSystem(role && (role.isSystem ?? role.system ?? role.is_system));
+        }
+
+        function renderRolePermissions(permissions) {
+          if (!detailPermissions) return;
+          const items = Array.isArray(permissions) ? permissions : [];
+          if (detailPermissionsCount) {
+            detailPermissionsCount.textContent = items.length ? `${items.length} permission` : '';
+          }
+          if (!items.length) {
+            detailPermissions.innerHTML = '<span class="text-body-secondary small">ChÆ°a cÃ³ permission Ä‘Æ°á»£c gÃ¡n.</span>';
+            return;
+          }
+          detailPermissions.innerHTML = items
+            .map(function (p) {
+              const rolePermissionId = p.rolePermissionId;
+              const permissionId = p.permissionId;
+              const code = p.code || '';
+              const name = p.name || '';
+              const module = p.module || '';
+              const title = [code, name, module].filter(Boolean).join(' - ');
+              const text = code ? code : name ? name : '(permission)';
+              const isActive = getRolePermissionIsActive(p);
+              const checked = isActive === null || isActive === undefined ? true : !!isActive;
+              const safeTitle = String(title).replace(/"/g, '&quot;');
+              const safeText = String(text).replace(/</g, '&lt;').replace(/>/g, '&gt;');
+              const safeSub = String([name, module].filter(Boolean).join(' - '))
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;');
+
+              return (
+                '<div class="d-flex align-items-center justify-content-between gap-2 py-1">' +
+                '<div class="d-flex flex-column">' +
+                '<span class="fw-semibold" title="' +
+                safeTitle +
+                '">' +
+                safeText +
+                '</span>' +
+                (safeSub ? '<span class="small text-body-secondary">' + safeSub + '</span>' : '') +
+                '</div>' +
+                '<div class="form-check form-switch m-0">' +
+                '<input class="form-check-input permission-active-toggle" type="checkbox" role="switch" ' +
+                (checked ? 'checked ' : '') +
+                (rolePermissionId
+                  ? 'data-role-permission-id="' +
+                    String(rolePermissionId).replace(/"/g, '&quot;') +
+                    '" ' +
+                    (permissionId
+                      ? 'data-permission-id="' + String(permissionId).replace(/"/g, '&quot;') + '" '
+                      : '')
+                  : 'disabled ') +
+                '/>' +
+                '</div>' +
+                '</div>'
+              );
+            })
+            .join('');
+        }
+
+        async function loadPermissionsForRole(roleId) {
+          if (!detailPermissions) return;
+          detailPermissions.innerHTML = '<span class="text-body-secondary small">Äang táº£i...</span>';
+          if (detailPermissionsCount) detailPermissionsCount.textContent = '';
+
+          try {
+            const [rpRes, permRes] = await Promise.all([
+              fetch('/api/role-permissions/roles/' + roleId + '/permissions'),
+              fetch('/api/permissions'),
+            ]);
+
+            if (!rpRes.ok) throw new Error(await rpRes.text());
+            if (!permRes.ok) throw new Error(await permRes.text());
+
+            const rolePermissions = await rpRes.json();
+            const allPermissions = await permRes.json();
+
+            const permById = new Map(
+              (Array.isArray(allPermissions) ? allPermissions : []).map(function (p) {
+                return [String(p.id), p];
+              }),
+            );
+
+            const rolePermissionViews = (Array.isArray(rolePermissions) ? rolePermissions : [])
+              .filter(function (rp) {
+                return rp && rp.permissionId;
+              })
+              .map(function (rp) {
+                const perm = permById.get(String(rp.permissionId));
+                return {
+                  rolePermissionId: rp.id,
+                  permissionId: rp.permissionId,
+                  isActive: rp.isActive,
+                  active: rp.active,
+                  is_active: rp.is_active,
+                  code: perm ? perm.code : String(rp.permissionId),
+                  name: perm ? perm.name : '',
+                  module: perm ? perm.module : '',
+                };
+              })
+              .sort(function (a, b) {
+                return String(a.code || '').localeCompare(String(b.code || ''), 'vi');
+              });
+
+            renderRolePermissions(rolePermissionViews);
+          } catch (e) {
+            console.error('Lá»—i táº£i permission cá»§a role', e);
+            detailPermissions.innerHTML =
+              '<span class="text-danger small">KhÃ´ng táº£i Ä‘Æ°á»£c danh sÃ¡ch permission.</span>';
+          }
+        }
+
+        async function setRolePermissionActive(rolePermissionId, nextActive) {
+          const base = '/api/role-permissions/' + rolePermissionId;
+          const url = nextActive ? base + '/unlock' : base + '/lock';
+          const res = await fetch(url, { method: 'PUT' });
+          if (!res.ok) throw new Error(await res.text());
+          return true;
+        }
+
+        if (detailPermissions) {
+          detailPermissions.addEventListener('change', async function (e) {
+            const target = e && e.target;
+            if (!target || !target.classList || !target.classList.contains('permission-active-toggle')) return;
+            const rolePermissionId = target.getAttribute('data-role-permission-id');
+            if (!rolePermissionId) return;
+
+            const previous = !target.checked;
+            target.disabled = true;
+            try {
+              await setRolePermissionActive(rolePermissionId, target.checked);
+            } catch (err) {
+              console.error('Lá»—i cập nhật trạng thái permission', err);
+              target.checked = previous;
+              alert('Không cập nhật được trạng thái permission.');
+            } finally {
+              target.disabled = false;
+            }
+          });
         }
 
         function renderTable(roles) {
@@ -855,6 +1016,7 @@
               detailName.value = role.name || '';
               detailDescription.value = role.description || '';
               detailSystem.value = isSystem ? 'Yes' : 'No';
+              if (role && role.id) loadPermissionsForRole(role.id);
               if (roleDetailModal) roleDetailModal.show();
             })
             .catch(function () {
