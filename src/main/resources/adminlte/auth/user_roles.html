@@ -1,1145 +1,1113 @@
 <!doctype html>
 <html lang="vi">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Quản lý user roles | School Manager</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-    <meta name="color-scheme" content="light dark" />
-    <meta name="theme-color" content="#007bff" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#1a1a1a" media="(prefers-color-scheme: dark)" />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/@fontsource/source-sans-3@5.0.12/index.css"
-      crossorigin="anonymous"
-      media="print"
-      onload="this.media='all'"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.11.0/styles/overlayscrollbars.min.css"
-      crossorigin="anonymous"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
-      crossorigin="anonymous"
-    />
-    <link rel="stylesheet" href="../css/adminlte.css" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/css/tom-select.bootstrap5.min.css"
-      rel="stylesheet"
-    />
-    <style>
-      .sidebar-menu .nav-link {
-        transition: none !important;
-      }
 
-      .sidebar-menu .nav-item:hover > .nav-link,
-      .sidebar-menu .nav-item:focus-within > .nav-link,
-      .sidebar-menu .nav-link:hover,
-      .sidebar-menu .nav-link:focus {
-        background-color: transparent !important;
-        background-image: none !important;
-        box-shadow: none !important;
-        filter: none !important;
-      }
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Quản lý user roles | School Manager</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="color-scheme" content="light dark" />
+  <meta name="theme-color" content="#007bff" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#1a1a1a" media="(prefers-color-scheme: dark)" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/source-sans-3@5.0.12/index.css"
+    crossorigin="anonymous" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.11.0/styles/overlayscrollbars.min.css"
+    crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
+    crossorigin="anonymous" />
+  <link rel="stylesheet" href="../css/adminlte.css" />
+  <link href="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/css/tom-select.bootstrap5.min.css" rel="stylesheet" />
+  <style>
+    .sidebar-menu .nav-link {
+      transition: none !important;
+    }
 
-      .sidebar-menu .nav-item:hover > .nav-link:not(.active),
-      .sidebar-menu .nav-item:focus-within > .nav-link:not(.active),
-      .sidebar-menu .nav-link:not(.active):hover,
-      .sidebar-menu .nav-link:not(.active):focus,
-      .sidebar-menu .nav-link:not(.active):active {
-        color: rgba(255, 255, 255, 0.75) !important;
-      }
+    .sidebar-menu .nav-item:hover>.nav-link,
+    .sidebar-menu .nav-item:focus-within>.nav-link,
+    .sidebar-menu .nav-link:hover,
+    .sidebar-menu .nav-link:focus {
+      background-color: transparent !important;
+      background-image: none !important;
+      box-shadow: none !important;
+      filter: none !important;
+    }
 
-      .sidebar-menu .nav-item:hover > .nav-link.active,
-      .sidebar-menu .nav-item:focus-within > .nav-link.active,
-      .sidebar-menu .nav-link.active,
-      .sidebar-menu .nav-link.active:hover,
-      .sidebar-menu .nav-link.active:focus {
-        color: #fff !important;
-        background-color: var(--lte-sidebar-menu-active-bg) !important;
-      }
-    </style>
-  </head>
-  <body class="layout-fixed sidebar-expand-lg sidebar-open bg-body-tertiary">
-    <div class="app-wrapper">
-      <nav class="app-header navbar navbar-expand bg-body">
+    .sidebar-menu .nav-item:hover>.nav-link:not(.active),
+    .sidebar-menu .nav-item:focus-within>.nav-link:not(.active),
+    .sidebar-menu .nav-link:not(.active):hover,
+    .sidebar-menu .nav-link:not(.active):focus,
+    .sidebar-menu .nav-link:not(.active):active {
+      color: rgba(255, 255, 255, 0.75) !important;
+    }
+
+    .sidebar-menu .nav-item:hover>.nav-link.active,
+    .sidebar-menu .nav-item:focus-within>.nav-link.active,
+    .sidebar-menu .nav-link.active,
+    .sidebar-menu .nav-link.active:hover,
+    .sidebar-menu .nav-link.active:focus {
+      color: #fff !important;
+      background-color: var(--lte-sidebar-menu-active-bg) !important;
+    }
+  </style>
+</head>
+
+<body class="layout-fixed sidebar-expand-lg sidebar-open bg-body-tertiary">
+  <div class="app-wrapper">
+    <nav class="app-header navbar navbar-expand bg-body">
+      <div class="container-fluid">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" data-lte-toggle="sidebar" href="#" role="button">
+              <i class="bi bi-list"></i>
+            </a>
+          </li>
+          <li class="nav-item d-none d-md-block">
+            <span class="nav-link fw-semibold">Quản lý user roles</span>
+          </li>
+        </ul>
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#" data-lte-toggle="fullscreen">
+              <i data-lte-icon="maximize" class="bi bi-arrows-fullscreen"></i>
+              <i data-lte-icon="minimize" class="bi bi-fullscreen-exit" style="display: none"></i>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" id="btnLogout" title="Đăng xuất">
+              <i class="bi bi-box-arrow-right"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark">
+      <div class="sidebar-brand">
+        <a href="../index.html" class="brand-link">
+          <img src="../assets/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image opacity-75 shadow" />
+          <span class="brand-text fw-light">School Manager</span>
+        </a>
+      </div>
+      <div class="sidebar-wrapper">
+        <nav class="mt-2">
+          <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" role="navigation"
+            aria-label="Main navigation" data-accordion="false">
+            <li class="nav-item px-3">
+              <div class="d-flex align-items-center gap-2 mb-2">
+                <span class="text-white small mb-0 fw-semibold">Auth</span>
+                <span class="badge text-bg-light">Admin</span>
+              </div>
+              <a class="nav-link px-0 py-1 text-white-50" href="./users.html">
+                <i class="nav-icon bi bi-people"></i>
+                <p class="mb-0">Users</p>
+              </a>
+              <a class="nav-link px-0 py-1 text-white-50" href="./roles.html">
+                <i class="nav-icon bi bi-shield-lock"></i>
+                <p class="mb-0">Roles</p>
+              </a>
+              <a class="nav-link px-0 py-1 text-white-50" href="./permissions.html">
+                <i class="nav-icon bi bi-key"></i>
+                <p class="mb-0">Permissions</p>
+              </a>
+              <a class="nav-link px-0 py-1 text-white-50 active" href="./user_roles.html">
+                <i class="nav-icon bi bi-diagram-3"></i>
+                <p class="mb-0">User Roles</p>
+              </a>
+              <a class="nav-link px-0 py-1 text-white-50" href="./role_permission.html">
+                <i class="nav-icon bi bi-link-45deg"></i>
+                <p class="mb-0">Role Permissions</p>
+              </a>
+              <a class="nav-link px-0 py-1 text-white-50" href="./sv.html">
+                <i class="nav-icon bi bi-mortarboard"></i>
+                <p class="mb-0">Sinh viên</p>
+              </a>
+              <a class="nav-link px-0 py-1 text-white-50" href="http://localhost:5173/dashboard">
+                <i class="nav-icon bi bi-speedometer2"></i>
+                <p class="mb-0">Tổng quan</p>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </aside>
+
+    <main class="app-main">
+      <div class="app-content">
         <div class="container-fluid">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link" data-lte-toggle="sidebar" href="#" role="button">
-                <i class="bi bi-list"></i>
-              </a>
-            </li>
-            <li class="nav-item d-none d-md-block">
-              <span class="nav-link fw-semibold">Quản lý user roles</span>
-            </li>
-          </ul>
-          <ul class="navbar-nav ms-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="#" data-lte-toggle="fullscreen">
-                <i data-lte-icon="maximize" class="bi bi-arrows-fullscreen"></i>
-                <i data-lte-icon="minimize" class="bi bi-fullscreen-exit" style="display: none"></i>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#" id="btnLogout" title="Đăng xuất">
-                <i class="bi bi-box-arrow-right"></i>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </nav>
-
-      <aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark">
-        <div class="sidebar-brand">
-          <a href="../index.html" class="brand-link">
-            <img
-              src="../assets/img/AdminLTELogo.png"
-              alt="AdminLTE Logo"
-              class="brand-image opacity-75 shadow"
-            />
-            <span class="brand-text fw-light">School Manager</span>
-          </a>
-        </div>
-        <div class="sidebar-wrapper">
-          <nav class="mt-2">
-            <ul
-              class="nav sidebar-menu flex-column"
-              data-lte-toggle="treeview"
-              role="navigation"
-              aria-label="Main navigation"
-              data-accordion="false"
-            >
-              <li class="nav-item px-3">
-                <div class="d-flex align-items-center gap-2 mb-2">
-                  <span class="text-white small mb-0 fw-semibold">Auth</span>
-                  <span class="badge text-bg-light">Admin</span>
-                </div>
-                <a class="nav-link px-0 py-1 text-white-50" href="./users.html">
-                  <i class="nav-icon bi bi-people"></i>
-                  <p class="mb-0">Users</p>
-                </a>
-                <a class="nav-link px-0 py-1 text-white-50" href="./roles.html">
-                  <i class="nav-icon bi bi-shield-lock"></i>
-                  <p class="mb-0">Roles</p>
-                </a>
-                <a class="nav-link px-0 py-1 text-white-50" href="./permissions.html">
-                  <i class="nav-icon bi bi-key"></i>
-                  <p class="mb-0">Permissions</p>
-                </a>
-                <a class="nav-link px-0 py-1 text-white-50 active" href="./user_roles.html">
-                  <i class="nav-icon bi bi-diagram-3"></i>
-                  <p class="mb-0">User Roles</p>
-                </a>
-                <a class="nav-link px-0 py-1 text-white-50" href="./role_permission.html">
-                  <i class="nav-icon bi bi-link-45deg"></i>
-                  <p class="mb-0">Role Permissions</p>
-                </a>
-                <a class="nav-link px-0 py-1 text-white-50" href="./sv.html">
-                  <i class="nav-icon bi bi-link-45deg"></i>
-                  <p class="mb-0">Sinh viên</p>
-                </a>
-                <a class="nav-link px-0 py-1 text-white-50" href="http://localhost:5173/dashboard">
-                  <i class="nav-icon bi bi-speedometer2"></i>
-                  <p class="mb-0">Tổng quan</p>
-                </a>
-              </li>
-            </ul>
-          </nav>
-        </div>
-      </aside>
-
-      <main class="app-main">     
-        <div class="app-content">
-          <div class="container-fluid">
-            <div class="card shadow-sm border-0">
-              <div class="card-header d-flex flex-wrap gap-3 align-items-center">
-                <div>
-                  <h3 class="card-title mb-1">Danh sách user roles</h3>
-                </div>
-                <div class="ms-auto d-flex flex-wrap gap-2">
-                  <button class="btn btn-outline-secondary btn-sm" id="btnLoadPage" type="button">
-                    <i class="bi bi-list-ol me-1"></i> Reload
-                  </button>
-                  <button class="btn btn-outline-success btn-sm" id="btnLoadActive" type="button">
-                    <i class="bi bi-filter-circle me-1"></i> Trạng thái
-                  </button>
-                  <button class="btn btn-primary btn-sm" id="btnAdd" type="button">
-                    <i class="bi bi-plus-circle me-1"></i> Thêm user role
-                  </button>
-                </div>
+          <div class="card shadow-sm border-0">
+            <div class="card-header d-flex flex-wrap gap-3 align-items-center">
+              <div>
+                <h3 class="card-title mb-1">Danh sách user roles</h3>
               </div>
+              <div class="ms-auto d-flex flex-wrap gap-2">
+                <button class="btn btn-outline-secondary btn-sm" id="btnLoadPage" type="button">
+                  <i class="bi bi-list-ol me-1"></i> Reload
+                </button>
+                <button class="btn btn-outline-success btn-sm" id="btnLoadActive" type="button">
+                  <i class="bi bi-filter-circle me-1"></i> Trạng thái
+                </button>
+                <button class="btn btn-primary btn-sm" id="btnAdd" type="button">
+                  <i class="bi bi-plus-circle me-1"></i> Thêm user role
+                </button>
+              </div>
+            </div>
 
-              <div class="card-body border-bottom">
-                <div class="row g-3 align-items-end">
-                  <div class="col-lg-5">
-                    <label class="form-label small text-secondary mb-1" for="searchInput">
-                      Tìm nhanh
-                    </label>
-                    <div class="input-group">
-                      <span class="input-group-text"><i class="bi bi-search"></i></span>
-                      <input
-                        type="text"
-                        id="searchInput"
-                        class="form-control"
-                        placeholder="Nhập từ khóa để tìm..."
-                      />
-                    </div>
+            <div class="card-body border-bottom">
+              <div class="row g-3 align-items-end">
+                <div class="col-lg-5">
+                  <label class="form-label small text-secondary mb-1" for="searchInput">
+                    Tìm nhanh
+                  </label>
+                  <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-search"></i></span>
+                    <input type="text" id="searchInput" class="form-control" placeholder="Nhập từ khóa để tìm..." />
                   </div>
-                  <div class="col-lg-2">
-                    <label class="form-label small text-secondary mb-1" for="filterUserSelect">
-                      <i class="bi bi-person-fill me-1"></i>Lọc theo User
-                    </label>
-                    <select id="filterUserSelect" class="form-select">
-                      <option value="">Tất cả users</option>
-                    </select>
-                  </div>
-                  <div class="col-lg-2">
-                    <label class="form-label small text-secondary mb-1" for="filterRoleSelect">
-                      <i class="bi bi-shield-fill me-1"></i>Lọc theo Role
-                    </label>
-                    <select id="filterRoleSelect" class="form-select">
-                      <option value="">Tất cả roles</option>
-                    </select>
-                  </div>
-                  <div class="col-lg-3">
-                    <label class="form-label small text-secondary mb-1" for="sortSelect">
-                      Sắp xếp
-                    </label>
-                    <select id="sortSelect" class="form-select">
-                      <option value="updatedAt,desc">Mới nhất</option>
-                      <option value="updatedAt,asc">Cũ nhất</option>
-                    </select>
-                  </div>
-
                 </div>
-              </div>
+                <div class="col-lg-2">
+                  <label class="form-label small text-secondary mb-1" for="filterUserSelect">
+                    <i class="bi bi-person-fill me-1"></i>Lọc theo User
+                  </label>
+                  <select id="filterUserSelect" class="form-select">
+                    <option value="">Tất cả users</option>
+                  </select>
+                </div>
+                <div class="col-lg-2">
+                  <label class="form-label small text-secondary mb-1" for="filterRoleSelect">
+                    <i class="bi bi-shield-fill me-1"></i>Lọc theo Role
+                  </label>
+                  <select id="filterRoleSelect" class="form-select">
+                    <option value="">Tất cả roles</option>
+                  </select>
+                </div>
+                <div class="col-lg-3">
+                  <label class="form-label small text-secondary mb-1" for="sortSelect">
+                    Sắp xếp
+                  </label>
+                  <select id="sortSelect" class="form-select">
+                    <option value="updatedAt,desc">Mới nhất</option>
+                    <option value="updatedAt,asc">Cũ nhất</option>
+                  </select>
+                </div>
 
-              <div class="card-body table-responsive p-0">
-                <table class="table table-hover align-middle text-nowrap mb-0">
-                  <thead class="table-light">
-                    <tr>
-                      <th style="width: 25%">User</th>
-                      <th style="width: 25%">Role</th>
-                      <th style="width: 15%">Trạng thái</th>
-                      <th style="width: 20%">Created at</th>
-                      <th style="width: 15%" class="text-end">Hành động</th>
-                    </tr>
-                  </thead>
-                  <tbody id="userRoleTableBody"></tbody>
-                </table>
               </div>
+            </div>
 
-              <div class="card-footer d-flex flex-wrap justify-content-between align-items-center gap-2">
-                <div class="small text-secondary" id="paginationInfo"></div>
-                <nav>
-                  <ul class="pagination pagination-sm mb-0" id="pagination"></ul>
-                </nav>
-              </div>
+            <div class="card-body table-responsive p-0">
+              <table class="table table-hover align-middle text-nowrap mb-0">
+                <thead class="table-light">
+                  <tr>
+                    <th style="width: 25%">User</th>
+                    <th style="width: 25%">Role</th>
+                    <th style="width: 15%">Trạng thái</th>
+                    <th style="width: 20%">Created at</th>
+                    <th style="width: 15%" class="text-end">Hành động</th>
+                  </tr>
+                </thead>
+                <tbody id="userRoleTableBody"></tbody>
+              </table>
+            </div>
+
+            <div class="card-footer d-flex flex-wrap justify-content-between align-items-center gap-2">
+              <div class="small text-secondary" id="paginationInfo"></div>
+              <nav>
+                <ul class="pagination pagination-sm mb-0" id="pagination"></ul>
+              </nav>
             </div>
           </div>
         </div>
-      </main>
+      </div>
+    </main>
 
-      <footer class="app-footer">
-        <div class="float-end d-none d-sm-inline">School Manager</div>
-        <strong>Quản lý user roles với AdminLTE 4</strong>
-      </footer>
-    </div>
+    <footer class="app-footer">
+      <div class="float-end d-none d-sm-inline">School Manager</div>
+      <strong>Quản lý user roles với AdminLTE 4</strong>
+    </footer>
+  </div>
 
-    <div class="modal fade" id="userRoleModal" tabindex="-1" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="userRoleModalTitle">Thêm user role</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  <div class="modal fade" id="userRoleModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="userRoleModalTitle">Thêm user role</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <input type="hidden" id="userRoleId" />
+          <div class="mb-3">
+            <label class="form-label">User</label>
+            <select id="userIdSelect" class="form-select">
+              <option value="">Chọn user</option>
+            </select>
           </div>
-          <div class="modal-body">
-            <input type="hidden" id="userRoleId" />
-            <div class="mb-3">
+          <div class="mb-3">
+            <label class="form-label">Role</label>
+            <select id="roleIdSelect" class="form-select">
+              <option value="">Chọn role</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+          <button type="button" class="btn btn-primary" id="btnSaveUserRole">Lưu</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="userRoleDetailModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Chi tiết user role</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label">ID</label>
+              <input type="text" class="form-control" id="detailId" readonly />
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Trạng thái</label>
+              <input type="text" class="form-control" id="detailStatus" readonly />
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">User ID</label>
+              <input type="text" class="form-control" id="detailUserId" readonly />
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Role ID</label>
+              <input type="text" class="form-control" id="detailRoleId" readonly />
+            </div>
+            <div class="col-md-6">
               <label class="form-label">User</label>
-              <select id="userIdSelect" class="form-select">
-                <option value="">Chọn user</option>
-              </select>
+              <input type="text" class="form-control" id="detailUserLabel" readonly />
             </div>
-            <div class="mb-3">
+            <div class="col-md-6">
               <label class="form-label">Role</label>
-              <select id="roleIdSelect" class="form-select">
-                <option value="">Chọn role</option>
-              </select>
+              <input type="text" class="form-control" id="detailRoleLabel" readonly />
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Created at</label>
+              <input type="text" class="form-control" id="detailCreatedAt" readonly />
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Updated at</label>
+              <input type="text" class="form-control" id="detailUpdatedAt" readonly />
             </div>
           </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-            <button type="button" class="btn btn-primary" id="btnSaveUserRole">Lưu</button>
-          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
         </div>
       </div>
     </div>
+  </div>
 
-    <div class="modal fade" id="userRoleDetailModal" tabindex="-1" aria-hidden="true">
-      <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Chi tiết user role</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <div class="row g-3">
-              <div class="col-md-6">
-                <label class="form-label">ID</label>
-                <input type="text" class="form-control" id="detailId" readonly />
-              </div>
-              <div class="col-md-6">
-                <label class="form-label">Trạng thái</label>
-                <input type="text" class="form-control" id="detailStatus" readonly />
-              </div>
-              <div class="col-md-6">
-                <label class="form-label">User ID</label>
-                <input type="text" class="form-control" id="detailUserId" readonly />
-              </div>
-              <div class="col-md-6">
-                <label class="form-label">Role ID</label>
-                <input type="text" class="form-control" id="detailRoleId" readonly />
-              </div>
-              <div class="col-md-6">
-                <label class="form-label">User</label>
-                <input type="text" class="form-control" id="detailUserLabel" readonly />
-              </div>
-              <div class="col-md-6">
-                <label class="form-label">Role</label>
-                <input type="text" class="form-control" id="detailRoleLabel" readonly />
-              </div>
-              <div class="col-md-6">
-                <label class="form-label">Created at</label>
-                <input type="text" class="form-control" id="detailCreatedAt" readonly />
-              </div>
-              <div class="col-md-6">
-                <label class="form-label">Updated at</label>
-                <input type="text" class="form-control" id="detailUpdatedAt" readonly />
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-          </div>
-        </div>
-      </div>
-    </div>
+  <script src="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.11.0/browser/overlayscrollbars.browser.es6.min.js"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
+  <script src="../js/adminlte.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/js/tom-select.complete.min.js"></script>
 
-    <script
-      src="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.11.0/browser/overlayscrollbars.browser.es6.min.js"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.min.js"
-      crossorigin="anonymous"
-    ></script>
-    <script src="../js/adminlte.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/js/tom-select.complete.min.js"></script>
+  <script>
+    function logout() {
+      localStorage.removeItem('token');
+      sessionStorage.removeItem('token');
+      window.location.href = '/auth/login.html';
+    }
 
-    <script>
-      function logout() {
-        localStorage.removeItem('token');
-        sessionStorage.removeItem('token');
+    // Auth Check & Fetch Interceptor
+    (function () {
+      const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+      if (!token) {
         window.location.href = '/auth/login.html';
+        return;
+      }
+      const originalFetch = window.fetch;
+      window.fetch = function (url, options) {
+        options = options || {};
+        options.headers = options.headers || {};
+        options.headers['Authorization'] = 'Bearer ' + token;
+        return originalFetch(url, options).then(response => {
+          if (response.status === 401 || response.status === 403) {
+            localStorage.removeItem('token');
+            sessionStorage.removeItem('token');
+            window.location.href = '/auth/login.html';
+          }
+          return response;
+        });
+      };
+    })();
+
+    document.addEventListener('DOMContentLoaded', function () {
+      const btnLogout = document.getElementById('btnLogout');
+      if (btnLogout) btnLogout.addEventListener('click', function (e) { e.preventDefault(); logout(); });
+
+      const API_BASE = '/api/user-roles';
+      const USERS_API = '/api/users';
+      const ROLES_API = '/api/roles';
+      const PAGE_SIZE = 8;
+      const DEFAULT_SORT_FIELD = 'updatedAt';
+      const DEFAULT_SORT_DIR = 'desc';
+
+      let currentPage = 0;
+      let totalPages = 0;
+      let totalElements = 0;
+      let activeFilterMode = 0;
+      let serverTotalPages = 0;
+      let serverTotalElements = 0;
+      let loadMode = 'page';
+      let isServerPaging = true;
+      let currentSortField = DEFAULT_SORT_FIELD;
+      let currentSortDir = DEFAULT_SORT_DIR;
+      let allUserRoles = [];
+      let usersById = {};
+      let rolesById = {};
+      let tsUser = null;
+      let tsRole = null;
+      let tsFilterUser = null;
+      let tsFilterRole = null;
+
+      const userRoleTableBody = document.getElementById('userRoleTableBody');
+      const pagination = document.getElementById('pagination');
+      const paginationInfo = document.getElementById('paginationInfo');
+      const searchInput = document.getElementById('searchInput');
+      const filterUserSelect = document.getElementById('filterUserSelect');
+      const filterRoleSelect = document.getElementById('filterRoleSelect');
+      const sortSelect = document.getElementById('sortSelect');
+
+      const userRoleModalEl = document.getElementById('userRoleModal');
+      const userRoleModalTitle = document.getElementById('userRoleModalTitle');
+      const userRoleIdInput = document.getElementById('userRoleId');
+      const userIdSelect = document.getElementById('userIdSelect');
+      const roleIdSelect = document.getElementById('roleIdSelect');
+      const btnSaveUserRole = document.getElementById('btnSaveUserRole');
+      const btnAdd = document.getElementById('btnAdd');
+
+      const btnApplyFilters = document.getElementById('btnApplyFilters');
+      const btnLoadActive = document.getElementById('btnLoadActive');
+      const btnLoadPage = document.getElementById('btnLoadPage');
+
+      const userRoleDetailModalEl = document.getElementById('userRoleDetailModal');
+      const detailId = document.getElementById('detailId');
+      const detailStatus = document.getElementById('detailStatus');
+      const detailUserId = document.getElementById('detailUserId');
+      const detailRoleId = document.getElementById('detailRoleId');
+      const detailUserLabel = document.getElementById('detailUserLabel');
+      const detailRoleLabel = document.getElementById('detailRoleLabel');
+      const detailCreatedAt = document.getElementById('detailCreatedAt');
+      const detailUpdatedAt = document.getElementById('detailUpdatedAt');
+
+      var userRoleModal = null;
+      if (window.bootstrap && userRoleModalEl) {
+        userRoleModal = new window.bootstrap.Modal(userRoleModalEl);
+      }
+      var userRoleDetailModal = null;
+      if (window.bootstrap && userRoleDetailModalEl) {
+        userRoleDetailModal = new window.bootstrap.Modal(userRoleDetailModalEl);
       }
 
-      // Auth Check & Fetch Interceptor
-      (function () {
-        const token = localStorage.getItem('token') || sessionStorage.getItem('token');
-        if (!token) {
-          window.location.href = '/auth/login.html';
-          return;
-        }
-        const originalFetch = window.fetch;
-        window.fetch = function (url, options) {
-          options = options || {};
-          options.headers = options.headers || {};
-          options.headers['Authorization'] = 'Bearer ' + token;
-          return originalFetch(url, options).then(response => {
-            if (response.status === 401 || response.status === 403) {
-              localStorage.removeItem('token');
-              sessionStorage.removeItem('token');
-              window.location.href = '/auth/login.html';
-            }
-            return response;
-          });
-        };
-      })();
+      if (window.TomSelect) {
+        if (userIdSelect) tsUser = new TomSelect(userIdSelect, { create: false });
+        if (roleIdSelect) tsRole = new TomSelect(roleIdSelect, { create: false });
+        if (filterUserSelect) tsFilterUser = new TomSelect(filterUserSelect, { create: false });
+        if (filterRoleSelect) tsFilterRole = new TomSelect(filterRoleSelect, { create: false });
+      }
 
-      document.addEventListener('DOMContentLoaded', function () {
-        const btnLogout = document.getElementById('btnLogout');
-        if (btnLogout) btnLogout.addEventListener('click', function (e) { e.preventDefault(); logout(); });
+      function highlightText(text, term) {
+        const value = text == null ? '' : String(text);
+        if (!term) return value;
+        const escaped = term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        const re = new RegExp(escaped, 'ig');
+        return value.replace(re, function (m) {
+          return '<mark>' + m + '</mark>';
+        });
+      }
 
-        const API_BASE = '/api/user-roles';
-        const USERS_API = '/api/users';
-        const ROLES_API = '/api/roles';
-        const PAGE_SIZE = 8;
-        const DEFAULT_SORT_FIELD = 'updatedAt';
-        const DEFAULT_SORT_DIR = 'desc';
+      function normalizeText(value) {
+        return (value || '')
+          .toString()
+          .toLowerCase()
+          .normalize('NFD')
+          .replace(/[\u0300-\u036f]/g, '')
+          .replace(/Đ/g, 'd');
+      }
 
-        let currentPage = 0;
-        let totalPages = 0;
-        let totalElements = 0;
-        let activeFilterMode = 0;
-        let serverTotalPages = 0;
-        let serverTotalElements = 0;
-        let loadMode = 'page';
-        let isServerPaging = true;
-        let currentSortField = DEFAULT_SORT_FIELD;
-        let currentSortDir = DEFAULT_SORT_DIR;
-        let allUserRoles = [];
-        let usersById = {};
-        let rolesById = {};
-        let tsUser = null;
-        let tsRole = null;
-        let tsFilterUser = null;
-        let tsFilterRole = null;
+      function getIsActive(userRole) {
+        if (!userRole) return null;
+        if (typeof userRole.isActive === 'boolean') return userRole.isActive;
+        if (typeof userRole.active === 'boolean') return userRole.active;
+        if (typeof userRole.is_active === 'boolean') return userRole.is_active;
+        if (typeof userRole.isActive === 'number') return userRole.isActive === 1;
+        if (typeof userRole.active === 'number') return userRole.active === 1;
+        if (typeof userRole.is_active === 'number') return userRole.is_active === 1;
+        return null;
+      }
 
-        const userRoleTableBody = document.getElementById('userRoleTableBody');
-        const pagination = document.getElementById('pagination');
-        const paginationInfo = document.getElementById('paginationInfo');
-        const searchInput = document.getElementById('searchInput');
-        const filterUserSelect = document.getElementById('filterUserSelect');
-        const filterRoleSelect = document.getElementById('filterRoleSelect');
-        const sortSelect = document.getElementById('sortSelect');
+      function formatDateTime(value) {
+        if (!value) return '';
+        const d = new Date(value);
+        if (isNaN(d.getTime())) return String(value);
+        return d.toLocaleString('vi-VN');
+      }
 
-        const userRoleModalEl = document.getElementById('userRoleModal');
-        const userRoleModalTitle = document.getElementById('userRoleModalTitle');
-        const userRoleIdInput = document.getElementById('userRoleId');
-        const userIdSelect = document.getElementById('userIdSelect');
-        const roleIdSelect = document.getElementById('roleIdSelect');
-        const btnSaveUserRole = document.getElementById('btnSaveUserRole');
-        const btnAdd = document.getElementById('btnAdd');
+      function getSelectedSort() {
+        const field = sortSelect ? sortSelect.value.split(',')[0] || DEFAULT_SORT_FIELD : DEFAULT_SORT_FIELD;
+        const dir = sortSelect ? sortSelect.value.split(',')[1] || DEFAULT_SORT_DIR : DEFAULT_SORT_DIR;
+        return { field, dir };
+      }
 
-        const btnApplyFilters = document.getElementById('btnApplyFilters');
-        const btnLoadActive = document.getElementById('btnLoadActive');
-        const btnLoadPage = document.getElementById('btnLoadPage');
+      function getUserLabel(userId) {
+        if (!userId) return '';
+        const user = usersById[String(userId).toLowerCase()];
+        if (!user) return String(userId);
+        return (
+          (user.fullName || user.name || '') +
+          (user.username ? ' (' + user.username + ')' : '')
+        ).trim() || String(userId);
+      }
 
-        const userRoleDetailModalEl = document.getElementById('userRoleDetailModal');
-        const detailId = document.getElementById('detailId');
-        const detailStatus = document.getElementById('detailStatus');
-        const detailUserId = document.getElementById('detailUserId');
-        const detailRoleId = document.getElementById('detailRoleId');
-        const detailUserLabel = document.getElementById('detailUserLabel');
-        const detailRoleLabel = document.getElementById('detailRoleLabel');
-        const detailCreatedAt = document.getElementById('detailCreatedAt');
-        const detailUpdatedAt = document.getElementById('detailUpdatedAt');
+      function getRoleLabel(roleId) {
+        if (!roleId) return '';
+        const role = rolesById[String(roleId).toLowerCase()];
+        if (!role) return String(roleId);
+        return ((role.name || role.code || '') + (role.code ? ' (' + role.code + ')' : '')).trim() || String(roleId);
+      }
 
-        var userRoleModal = null;
-        if (window.bootstrap && userRoleModalEl) {
-          userRoleModal = new window.bootstrap.Modal(userRoleModalEl);
-        }
-        var userRoleDetailModal = null;
-        if (window.bootstrap && userRoleDetailModalEl) {
-          userRoleDetailModal = new window.bootstrap.Modal(userRoleDetailModalEl);
-        }
+      function sortUserRoles(items) {
+        const { field: sortField, dir: sortDir } = getSelectedSort();
+        return items.slice().sort(function (a, b) {
+          let valA = a[sortField];
+          let valB = b[sortField];
 
-        if (window.TomSelect) {
-          if (userIdSelect) tsUser = new TomSelect(userIdSelect, { create: false });
-          if (roleIdSelect) tsRole = new TomSelect(roleIdSelect, { create: false });
-          if (filterUserSelect) tsFilterUser = new TomSelect(filterUserSelect, { create: false });
-          if (filterRoleSelect) tsFilterRole = new TomSelect(filterRoleSelect, { create: false });
-        }
-
-        function highlightText(text, term) {
-          const value = text == null ? '' : String(text);
-          if (!term) return value;
-          const escaped = term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-          const re = new RegExp(escaped, 'ig');
-          return value.replace(re, function (m) {
-            return '<mark>' + m + '</mark>';
-          });
-        }
-
-        function normalizeText(value) {
-          return (value || '')
-            .toString()
-            .toLowerCase()
-            .normalize('NFD')
-            .replace(/[\u0300-\u036f]/g, '')
-            .replace(/Đ/g, 'd');
-        }
-
-        function getIsActive(userRole) {
-          if (!userRole) return null;
-          if (typeof userRole.isActive === 'boolean') return userRole.isActive;
-          if (typeof userRole.active === 'boolean') return userRole.active;
-          if (typeof userRole.is_active === 'boolean') return userRole.is_active;
-          if (typeof userRole.isActive === 'number') return userRole.isActive === 1;
-          if (typeof userRole.active === 'number') return userRole.active === 1;
-          if (typeof userRole.is_active === 'number') return userRole.is_active === 1;
-          return null;
-        }
-
-        function formatDateTime(value) {
-          if (!value) return '';
-          const d = new Date(value);
-          if (isNaN(d.getTime())) return String(value);
-          return d.toLocaleString('vi-VN');
-        }
-
-        function getSelectedSort() {
-          const field = sortSelect ? sortSelect.value.split(',')[0] || DEFAULT_SORT_FIELD : DEFAULT_SORT_FIELD;
-          const dir = sortSelect ? sortSelect.value.split(',')[1] || DEFAULT_SORT_DIR : DEFAULT_SORT_DIR;
-          return { field, dir };
-        }
-
-        function getUserLabel(userId) {
-          if (!userId) return '';
-          const user = usersById[String(userId).toLowerCase()];
-          if (!user) return String(userId);
-          return (
-            (user.fullName || user.name || '') +
-            (user.username ? ' (' + user.username + ')' : '')
-          ).trim() || String(userId);
-        }
-
-        function getRoleLabel(roleId) {
-          if (!roleId) return '';
-          const role = rolesById[String(roleId).toLowerCase()];
-          if (!role) return String(roleId);
-          return ((role.name || role.code || '') + (role.code ? ' (' + role.code + ')' : '')).trim() || String(roleId);
-        }
-
-        function sortUserRoles(items) {
-          const { field: sortField, dir: sortDir } = getSelectedSort();
-          return items.slice().sort(function (a, b) {
-            let valA = a[sortField];
-            let valB = b[sortField];
-
-            if (sortField && (sortField.toLowerCase().includes('at') || sortField.toLowerCase().includes('date'))) {
-              valA = valA ? new Date(valA).getTime() : 0;
-              valB = valB ? new Date(valB).getTime() : 0;
-            } else {
-              valA = valA != null ? String(valA).toLowerCase() : '';
-              valB = valB != null ? String(valB).toLowerCase() : '';
-            }
-
-            if (valA < valB) return sortDir === 'asc' ? -1 : 1;
-            if (valA > valB) return sortDir === 'asc' ? 1 : -1;
-            return 0;
-          });
-        }
-
-        function setSelectOptions(selectEl, items, placeholder, getValue, getLabel) {
-          if (!selectEl) return;
-          const options = ['<option value="">' + placeholder + '</option>']
-            .concat(
-              items.map(function (item) {
-                const value = String(getValue(item) || '');
-                const label = String(getLabel(item) || value);
-                return '<option value="' + value.replace(/"/g, '&quot;') + '">' + label + '</option>';
-              })
-            )
-            .join('');
-          selectEl.innerHTML = options;
-        }
-
-        function populateLookupMaps() {
-          usersById = {};
-          rolesById = {};
-
-          allUsers.forEach(function (u) {
-            if (u && u.id) usersById[String(u.id).toLowerCase()] = u;
-          });
-          allRoles.forEach(function (r) {
-            if (r && r.id) rolesById[String(r.id).toLowerCase()] = r;
-          });
-
-          const activeUsers = allUsers.filter(function(u) {
-            return getIsActive(u) !== false;
-          });
-
-          setSelectOptions(userIdSelect, activeUsers, 'Chọn user', function (u) {
-            return u.id;
-          }, function (u) {
-            return (u.fullName || u.username || u.email || u.id) + (u.username ? ' (' + u.username + ')' : '');
-          });
-
-          const activeRoles = allRoles.filter(function(r) {
-            return getIsActive(r) !== false;
-          });
-
-          setSelectOptions(roleIdSelect, activeRoles, 'Chọn role', function (r) {
-            return r.id;
-          }, function (r) {
-            return (r.name || r.code || r.id) + (r.code ? ' (' + r.code + ')' : '');
-          });
-
-          // Populate filter dropdowns
-          setSelectOptions(filterUserSelect, allUsers, 'Tất cả users', function (u) {
-            return u.id;
-          }, function (u) {
-            return (u.fullName || u.username || u.email || u.id) + (u.username ? ' (' + u.username + ')' : '');
-          });
-
-          setSelectOptions(filterRoleSelect, allRoles, 'Tất cả roles', function (r) {
-            return r.id;
-          }, function (r) {
-            return (r.name || r.code || r.id) + (r.code ? ' (' + r.code + ')' : '');
-          });
-
-          // Sync Tom Select
-          if (tsUser) tsUser.sync();
-          if (tsRole) tsRole.sync();
-          if (tsFilterUser) tsFilterUser.sync();
-          if (tsFilterRole) tsFilterRole.sync();
-        }
-
-        let allUsers = [];
-        let allRoles = [];
-
-        async function loadLookups() {
-          try {
-            const [usersRes, rolesRes] = await Promise.all([fetch(USERS_API), fetch(ROLES_API)]);
-            const usersData = await usersRes.json();
-            const rolesData = await rolesRes.json();
-            allUsers = Array.isArray(usersData) ? usersData : [];
-            allRoles = Array.isArray(rolesData) ? rolesData : [];
-            populateLookupMaps();
-          } catch (e) {
-            console.error('Lỗi tải danh sách user/role', e);
-          }
-        }
-
-        function renderTable(userRoles) {
-          const term = searchInput.value.trim();
-          userRoleTableBody.innerHTML = userRoles
-            .map(function (r) {
-              const isActive = getIsActive(r);
-              const statusBadge =
-                typeof isActive === 'boolean'
-                  ? isActive
-                    ? '<span class="badge bg-success">Hoạt động</span>'
-                    : '<span class="badge bg-secondary">Đã khóa</span>'
-                  : '<span class="badge bg-secondary">Không xác định</span>';
-              const lockAction =
-                typeof isActive === 'boolean'
-                  ? isActive
-                    ? '<button class="btn btn-sm btn-outline-warning me-1" data-id="' +
-                      r.id +
-                      '" data-action="lock" title="Khóa">' +
-                      '<i class="bi bi-lock"></i>' +
-                      '</button>'
-                    : '<button class="btn btn-sm btn-outline-success me-1" data-id="' +
-                      r.id +
-                      '" data-action="unlock" title="Mở khóa">' +
-                      '<i class="bi bi-unlock"></i>' +
-                      '</button>'
-                  : '';
-              const userLabel = getUserLabel(r.userId);
-              const roleLabel = getRoleLabel(r.roleId);
-              return (
-                '<tr class="user-role-row" data-id="' +
-                r.id +
-                '">' +
-                '<td>' +
-                highlightText(userLabel, term) +
-                '</td>' +
-                '<td>' +
-                highlightText(roleLabel, term) +
-                '</td>' +
-                '<td>' +
-                statusBadge +
-                '</td>' +
-                '<td>' +
-                highlightText(formatDateTime(r.createdAt), term) +
-                '</td>' +
-                '<td class="text-end">' +
-                lockAction +
-                '<button class="btn btn-sm btn-outline-secondary me-1" data-id="' +
-                r.id +
-                '" data-action="edit">' +
-                '<i class="bi bi-pencil"></i>' +
-                '</button>' +
-                '<button class="btn btn-sm btn-outline-danger" data-id="' +
-                r.id +
-                '" data-action="delete">' +
-                '<i class="bi bi-trash"></i>' +
-                '</button>' +
-                '</td>' +
-                '</tr>'
-              );
-            })
-            .join('');
-
-          const from = totalElements === 0 ? 0 : currentPage * PAGE_SIZE + 1;
-          const to = Math.min((currentPage + 1) * PAGE_SIZE, totalElements);
-          paginationInfo.textContent =
-            'Hiển thị ' + from + '-' + to + ' trên tổng ' + totalElements + ' user roles';
-
-          renderPagination();
-        }
-
-        function applyFilterAndRender() {
-          const term = normalizeText(searchInput.value.trim());
-          const filterUserId = filterUserSelect ? filterUserSelect.value : '';
-          const filterRoleId = filterRoleSelect ? filterRoleSelect.value : '';
-          const hasFilter = term || filterUserId || filterRoleId;
-
-          let filtered = allUserRoles.filter(function (r) {
-            const matchTerm = !term || (
-              normalizeText(r.id).includes(term) ||
-              normalizeText(getUserLabel(r.userId)).includes(term) ||
-              normalizeText(getRoleLabel(r.roleId)).includes(term)
-            );
-            const matchUser = !filterUserId || String(r.userId).toLowerCase() === String(filterUserId).toLowerCase();
-            const matchRole = !filterRoleId || String(r.roleId).toLowerCase() === String(filterRoleId).toLowerCase();
-            return matchTerm && matchUser && matchRole;
-          });
-
-          // Sắp xếp client-side nếu đang lọc hoặc ở chế độ 'all'
-          if (!isServerPaging || hasFilter) {
-            filtered = sortUserRoles(filtered);
-          }
-
-          if (isServerPaging && !hasFilter) {
-            totalElements = serverTotalElements;
-            totalPages = serverTotalPages;
-            renderTable(allUserRoles);
-            return;
-          }
-
-          totalElements = filtered.length;
-          totalPages = totalElements === 0 ? 0 : Math.ceil(totalElements / PAGE_SIZE);
-          if (currentPage >= totalPages) {
-            currentPage = Math.max(0, totalPages - 1);
-          }
-
-          const start = currentPage * PAGE_SIZE;
-          const pageItems = filtered.slice(start, start + PAGE_SIZE);
-          renderTable(pageItems);
-        }
-
-        function renderPagination() {
-          if (totalPages === 0) {
-            pagination.innerHTML = '';
-            return;
-          }
-
-          var html = '';
-          html +=
-            '<li class="page-item ' +
-            (currentPage === 0 ? 'disabled' : '') +
-            '"><a class="page-link" href="#" data-page="' +
-            (currentPage - 1) +
-            '">&laquo;</a></li>';
-
-          for (var i = 0; i < totalPages; i++) {
-            html +=
-              '<li class="page-item ' +
-              (i === currentPage ? 'active' : '') +
-              '"><a class="page-link" href="#" data-page="' +
-              i +
-              '">' +
-              (i + 1) +
-              '</a></li>';
-          }
-
-          html +=
-            '<li class="page-item ' +
-            (currentPage === totalPages - 1 ? 'disabled' : '') +
-            '"><a class="page-link" href="#" data-page="' +
-            (currentPage + 1) +
-            '">&raquo;</a></li>';
-
-          pagination.innerHTML = html;
-        }
-
-        pagination.addEventListener('click', function (e) {
-          if (e.target.tagName !== 'A') return;
-          e.preventDefault();
-          const page = Number(e.target.getAttribute('data-page'));
-          if (isNaN(page) || page === currentPage || page < 0 || page >= totalPages) return;
-          currentPage = page;
-          if (isServerPaging) {
-            loadUserRoles();
+          if (sortField && (sortField.toLowerCase().includes('at') || sortField.toLowerCase().includes('date'))) {
+            valA = valA ? new Date(valA).getTime() : 0;
+            valB = valB ? new Date(valB).getTime() : 0;
           } else {
-            applyFilterAndRender();
+            valA = valA != null ? String(valA).toLowerCase() : '';
+            valB = valB != null ? String(valB).toLowerCase() : '';
           }
+
+          if (valA < valB) return sortDir === 'asc' ? -1 : 1;
+          if (valA > valB) return sortDir === 'asc' ? 1 : -1;
+          return 0;
+        });
+      }
+
+      function setSelectOptions(selectEl, items, placeholder, getValue, getLabel) {
+        if (!selectEl) return;
+        const options = ['<option value="">' + placeholder + '</option>']
+          .concat(
+            items.map(function (item) {
+              const value = String(getValue(item) || '');
+              const label = String(getLabel(item) || value);
+              return '<option value="' + value.replace(/"/g, '&quot;') + '">' + label + '</option>';
+            })
+          )
+          .join('');
+        selectEl.innerHTML = options;
+      }
+
+      function populateLookupMaps() {
+        usersById = {};
+        rolesById = {};
+
+        allUsers.forEach(function (u) {
+          if (u && u.id) usersById[String(u.id).toLowerCase()] = u;
+        });
+        allRoles.forEach(function (r) {
+          if (r && r.id) rolesById[String(r.id).toLowerCase()] = r;
         });
 
-        function onFilterChange() {
-          const term = searchInput.value.trim();
-          const userId = filterUserSelect ? filterUserSelect.value : '';
-          const roleId = filterRoleSelect ? filterRoleSelect.value : '';
-          const hasFilter = term || userId || roleId;
+        const activeUsers = allUsers.filter(function (u) {
+          return getIsActive(u) !== false;
+        });
 
-          // Nếu có lọc và đang ở chế độ phân trang server ('page'), 
-          // chuyển sang chế độ tải tất cả ('all') để lọc chính xác trên toàn bộ dữ liệu.
-          if (hasFilter && loadMode === 'page') {
-            setMode('all');
-            loadUserRoles();
-          } else if (!hasFilter && loadMode === 'all') {
-            // Nếu xóa hết lọc và đang ở chế độ 'all', quay lại chế độ phân trang server.
-            setMode('page');
-            loadUserRoles();
-          } else {
-            currentPage = 0;
-            applyFilterAndRender();
-          }
+        setSelectOptions(userIdSelect, activeUsers, 'Chọn user', function (u) {
+          return u.id;
+        }, function (u) {
+          return (u.fullName || u.username || u.email || u.id) + (u.username ? ' (' + u.username + ')' : '');
+        });
+
+        const activeRoles = allRoles.filter(function (r) {
+          return getIsActive(r) !== false;
+        });
+
+        setSelectOptions(roleIdSelect, activeRoles, 'Chọn role', function (r) {
+          return r.id;
+        }, function (r) {
+          return (r.name || r.code || r.id) + (r.code ? ' (' + r.code + ')' : '');
+        });
+
+        // Populate filter dropdowns
+        setSelectOptions(filterUserSelect, allUsers, 'Tất cả users', function (u) {
+          return u.id;
+        }, function (u) {
+          return (u.fullName || u.username || u.email || u.id) + (u.username ? ' (' + u.username + ')' : '');
+        });
+
+        setSelectOptions(filterRoleSelect, allRoles, 'Tất cả roles', function (r) {
+          return r.id;
+        }, function (r) {
+          return (r.name || r.code || r.id) + (r.code ? ' (' + r.code + ')' : '');
+        });
+
+        // Sync Tom Select
+        if (tsUser) tsUser.sync();
+        if (tsRole) tsRole.sync();
+        if (tsFilterUser) tsFilterUser.sync();
+        if (tsFilterRole) tsFilterRole.sync();
+      }
+
+      let allUsers = [];
+      let allRoles = [];
+
+      async function loadLookups() {
+        try {
+          const [usersRes, rolesRes] = await Promise.all([fetch(USERS_API), fetch(ROLES_API)]);
+          const usersData = await usersRes.json();
+          const rolesData = await rolesRes.json();
+          allUsers = Array.isArray(usersData) ? usersData : [];
+          allRoles = Array.isArray(rolesData) ? rolesData : [];
+          populateLookupMaps();
+        } catch (e) {
+          console.error('Lỗi tải danh sách user/role', e);
         }
+      }
 
-        searchInput.addEventListener('input', onFilterChange);
-        if (filterUserSelect) filterUserSelect.addEventListener('change', onFilterChange);
-        if (filterRoleSelect) filterRoleSelect.addEventListener('change', onFilterChange);
-
-        function setMode(mode) {
-          loadMode = mode;
-          isServerPaging = mode === 'page';
-          currentPage = 0;
-        }
-
-        function buildSearchParams() {
-          const userId = searchInput ? searchInput.value.trim() : '';
-          const params = new URLSearchParams();
-          if (userId) params.set('userId', userId);
-          return params;
-        }
-
-        async function loadUserRoles() {
-          if (loadMode === 'search') return loadUserRolesSearch();
-          if (loadMode === 'active') return loadUserRolesActive();
-          if (loadMode === 'all') return loadUserRolesAll();
-          return loadUserRolesPage();
-        }
-
-        async function loadUserRolesPage() {
-          try {
-            const selectedSort = getSelectedSort();
-            currentSortField = selectedSort.field;
-            currentSortDir = selectedSort.dir;
-
-            const params = new URLSearchParams({
-              page: String(currentPage),
-              size: String(PAGE_SIZE),
-              sort: currentSortField + ',' + currentSortDir,
-            });
-            const res = await fetch(API_BASE + '?' + params.toString());
-            const data = await res.json();
-            allUserRoles = Array.isArray(data.content) ? data.content : [];
-            serverTotalElements = typeof data.totalElements === 'number' ? data.totalElements : 0;
-            serverTotalPages = typeof data.totalPages === 'number' ? data.totalPages : 0;
-            applyFilterAndRender();
-          } catch (e) {
-            console.error('Lỗi tải danh sách user roles theo trang', e);
-          }
-        }
-
-        async function loadUserRolesAll() {
-          try {
-            const selectedSort = getSelectedSort();
-            const params = new URLSearchParams({
-              page: '0',
-              size: '1000',
-              sort: selectedSort.field + ',' + selectedSort.dir,
-            });
-            const res = await fetch(API_BASE + '?' + params.toString());
-            const data = await res.json();
-            allUserRoles = Array.isArray(data.content) ? data.content : [];
-            serverTotalElements = typeof data.totalElements === 'number' ? data.totalElements : 0;
-            serverTotalPages = typeof data.totalPages === 'number' ? data.totalPages : 0;
-            if (!isServerPaging) {
-              allUserRoles = sortUserRoles(allUserRoles);
-            }
-            applyFilterAndRender();
-          } catch (e) {
-            console.error('Lỗi tải danh sách user roles', e);
-          }
-        }
-
-        async function loadUserRolesSearch() {
-          try {
-            const params = buildSearchParams();
-            if ([...params.keys()].length === 0) return loadUserRolesAll();
-            const userId = params.get('userId');
-            const searchParams = new URLSearchParams({
-              userId: userId,
-              page: String(currentPage),
-              size: String(PAGE_SIZE),
-            });
-            const res = await fetch(API_BASE + '/search?' + searchParams.toString());
-            const data = await res.json();
-            allUserRoles = Array.isArray(data.content) ? data.content : [];
-            serverTotalElements = typeof data.totalElements === 'number' ? data.totalElements : 0;
-            serverTotalPages = typeof data.totalPages === 'number' ? data.totalPages : 0;
-            if (!isServerPaging) {
-              allUserRoles = sortUserRoles(allUserRoles);
-            }
-            applyFilterAndRender();
-          } catch (e) {
-            console.error('Lỗi tìm kiếm user roles', e);
-          }
-        }
-
-        async function loadUserRolesActive(isActive) {
-          try {
-            const activeValue =
+      function renderTable(userRoles) {
+        const term = searchInput.value.trim();
+        userRoleTableBody.innerHTML = userRoles
+          .map(function (r) {
+            const isActive = getIsActive(r);
+            const statusBadge =
               typeof isActive === 'boolean'
                 ? isActive
-                  ? 'true'
-                  : 'false'
-                : 'true';
-            const params = new URLSearchParams({ isActive: activeValue });
-            const res = await fetch(API_BASE + '/active?' + params.toString());
-            const data = await res.json();
-            allUserRoles = Array.isArray(data) ? data : [];
-            serverTotalElements = allUserRoles.length;
-            serverTotalPages = Math.ceil(allUserRoles.length / PAGE_SIZE);
-            if (!isServerPaging) {
-              allUserRoles = sortUserRoles(allUserRoles);
-            }
-            applyFilterAndRender();
-          } catch (e) {
-            console.error('Lỗi lọc user roles theo trạng thái', e);
-          }
-        }
+                  ? '<span class="badge bg-success">Hoạt động</span>'
+                  : '<span class="badge bg-secondary">Đã khóa</span>'
+                : '<span class="badge bg-secondary">Không xác định</span>';
+            const lockAction =
+              typeof isActive === 'boolean'
+                ? isActive
+                  ? '<button class="btn btn-sm btn-outline-warning me-1" data-id="' +
+                  r.id +
+                  '" data-action="lock" title="Khóa">' +
+                  '<i class="bi bi-lock"></i>' +
+                  '</button>'
+                  : '<button class="btn btn-sm btn-outline-success me-1" data-id="' +
+                  r.id +
+                  '" data-action="unlock" title="Mở khóa">' +
+                  '<i class="bi bi-unlock"></i>' +
+                  '</button>'
+                : '';
+            const userLabel = getUserLabel(r.userId);
+            const roleLabel = getRoleLabel(r.roleId);
+            return (
+              '<tr class="user-role-row" data-id="' +
+              r.id +
+              '">' +
+              '<td>' +
+              highlightText(userLabel, term) +
+              '</td>' +
+              '<td>' +
+              highlightText(roleLabel, term) +
+              '</td>' +
+              '<td>' +
+              statusBadge +
+              '</td>' +
+              '<td>' +
+              highlightText(formatDateTime(r.createdAt), term) +
+              '</td>' +
+              '<td class="text-end">' +
+              lockAction +
+              '<button class="btn btn-sm btn-outline-secondary me-1" data-id="' +
+              r.id +
+              '" data-action="edit">' +
+              '<i class="bi bi-pencil"></i>' +
+              '</button>' +
+              '<button class="btn btn-sm btn-outline-danger" data-id="' +
+              r.id +
+              '" data-action="delete">' +
+              '<i class="bi bi-trash"></i>' +
+              '</button>' +
+              '</td>' +
+              '</tr>'
+            );
+          })
+          .join('');
 
-        let currentEditingUserRole = null;
+        const from = totalElements === 0 ? 0 : currentPage * PAGE_SIZE + 1;
+        const to = Math.min((currentPage + 1) * PAGE_SIZE, totalElements);
+        paginationInfo.textContent =
+          'Hiển thị ' + from + '-' + to + ' trên tổng ' + totalElements + ' user roles';
 
-        function openAddModal() {
-          if (!userRoleModal) return;
-          currentEditingUserRole = null;
-          userRoleIdInput.value = '';
-          userIdSelect.value = '';
-          roleIdSelect.value = '';
-          if (tsUser) tsUser.sync();
-          if (tsRole) tsRole.sync();
-          userRoleModalTitle.textContent = 'Thêm user role';
-          btnSaveUserRole.dataset.mode = 'create';
-          userRoleModal.show();
-        }
+        renderPagination();
+      }
 
-        function openEditModal(userRole) {
-          if (!userRoleModal) return;
-          currentEditingUserRole = userRole || {};
-          userRoleIdInput.value = userRole.id || '';
-          userIdSelect.value = userRole.userId || '';
-          roleIdSelect.value = userRole.roleId || '';
-          if (tsUser) tsUser.sync();
-          if (tsRole) tsRole.sync();
-          userRoleModalTitle.textContent = 'Cập nhật user role';
-          btnSaveUserRole.dataset.mode = 'update';
-          userRoleModal.show();
-        }
+      function applyFilterAndRender() {
+        const term = normalizeText(searchInput.value.trim());
+        const filterUserId = filterUserSelect ? filterUserSelect.value : '';
+        const filterRoleId = filterRoleSelect ? filterRoleSelect.value : '';
+        const hasFilter = term || filterUserId || filterRoleId;
 
-        btnAdd.addEventListener('click', openAddModal);
-
-        if (btnApplyFilters) {
-          btnApplyFilters.addEventListener('click', function () {
-            const hasSearch = searchInput.value.trim().length > 0;
-            if (hasSearch) {
-              setMode('search');
-            } else {
-              setMode('page');
-            }
-            loadUserRoles();
-          });
-        }
-
-        if (btnLoadActive) {
-          btnLoadActive.addEventListener('click', function () {
-            activeFilterMode = (activeFilterMode + 1) % 3;
-            if (activeFilterMode === 1) {
-              btnLoadActive.innerHTML =
-                '<i class="bi bi-check-circle me-1"></i> Đang hoạt động';
-              setMode('active');
-              loadUserRolesActive(true);
-            } else if (activeFilterMode === 2) {
-              btnLoadActive.innerHTML = '<i class="bi bi-slash-circle me-1"></i> Đã khóa';
-              setMode('active');
-              loadUserRolesActive(false);
-            } else {
-              btnLoadActive.innerHTML = '<i class="bi bi-filter-circle me-1"></i> Tất cả';
-              setMode('all');
-              loadUserRolesAll();
-            }
-          });
-          btnLoadActive.innerHTML = '<i class="bi bi-filter-circle me-1"></i> Tất cả';
-        }
-
-        if (btnLoadPage) {
-          btnLoadPage.addEventListener('click', function () {
-            setMode('page');
-            loadUserRoles();
-          });
-        }
-
-        if (sortSelect) {
-          sortSelect.addEventListener('change', function () {
-            if (loadMode === 'page') {
-              currentPage = 0;
-              loadUserRoles();
-            }
-          });
-        }
-
-        userRoleTableBody.addEventListener('click', function (e) {
-          const btn = e.target.closest('button[data-action]');
-          if (btn) {
-            const id = btn.getAttribute('data-id');
-            const action = btn.getAttribute('data-action');
-            if (action === 'edit') {
-              fetch(API_BASE + '/' + id)
-                .then(function (res) {
-                  return res.json();
-                })
-                .then(function (userRole) {
-                  openEditModal(userRole || {});
-                })
-                .catch(function () {
-                  alert('Không tải được thông tin user role.');
-                });
-            } else if (action === 'lock') {
-              lockUserRole(id);
-            } else if (action === 'unlock') {
-              unlockUserRole(id);
-            } else if (action === 'delete') {
-              if (confirm('Bạn có chắc chắn muốn xóa user role này?')) {
-                deleteUserRole(id);
-              }
-            }
-            return;
-          }
-
-          const row = e.target.closest('tr.user-role-row');
-          if (!row) return;
-          const id = row.getAttribute('data-id');
-          if (!id) return;
-          fetch(API_BASE + '/' + id)
-            .then(function (res) {
-              return res.json();
-            })
-            .then(function (userRole) {
-              const isActive = getIsActive(userRole);
-              detailId.value = userRole.id || '';
-              detailStatus.value =
-                typeof isActive === 'boolean'
-                  ? isActive
-                    ? 'Hoạt động'
-                    : 'Đã khóa'
-                  : 'Không xác định';
-              detailUserId.value = userRole.userId || '';
-              detailRoleId.value = userRole.roleId || '';
-              detailUserLabel.value = getUserLabel(userRole.userId);
-              detailRoleLabel.value = getRoleLabel(userRole.roleId);
-              detailCreatedAt.value = formatDateTime(userRole.createdAt);
-              detailUpdatedAt.value = formatDateTime(userRole.updatedAt);
-              if (userRoleDetailModal) userRoleDetailModal.show();
-            })
-            .catch(function () {
-              alert('Không tải được thông tin user role.');
-            });
+        let filtered = allUserRoles.filter(function (r) {
+          const matchTerm = !term || (
+            normalizeText(r.id).includes(term) ||
+            normalizeText(getUserLabel(r.userId)).includes(term) ||
+            normalizeText(getRoleLabel(r.roleId)).includes(term)
+          );
+          const matchUser = !filterUserId || String(r.userId).toLowerCase() === String(filterUserId).toLowerCase();
+          const matchRole = !filterRoleId || String(r.roleId).toLowerCase() === String(filterRoleId).toLowerCase();
+          return matchTerm && matchUser && matchRole;
         });
 
-        async function saveUserRole() {
-          const mode = btnSaveUserRole.dataset.mode;
-          const userId = userIdSelect.value.trim();
-          const roleId = roleIdSelect.value.trim();
-
-          if (!userId || !roleId) {
-            alert('Vui lòng chọn user và role.');
-            return;
-          }
-
-          const isUpdate = mode === 'update';
-          const id = userRoleIdInput.value;
-
-          const payload = {
-            userId: userId,
-            roleId: roleId,
-            isActive: isUpdate
-              ? currentEditingUserRole && typeof currentEditingUserRole.isActive === 'boolean'
-                ? currentEditingUserRole.isActive
-                : true
-              : true,
-          };
-
-          const url = isUpdate ? API_BASE + '/' + id : API_BASE;
-          const method = isUpdate ? 'PUT' : 'POST';
-
-          try {
-            const res = await fetch(url, {
-              method: method,
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify(payload),
-            });
-            if (!res.ok) throw new Error(await res.text());
-            if (userRoleModal) userRoleModal.hide();
-            await loadUserRoles();
-          } catch (e) {
-            console.error('Lỗi lưu user role', e);
-            alert('Có lỗi xảy ra khi lưu user role.');
-          }
+        // Sắp xếp client-side nếu đang lọc hoặc ở chế độ 'all'
+        if (!isServerPaging || hasFilter) {
+          filtered = sortUserRoles(filtered);
         }
 
-        btnSaveUserRole.addEventListener('click', saveUserRole);
-
-        async function deleteUserRole(id) {
-          try {
-            const res = await fetch(API_BASE + '/' + id, { method: 'DELETE' });
-            if (!res.ok && res.status !== 204) throw new Error(await res.text());
-            await loadUserRoles();
-          } catch (e) {
-            console.error('Lỗi xóa user role', e);
-            alert('Có lỗi xảy ra khi xóa user role.');
-          }
+        if (isServerPaging && !hasFilter) {
+          totalElements = serverTotalElements;
+          totalPages = serverTotalPages;
+          renderTable(allUserRoles);
+          return;
         }
 
-        async function lockUserRole(id) {
-          try {
-            const res = await fetch(API_BASE + '/' + id + '/lock', { method: 'PUT' });
-            if (!res.ok) throw new Error(await res.text());
-            await loadUserRoles();
-          } catch (e) {
-            console.error('Lỗi khóa user role', e);
-            alert('Có lỗi xảy ra khi khóa user role.');
-          }
+        totalElements = filtered.length;
+        totalPages = totalElements === 0 ? 0 : Math.ceil(totalElements / PAGE_SIZE);
+        if (currentPage >= totalPages) {
+          currentPage = Math.max(0, totalPages - 1);
         }
 
-        async function unlockUserRole(id) {
-          try {
-            const res = await fetch(API_BASE + '/' + id + '/unlock', { method: 'PUT' });
-            if (!res.ok) throw new Error(await res.text());
-            await loadUserRoles();
-          } catch (e) {
-            console.error('Lỗi mở khóa user role', e);
-            alert('Có lỗi xảy ra khi mở khóa user role.');
-          }
+        const start = currentPage * PAGE_SIZE;
+        const pageItems = filtered.slice(start, start + PAGE_SIZE);
+        renderTable(pageItems);
+      }
+
+      function renderPagination() {
+        if (totalPages === 0) {
+          pagination.innerHTML = '';
+          return;
         }
 
-        const SELECTOR_SIDEBAR_WRAPPER = '.sidebar-wrapper';
-        const Default = {
-          scrollbarTheme: 'os-theme-light',
-          scrollbarAutoHide: 'leave',
-          scrollbarClickScroll: true,
-        };
-        const sidebarWrapper = document.querySelector(SELECTOR_SIDEBAR_WRAPPER);
-        if (sidebarWrapper && window.OverlayScrollbarsGlobal && window.OverlayScrollbarsGlobal.OverlayScrollbars) {
-          window.OverlayScrollbarsGlobal.OverlayScrollbars(sidebarWrapper, {
-            scrollbars: {
-              theme: Default.scrollbarTheme,
-              autoHide: Default.scrollbarAutoHide,
-              clickScroll: Default.scrollbarClickScroll,
-            },
+        var html = '';
+        html +=
+          '<li class="page-item ' +
+          (currentPage === 0 ? 'disabled' : '') +
+          '"><a class="page-link" href="#" data-page="' +
+          (currentPage - 1) +
+          '">&laquo;</a></li>';
+
+        for (var i = 0; i < totalPages; i++) {
+          html +=
+            '<li class="page-item ' +
+            (i === currentPage ? 'active' : '') +
+            '"><a class="page-link" href="#" data-page="' +
+            i +
+            '">' +
+            (i + 1) +
+            '</a></li>';
+        }
+
+        html +=
+          '<li class="page-item ' +
+          (currentPage === totalPages - 1 ? 'disabled' : '') +
+          '"><a class="page-link" href="#" data-page="' +
+          (currentPage + 1) +
+          '">&raquo;</a></li>';
+
+        pagination.innerHTML = html;
+      }
+
+      pagination.addEventListener('click', function (e) {
+        if (e.target.tagName !== 'A') return;
+        e.preventDefault();
+        const page = Number(e.target.getAttribute('data-page'));
+        if (isNaN(page) || page === currentPage || page < 0 || page >= totalPages) return;
+        currentPage = page;
+        if (isServerPaging) {
+          loadUserRoles();
+        } else {
+          applyFilterAndRender();
+        }
+      });
+
+      function onFilterChange() {
+        const term = searchInput.value.trim();
+        const userId = filterUserSelect ? filterUserSelect.value : '';
+        const roleId = filterRoleSelect ? filterRoleSelect.value : '';
+        const hasFilter = term || userId || roleId;
+
+        // Nếu có lọc và đang ở chế độ phân trang server ('page'), 
+        // chuyển sang chế độ tải tất cả ('all') để lọc chính xác trên toàn bộ dữ liệu.
+        if (hasFilter && loadMode === 'page') {
+          setMode('all');
+          loadUserRoles();
+        } else if (!hasFilter && loadMode === 'all') {
+          // Nếu xóa hết lọc và đang ở chế độ 'all', quay lại chế độ phân trang server.
+          setMode('page');
+          loadUserRoles();
+        } else {
+          currentPage = 0;
+          applyFilterAndRender();
+        }
+      }
+
+      searchInput.addEventListener('input', onFilterChange);
+      if (filterUserSelect) filterUserSelect.addEventListener('change', onFilterChange);
+      if (filterRoleSelect) filterRoleSelect.addEventListener('change', onFilterChange);
+
+      function setMode(mode) {
+        loadMode = mode;
+        isServerPaging = mode === 'page';
+        currentPage = 0;
+      }
+
+      function buildSearchParams() {
+        const userId = searchInput ? searchInput.value.trim() : '';
+        const params = new URLSearchParams();
+        if (userId) params.set('userId', userId);
+        return params;
+      }
+
+      async function loadUserRoles() {
+        if (loadMode === 'search') return loadUserRolesSearch();
+        if (loadMode === 'active') return loadUserRolesActive();
+        if (loadMode === 'all') return loadUserRolesAll();
+        return loadUserRolesPage();
+      }
+
+      async function loadUserRolesPage() {
+        try {
+          const selectedSort = getSelectedSort();
+          currentSortField = selectedSort.field;
+          currentSortDir = selectedSort.dir;
+
+          const params = new URLSearchParams({
+            page: String(currentPage),
+            size: String(PAGE_SIZE),
+            sort: currentSortField + ',' + currentSortDir,
           });
+          const res = await fetch(API_BASE + '?' + params.toString());
+          const data = await res.json();
+          allUserRoles = Array.isArray(data.content) ? data.content : [];
+          serverTotalElements = typeof data.totalElements === 'number' ? data.totalElements : 0;
+          serverTotalPages = typeof data.totalPages === 'number' ? data.totalPages : 0;
+          applyFilterAndRender();
+        } catch (e) {
+          console.error('Lỗi tải danh sách user roles theo trang', e);
         }
+      }
 
-        if (sortSelect) sortSelect.value = `${DEFAULT_SORT_FIELD},${DEFAULT_SORT_DIR}`;
+      async function loadUserRolesAll() {
+        try {
+          const selectedSort = getSelectedSort();
+          const params = new URLSearchParams({
+            page: '0',
+            size: '1000',
+            sort: selectedSort.field + ',' + selectedSort.dir,
+          });
+          const res = await fetch(API_BASE + '?' + params.toString());
+          const data = await res.json();
+          allUserRoles = Array.isArray(data.content) ? data.content : [];
+          serverTotalElements = typeof data.totalElements === 'number' ? data.totalElements : 0;
+          serverTotalPages = typeof data.totalPages === 'number' ? data.totalPages : 0;
+          if (!isServerPaging) {
+            allUserRoles = sortUserRoles(allUserRoles);
+          }
+          applyFilterAndRender();
+        } catch (e) {
+          console.error('Lỗi tải danh sách user roles', e);
+        }
+      }
 
-        loadLookups().then(function () {
+      async function loadUserRolesSearch() {
+        try {
+          const params = buildSearchParams();
+          if ([...params.keys()].length === 0) return loadUserRolesAll();
+          const userId = params.get('userId');
+          const searchParams = new URLSearchParams({
+            userId: userId,
+            page: String(currentPage),
+            size: String(PAGE_SIZE),
+          });
+          const res = await fetch(API_BASE + '/search?' + searchParams.toString());
+          const data = await res.json();
+          allUserRoles = Array.isArray(data.content) ? data.content : [];
+          serverTotalElements = typeof data.totalElements === 'number' ? data.totalElements : 0;
+          serverTotalPages = typeof data.totalPages === 'number' ? data.totalPages : 0;
+          if (!isServerPaging) {
+            allUserRoles = sortUserRoles(allUserRoles);
+          }
+          applyFilterAndRender();
+        } catch (e) {
+          console.error('Lỗi tìm kiếm user roles', e);
+        }
+      }
+
+      async function loadUserRolesActive(isActive) {
+        try {
+          const activeValue =
+            typeof isActive === 'boolean'
+              ? isActive
+                ? 'true'
+                : 'false'
+              : 'true';
+          const params = new URLSearchParams({ isActive: activeValue });
+          const res = await fetch(API_BASE + '/active?' + params.toString());
+          const data = await res.json();
+          allUserRoles = Array.isArray(data) ? data : [];
+          serverTotalElements = allUserRoles.length;
+          serverTotalPages = Math.ceil(allUserRoles.length / PAGE_SIZE);
+          if (!isServerPaging) {
+            allUserRoles = sortUserRoles(allUserRoles);
+          }
+          applyFilterAndRender();
+        } catch (e) {
+          console.error('Lỗi lọc user roles theo trạng thái', e);
+        }
+      }
+
+      let currentEditingUserRole = null;
+
+      function openAddModal() {
+        if (!userRoleModal) return;
+        currentEditingUserRole = null;
+        userRoleIdInput.value = '';
+        userIdSelect.value = '';
+        roleIdSelect.value = '';
+        if (tsUser) tsUser.sync();
+        if (tsRole) tsRole.sync();
+        userRoleModalTitle.textContent = 'Thêm user role';
+        btnSaveUserRole.dataset.mode = 'create';
+        userRoleModal.show();
+      }
+
+      function openEditModal(userRole) {
+        if (!userRoleModal) return;
+        currentEditingUserRole = userRole || {};
+        userRoleIdInput.value = userRole.id || '';
+        userIdSelect.value = userRole.userId || '';
+        roleIdSelect.value = userRole.roleId || '';
+        if (tsUser) tsUser.sync();
+        if (tsRole) tsRole.sync();
+        userRoleModalTitle.textContent = 'Cập nhật user role';
+        btnSaveUserRole.dataset.mode = 'update';
+        userRoleModal.show();
+      }
+
+      btnAdd.addEventListener('click', openAddModal);
+
+      if (btnApplyFilters) {
+        btnApplyFilters.addEventListener('click', function () {
+          const hasSearch = searchInput.value.trim().length > 0;
+          if (hasSearch) {
+            setMode('search');
+          } else {
+            setMode('page');
+          }
+          loadUserRoles();
+        });
+      }
+
+      if (btnLoadActive) {
+        btnLoadActive.addEventListener('click', function () {
+          activeFilterMode = (activeFilterMode + 1) % 3;
+          if (activeFilterMode === 1) {
+            btnLoadActive.innerHTML =
+              '<i class="bi bi-check-circle me-1"></i> Đang hoạt động';
+            setMode('active');
+            loadUserRolesActive(true);
+          } else if (activeFilterMode === 2) {
+            btnLoadActive.innerHTML = '<i class="bi bi-slash-circle me-1"></i> Đã khóa';
+            setMode('active');
+            loadUserRolesActive(false);
+          } else {
+            btnLoadActive.innerHTML = '<i class="bi bi-filter-circle me-1"></i> Tất cả';
+            setMode('all');
+            loadUserRolesAll();
+          }
+        });
+        btnLoadActive.innerHTML = '<i class="bi bi-filter-circle me-1"></i> Tất cả';
+      }
+
+      if (btnLoadPage) {
+        btnLoadPage.addEventListener('click', function () {
           setMode('page');
           loadUserRoles();
         });
+      }
+
+      if (sortSelect) {
+        sortSelect.addEventListener('change', function () {
+          if (loadMode === 'page') {
+            currentPage = 0;
+            loadUserRoles();
+          }
+        });
+      }
+
+      userRoleTableBody.addEventListener('click', function (e) {
+        const btn = e.target.closest('button[data-action]');
+        if (btn) {
+          const id = btn.getAttribute('data-id');
+          const action = btn.getAttribute('data-action');
+          if (action === 'edit') {
+            fetch(API_BASE + '/' + id)
+              .then(function (res) {
+                return res.json();
+              })
+              .then(function (userRole) {
+                openEditModal(userRole || {});
+              })
+              .catch(function () {
+                alert('Không tải được thông tin user role.');
+              });
+          } else if (action === 'lock') {
+            lockUserRole(id);
+          } else if (action === 'unlock') {
+            unlockUserRole(id);
+          } else if (action === 'delete') {
+            if (confirm('Bạn có chắc chắn muốn xóa user role này?')) {
+              deleteUserRole(id);
+            }
+          }
+          return;
+        }
+
+        const row = e.target.closest('tr.user-role-row');
+        if (!row) return;
+        const id = row.getAttribute('data-id');
+        if (!id) return;
+        fetch(API_BASE + '/' + id)
+          .then(function (res) {
+            return res.json();
+          })
+          .then(function (userRole) {
+            const isActive = getIsActive(userRole);
+            detailId.value = userRole.id || '';
+            detailStatus.value =
+              typeof isActive === 'boolean'
+                ? isActive
+                  ? 'Hoạt động'
+                  : 'Đã khóa'
+                : 'Không xác định';
+            detailUserId.value = userRole.userId || '';
+            detailRoleId.value = userRole.roleId || '';
+            detailUserLabel.value = getUserLabel(userRole.userId);
+            detailRoleLabel.value = getRoleLabel(userRole.roleId);
+            detailCreatedAt.value = formatDateTime(userRole.createdAt);
+            detailUpdatedAt.value = formatDateTime(userRole.updatedAt);
+            if (userRoleDetailModal) userRoleDetailModal.show();
+          })
+          .catch(function () {
+            alert('Không tải được thông tin user role.');
+          });
       });
-    </script>
-  </body>
+
+      async function saveUserRole() {
+        const mode = btnSaveUserRole.dataset.mode;
+        const userId = userIdSelect.value.trim();
+        const roleId = roleIdSelect.value.trim();
+
+        if (!userId || !roleId) {
+          alert('Vui lòng chọn user và role.');
+          return;
+        }
+
+        const isUpdate = mode === 'update';
+        const id = userRoleIdInput.value;
+
+        const payload = {
+          userId: userId,
+          roleId: roleId,
+          isActive: isUpdate
+            ? currentEditingUserRole && typeof currentEditingUserRole.isActive === 'boolean'
+              ? currentEditingUserRole.isActive
+              : true
+            : true,
+        };
+
+        const url = isUpdate ? API_BASE + '/' + id : API_BASE;
+        const method = isUpdate ? 'PUT' : 'POST';
+
+        try {
+          const res = await fetch(url, {
+            method: method,
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload),
+          });
+          if (!res.ok) throw new Error(await res.text());
+          if (userRoleModal) userRoleModal.hide();
+          await loadUserRoles();
+        } catch (e) {
+          console.error('Lỗi lưu user role', e);
+          alert('Có lỗi xảy ra khi lưu user role.');
+        }
+      }
+
+      btnSaveUserRole.addEventListener('click', saveUserRole);
+
+      async function deleteUserRole(id) {
+        try {
+          const res = await fetch(API_BASE + '/' + id, { method: 'DELETE' });
+          if (!res.ok && res.status !== 204) throw new Error(await res.text());
+          await loadUserRoles();
+        } catch (e) {
+          console.error('Lỗi xóa user role', e);
+          alert('Có lỗi xảy ra khi xóa user role.');
+        }
+      }
+
+      async function lockUserRole(id) {
+        try {
+          const res = await fetch(API_BASE + '/' + id + '/lock', { method: 'PUT' });
+          if (!res.ok) throw new Error(await res.text());
+          await loadUserRoles();
+        } catch (e) {
+          console.error('Lỗi khóa user role', e);
+          alert('Có lỗi xảy ra khi khóa user role.');
+        }
+      }
+
+      async function unlockUserRole(id) {
+        try {
+          const res = await fetch(API_BASE + '/' + id + '/unlock', { method: 'PUT' });
+          if (!res.ok) throw new Error(await res.text());
+          await loadUserRoles();
+        } catch (e) {
+          console.error('Lỗi mở khóa user role', e);
+          alert('Có lỗi xảy ra khi mở khóa user role.');
+        }
+      }
+
+      const SELECTOR_SIDEBAR_WRAPPER = '.sidebar-wrapper';
+      const Default = {
+        scrollbarTheme: 'os-theme-light',
+        scrollbarAutoHide: 'leave',
+        scrollbarClickScroll: true,
+      };
+      const sidebarWrapper = document.querySelector(SELECTOR_SIDEBAR_WRAPPER);
+      if (sidebarWrapper && window.OverlayScrollbarsGlobal && window.OverlayScrollbarsGlobal.OverlayScrollbars) {
+        window.OverlayScrollbarsGlobal.OverlayScrollbars(sidebarWrapper, {
+          scrollbars: {
+            theme: Default.scrollbarTheme,
+            autoHide: Default.scrollbarAutoHide,
+            clickScroll: Default.scrollbarClickScroll,
+          },
+        });
+      }
+
+      if (sortSelect) sortSelect.value = `${DEFAULT_SORT_FIELD},${DEFAULT_SORT_DIR}`;
+
+      loadLookups().then(function () {
+        setMode('page');
+        loadUserRoles();
+      });
+    });
+  </script>
+</body>
+
 </html>
