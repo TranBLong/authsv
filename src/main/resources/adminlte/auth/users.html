@@ -14,8 +14,19 @@
     crossorigin="anonymous" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
     crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.2/cropper.min.css"
+    crossorigin="anonymous" />
   <link rel="stylesheet" href="../css/adminlte.css" />
   <style>
+    #avatarPreview {
+      cursor: pointer;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+    #avatarPreview:hover {
+      transform: scale(1.05);
+      border-color: #0d6efd !important;
+    }
+
     .sidebar-menu .nav-link {
       transition: none !important;
     }
@@ -168,8 +179,8 @@
                     Sắp xếp
                   </label>
                   <select id="sortSelect" class="form-select">
-                    <option value="full_name,asc">Tên A-Z</option>
-                    <option value="full_name,desc">Tên Z-A</option>
+                    <option value="username,asc">Username A-Z</option>
+                    <option value="username,desc">Username Z-A</option>
                   </select>
                 </div>
               </div>
@@ -248,10 +259,10 @@
             <div class="form-text">Nếu chọn ảnh, hệ thống sẽ lưu ảnh dưới dạng preview và gửi đến máy chủ.</div>
           </div>
           <div class="mb-3">
-            <label class="form-label">Xem trước avatar</label>
+            <label class="form-label d-block">Xem trước avatar <span class="text-muted small">(Nhấn vào ảnh để xoay, lật, phóng to/thu nhỏ)</span></label>
             <div>
-              <img id="avatarPreview" class="rounded-circle shadow-sm" src="" alt="Preview"
-                style="width:80px;height:80px;object-fit:cover;display:none;" />
+              <img id="avatarPreview" class="rounded-circle shadow-sm border border-primary" src="" alt="Preview"
+                style="width:80px;height:80px;object-fit:cover;display:none;padding:2px;border-style:dashed!important;" title="Nhấn để xoay, lật, phóng to/thu nhỏ..." />
             </div>
           </div>
         </div>
@@ -331,11 +342,56 @@
     </div>
   </div>
 
+  <!-- Modal Chỉnh sửa ảnh -->
+  <div class="modal fade" id="imageEditorModal" tabindex="-1" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Chỉnh sửa ảnh đại diện</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="img-container mb-3" style="max-height: 350px; overflow: hidden; display: flex; justify-content: center; align-items: center; background-color: #f8f9fa; border: 1px solid #dee2e6; border-radius: 4px;">
+            <img id="editorImage" src="" style="max-width: 100%; max-height: 300px; display: block;" />
+          </div>
+          <div class="d-flex flex-wrap justify-content-center gap-2">
+            <button type="button" class="btn btn-outline-secondary btn-sm" id="btnZoomIn" title="Phóng to">
+              <i class="bi bi-zoom-in"></i> Phóng to
+            </button>
+            <button type="button" class="btn btn-outline-secondary btn-sm" id="btnZoomOut" title="Thu nhỏ">
+              <i class="bi bi-zoom-out"></i> Thu nhỏ
+            </button>
+            <button type="button" class="btn btn-outline-secondary btn-sm" id="btnRotateLeft" title="Xoay trái">
+              <i class="bi bi-arrow-counterclockwise"></i> Xoay trái
+            </button>
+            <button type="button" class="btn btn-outline-secondary btn-sm" id="btnRotateRight" title="Xoay phải">
+              <i class="bi bi-arrow-clockwise"></i> Xoay phải
+            </button>
+            <button type="button" class="btn btn-outline-secondary btn-sm" id="btnFlipHorizontal" title="Lật ngang">
+              <i class="bi bi-arrows-expand" style="transform: rotate(90deg); display: inline-block;"></i> Lật ngang
+            </button>
+            <button type="button" class="btn btn-outline-secondary btn-sm" id="btnFlipVertical" title="Lật dọc">
+              <i class="bi bi-arrows-expand"></i> Lật dọc
+            </button>
+            <button type="button" class="btn btn-outline-warning btn-sm" id="btnResetEditor" title="Khôi phục">
+              <i class="bi bi-arrow-repeat"></i> Khôi phục
+            </button>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+          <button type="button" class="btn btn-primary" id="btnSaveCroppedImage">Xác nhận</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script src="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.11.0/browser/overlayscrollbars.browser.es6.min.js"
     crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
     crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.2/cropper.min.js" crossorigin="anonymous"></script>
   <script src="../js/adminlte.js"></script>
 
   <script>
@@ -376,7 +432,7 @@
       const USER_ROLES_API = '/api/user-roles';
       const ROLES_API = '/api/roles';
       const PAGE_SIZE = 8;
-      const DEFAULT_SORT = 'full_name,asc';
+      const DEFAULT_SORT = 'username,asc';
 
       let currentPage = 0;
       let totalPages = 0;
@@ -434,6 +490,25 @@
       if (window.bootstrap && userDetailModalEl) {
         userDetailModal = new window.bootstrap.Modal(userDetailModalEl);
       }
+
+      const imageEditorModalEl = document.getElementById('imageEditorModal');
+      const editorImage = document.getElementById('editorImage');
+      const btnZoomIn = document.getElementById('btnZoomIn');
+      const btnZoomOut = document.getElementById('btnZoomOut');
+      const btnRotateLeft = document.getElementById('btnRotateLeft');
+      const btnRotateRight = document.getElementById('btnRotateRight');
+      const btnFlipHorizontal = document.getElementById('btnFlipHorizontal');
+      const btnFlipVertical = document.getElementById('btnFlipVertical');
+      const btnResetEditor = document.getElementById('btnResetEditor');
+      const btnSaveCroppedImage = document.getElementById('btnSaveCroppedImage');
+
+      var imageEditorModal = null;
+      if (window.bootstrap && imageEditorModalEl) {
+        imageEditorModal = new window.bootstrap.Modal(imageEditorModalEl);
+      }
+      let cropper = null;
+      let flipX = 1;
+      let flipY = 1;
 
       function highlightText(text, term) {
         if (!term) return text;
@@ -509,6 +584,129 @@
         studentAvatarUrlInput.addEventListener('input', function () {
           if (!selectedAvatarFile) {
             updateAvatarPreview(this.value.trim());
+          }
+        });
+      }
+
+      // Sự kiện click vào ảnh preview để chỉnh sửa
+      if (avatarPreviewImg) {
+        avatarPreviewImg.addEventListener('click', function () {
+          if (!avatarPreviewImg.src || avatarPreviewImg.src === window.location.href) {
+            return;
+          }
+          // Gán src cho editorImage
+          editorImage.src = avatarPreviewImg.src;
+          
+          // Reset flips
+          flipX = 1;
+          flipY = 1;
+          
+          if (imageEditorModal) {
+            imageEditorModal.show();
+          }
+        });
+      }
+
+      // Khởi tạo Cropper khi modal hiển thị
+      if (imageEditorModalEl) {
+        imageEditorModalEl.addEventListener('shown.bs.modal', function () {
+          if (cropper) {
+            cropper.destroy();
+          }
+          cropper = new Cropper(editorImage, {
+            aspectRatio: 1, // Tỉ lệ 1:1 cho avatar
+            viewMode: 1,
+            autoCropArea: 1,
+            responsive: true,
+            restore: false,
+            checkCrossOrigin: true
+          });
+        });
+
+        imageEditorModalEl.addEventListener('hidden.bs.modal', function () {
+          if (cropper) {
+            cropper.destroy();
+            cropper = null;
+          }
+        });
+      }
+
+      // Đăng ký sự kiện các nút điều khiển Cropper
+      if (btnZoomIn) {
+        btnZoomIn.addEventListener('click', function () {
+          if (cropper) cropper.zoom(0.1);
+        });
+      }
+      if (btnZoomOut) {
+        btnZoomOut.addEventListener('click', function () {
+          if (cropper) cropper.zoom(-0.1);
+        });
+      }
+      if (btnRotateLeft) {
+        btnRotateLeft.addEventListener('click', function () {
+          if (cropper) cropper.rotate(-90);
+        });
+      }
+      if (btnRotateRight) {
+        btnRotateRight.addEventListener('click', function () {
+          if (cropper) cropper.rotate(90);
+        });
+      }
+      if (btnFlipHorizontal) {
+        btnFlipHorizontal.addEventListener('click', function () {
+          if (cropper) {
+            flipX = -flipX;
+            cropper.scaleX(flipX);
+          }
+        });
+      }
+      if (btnFlipVertical) {
+        btnFlipVertical.addEventListener('click', function () {
+          if (cropper) {
+            flipY = -flipY;
+            cropper.scaleY(flipY);
+          }
+        });
+      }
+      if (btnResetEditor) {
+        btnResetEditor.addEventListener('click', function () {
+          if (cropper) {
+            cropper.reset();
+            flipX = 1;
+            flipY = 1;
+            cropper.scale(1, 1);
+          }
+        });
+      }
+
+      // Lưu ảnh sau khi chỉnh sửa
+      if (btnSaveCroppedImage) {
+        btnSaveCroppedImage.addEventListener('click', function () {
+          if (!cropper) return;
+          
+          // Lấy canvas của ảnh đã cắt chỉnh sửa
+          const canvas = cropper.getCroppedCanvas({
+            width: 300,
+            height: 300
+          });
+          
+          if (canvas) {
+            canvas.toBlob(function (blob) {
+              if (blob) {
+                // Tạo một file mới từ blob để đưa vào biến selectedAvatarFile gửi lên server
+                const fileName = 'avatar_' + Date.now() + '.png';
+                selectedAvatarFile = new File([blob], fileName, { type: 'image/png' });
+                
+                // Cập nhật lại hình ảnh preview hiển thị trong form chính
+                const dataURL = canvas.toDataURL('image/png');
+                updateAvatarPreview(dataURL);
+                
+                // Đóng modal chỉnh sửa
+                if (imageEditorModal) {
+                  imageEditorModal.hide();
+                }
+              }
+            }, 'image/png');
           }
         });
       }

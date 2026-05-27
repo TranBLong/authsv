@@ -1,12 +1,17 @@
 package com.example.auths.controller;
 
+import com.example.auths.payload.ErrorResponse;
 import com.example.auths.payload.JwtResponse;
 import com.example.auths.payload.LoginRequest;
 import com.example.auths.security.JwtUtils;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.DisabledException;
+import org.springframework.security.authentication.LockedException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -25,17 +30,52 @@ public class AuthController {
     @Autowired
     private JwtUtils jwtUtils;
 
+    @Autowired
+    private com.example.auths.repository.UserRepository userRepository;
+
     @PostMapping("/login")
-    public ResponseEntity<JwtResponse> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        loginRequest.getUsername(),
-                        loginRequest.getPassword())
-        );
+    public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
+        try {
+            // Kiểm tra user có bị khóa không trước khi xác thực mật khẩu
+            java.util.Optional<com.example.auths.model.User> userOptional = 
+                userRepository.findByUsernameAndDeletedAtIsNull(loginRequest.getUsername());
+            
+            if (userOptional.isPresent()) {
+                com.example.auths.model.User user = userOptional.get();
+                if (user.getIsActive() != null && !user.getIsActive()) {
+                    return ResponseEntity
+                            .status(HttpStatus.FORBIDDEN)
+                            .body(new ErrorResponse(HttpStatus.FORBIDDEN.value(),
+                                    "Tài khoản của bạn đã bị khóa. Vui lòng liên hệ quản trị viên."));
+                }
+            }
 
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        String jwt = jwtUtils.generateToken(authentication);
+            Authentication authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(
+                            loginRequest.getUsername(),
+                            loginRequest.getPassword())
+            );
 
-        return ResponseEntity.ok(new JwtResponse(jwt));
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+            String jwt = jwtUtils.generateToken(authentication);
+
+            return ResponseEntity.ok(new JwtResponse(jwt));
+
+        } catch (DisabledException e) {
+            return ResponseEntity
+                    .status(HttpStatus.FORBIDDEN)
+                    .body(new ErrorResponse(HttpStatus.FORBIDDEN.value(),
+                            "Tài khoản của bạn đã bị vô hiệu hóa. Vui lòng liên hệ quản trị viên."));
+        } catch (LockedException e) {
+            return ResponseEntity
+                    .status(HttpStatus.FORBIDDEN)
+                    .body(new ErrorResponse(HttpStatus.FORBIDDEN.value(),
+                            "Tài khoản của bạn đã bị khóa. Vui lòng liên hệ quản trị viên."));
+        } catch (BadCredentialsException e) {
+            return ResponseEntity
+                    .status(HttpStatus.UNAUTHORIZED)
+                    .body(new ErrorResponse(HttpStatus.UNAUTHORIZED.value(),
+                            "Tên đăng nhập hoặc mật khẩu không đúng."));
+        }
     }
 }
